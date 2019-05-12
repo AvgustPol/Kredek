@@ -8,6 +8,7 @@ namespace Kredek.Data
     {
         #region Templates
 
+        public DbSet<Blogging> Blogging { get; set; }
         public DbSet<ImageAndTextLeft> TemplatesImageAndTextLeft { get; set; }
         public DbSet<ImageAndTextRight> TemplatesImageAndTextRight { get; set; }
         public DbSet<TextSeparatedByLine> TemplatesTextSeparatedByLine { get; set; }

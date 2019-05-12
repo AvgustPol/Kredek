@@ -100,8 +100,8 @@ namespace Kredek
 
             #region Facebook Page Getter
 
-            services.AddScoped<IFacebookService, FacebookService>();
-            services.AddScoped<IFacebookClient, FacebookClient>();
+            services.AddSingleton<IFacebookService, FacebookService>();
+            services.AddSingleton<IFacebookClient, FacebookClient>();
             services.AddSingleton(new FacebookSettings()
             {
                 AccessToken = Configuration.GetSection("FacebookSettings").GetSection("AccessToken").Value,
@@ -116,6 +116,9 @@ namespace Kredek
             });
 
             services.AddSingleton(mappingConfig.CreateMapper());
+
+            //Create Blogging Manager Singleton
+            services.AddSingleton<IBloggingManager, BloggingManager>();
 
             #endregion Facebook Page Getter
         }

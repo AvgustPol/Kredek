@@ -1,5 +1,6 @@
 ﻿@page "{language?}/{pageName?}"
 
+@using Kredek.Data.Models.ContentElementTranslationTemplates
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -26,6 +27,14 @@
         <h2>Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
 
         <h2>Save images to wwwroot folder : <a href="https://localhost:44328/CMS/ImageSaver">click here</a></h2>
+
+        @if (Model.CurrentPage.Name == "Blog")
+        {
+            if (Model.CurrentPage.ContentElements.ElementAt(0).ContentElementTranslations.ElementAt(0) is Blogging modelBlog)
+            {
+                @await Html.PartialAsync("Shared/PartialTemplates/_BlogPartial", (modelBlog, Model.BloggingManager))
+            }
+        }
     </main>
 </div>
 

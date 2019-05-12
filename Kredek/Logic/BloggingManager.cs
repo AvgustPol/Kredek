@@ -1,26 +1,23 @@
 ﻿using FacebookPageGetter.Models.FeedPostDto;
 using FacebookPageGetter.Services.FacebookService;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 
-namespace Kredek.Pages
+namespace Kredek.Logic
 {
-    public class BlogModel : PageModel
+    public class BloggingManager : IBloggingManager
     {
         private const int NumberOfPostsToDownload = 5;
 
         private readonly IFacebookService _facebookService;
 
-        public FeedPostsDto FeedPostsDto { get; set; }
-
-        public BlogModel(IFacebookService facebookService)
+        public BloggingManager(IFacebookService facebookService)
         {
             _facebookService = facebookService;
         }
 
-        public async Task OnGetAsync()
+        public async Task<FeedPostsDto> GetPostsAsync()
         {
-            FeedPostsDto = await _facebookService.GetPostsAsync(NumberOfPostsToDownload);
+            return await _facebookService.GetPostsAsync(NumberOfPostsToDownload);
         }
     }
 }

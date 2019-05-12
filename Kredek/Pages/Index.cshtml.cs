@@ -28,6 +28,7 @@ namespace Kredek.Pages
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
 
+        public IBloggingManager BloggingManager { get; set; }
         public string CurrentLanguage { get; set; }
         public WebsitePage CurrentPage { get; set; }
 
@@ -41,10 +42,11 @@ namespace Kredek.Pages
         /// </summary>
         public IList<string> Navigation { get; set; }
 
-        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager)
+        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IBloggingManager bloggingManager)
         {
             _context = context;
             _cookiesManager = cookiesManager;
+            BloggingManager = bloggingManager;
 
             CreateLanguages();
             CreateNavigation();
@@ -118,7 +120,10 @@ namespace Kredek.Pages
                 return RedirectPermanent($"{ThisWebsiteRootUrl}/{DefaultLanguage}/{DefaultPage}");
             }
 
-            CurrentPage = await _context.WebsitePages.SingleAsync(page => page.Name == pageName);
+            CurrentPage = await _context.WebsitePages
+                .Include(page => page.ContentElements)
+                .ThenInclude(elements => elements.ContentElementTranslations)
+                .SingleAsync(page => page.Name == pageName);
 
             return Page();
         }
