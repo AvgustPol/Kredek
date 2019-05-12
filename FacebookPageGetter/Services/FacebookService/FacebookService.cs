@@ -9,6 +9,9 @@ namespace FacebookPageGetter.Services.FacebookService
 {
     public class FacebookService : IFacebookService
     {
+        private const string Endpoint = "KNKredek/posts";
+        private const int NumberOfPostsToDownload = 5;
+
         private readonly IFacebookClient _facebookClient;
         private readonly FacebookSettings _facebookSettings;
         private readonly IMapper _mapper;
@@ -22,12 +25,7 @@ namespace FacebookPageGetter.Services.FacebookService
 
         public async Task<FeedPostsDto> GetPostsAsync(int count)
         {
-            if (count > 100)
-            {
-                count = 100;
-            }
-
-            var posts = await _facebookClient.GetAsync<FeedPosts>(_facebookSettings.AccessToken, "KNKredek/posts",
+            var posts = await _facebookClient.GetAsync<FeedPosts>(_facebookSettings.AccessToken, Endpoint,
                 $"fields=full_picture,permalink_url,created_time,message&limit={count}").ConfigureAwait(false);
 
             if (posts == null)
@@ -38,6 +36,11 @@ namespace FacebookPageGetter.Services.FacebookService
             var result = _mapper.Map<FeedPostsDto>(posts);
 
             return result;
+        }
+
+        public Task<FeedPostsDto> GetPostsAsync()
+        {
+            return GetPostsAsync(NumberOfPostsToDownload);
         }
     }
 }

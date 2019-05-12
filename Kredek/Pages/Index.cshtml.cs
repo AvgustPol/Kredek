@@ -1,4 +1,5 @@
-﻿using Kredek.Data;
+﻿using FacebookPageGetter.Services.FacebookService;
+using Kredek.Data;
 using Kredek.Data.Models;
 using Kredek.Global;
 using Kredek.Logic;
@@ -28,9 +29,9 @@ namespace Kredek.Pages
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
 
-        public IBloggingManager BloggingManager { get; set; }
         public string CurrentLanguage { get; set; }
         public WebsitePage CurrentPage { get; set; }
+        public IFacebookService FacebookService { get; set; }
 
         /// <summary>
         /// List of all available languages.
@@ -42,11 +43,11 @@ namespace Kredek.Pages
         /// </summary>
         public IList<string> Navigation { get; set; }
 
-        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IBloggingManager bloggingManager)
+        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService)
         {
             _context = context;
             _cookiesManager = cookiesManager;
-            BloggingManager = bloggingManager;
+            FacebookService = facebookService;
 
             CreateLanguages();
             CreateNavigation();

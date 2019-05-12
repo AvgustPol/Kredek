@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
-namespace Kredek.Data
+namespace Kredek.Data.DatabaseSeeding
 {
     public class DbInitializer : IDbInitializer
     {
+        private const string BlogPageName = "Blog";
         private readonly ApplicationDbContext _context;
         private readonly IPreviewInitializer _previewInitializer;
 
@@ -29,6 +30,8 @@ namespace Kredek.Data
                 if (!_context.WebsitePages.Any())
                 {
                     CreateDefaultPage();
+
+                    CreateBonusPages();
                 }
                 if (!_context.Languages.Any())
                 {
@@ -48,46 +51,59 @@ namespace Kredek.Data
             }
         }
 
+        private void CreateANewLanguage(string name, string isoCode)
+        {
+            var newLanguage = new Language()
+            {
+                Name = name,
+                ISOCode = isoCode
+            };
+
+            _context.Languages.Add(newLanguage);
+            _context.SaveChanges();
+        }
+
+        private void CreateANewPage(string name, bool isActive = true)
+        {
+            var newPage = new WebsitePage()
+            {
+                Name = name,
+                IsActive = isActive,
+            };
+
+            _context.WebsitePages.Add(newPage);
+            _context.SaveChanges();
+        }
+
+        private void CreateBlogPage()
+        {
+            CreateANewPage(BlogPageName);
+        }
+
+        private void CreateBonusPages()
+        {
+            CreateBlogPage();
+        }
+
         private void CreateDefaultLanguages()
         {
             CreatePolish();
             CreateEnglish();
-
-            _context.SaveChanges();
         }
 
         private void CreateDefaultPage()
         {
-            var home = new WebsitePage()
-            {
-                Name = GlobalVariables.HomePageName,
-                IsActive = GlobalVariables.HomePageIsActive
-            };
-
-            _context.WebsitePages.Add(home);
-            _context.SaveChanges();
+            CreateANewPage(GlobalVariables.HomePageName, GlobalVariables.HomePageIsActive);
         }
 
         private void CreateEnglish()
         {
-            var englishLanguage = new Language()
-            {
-                Name = GlobalVariables.EnglishLanguageName,
-                ISOCode = GlobalVariables.EnglishLanguageIsoCode
-            };
-
-            _context.Languages.Add(englishLanguage);
+            CreateANewLanguage(GlobalVariables.EnglishLanguageName, GlobalVariables.EnglishLanguageIsoCode);
         }
 
         private void CreatePolish()
         {
-            var polishLanguage = new Language()
-            {
-                Name = GlobalVariables.PolishLanguageName,
-                ISOCode = GlobalVariables.PolishLanguageIsoCode
-            };
-
-            _context.Languages.Add(polishLanguage);
+            CreateANewLanguage(GlobalVariables.PolishLanguageName, GlobalVariables.PolishLanguageIsoCode);
         }
     }
 }

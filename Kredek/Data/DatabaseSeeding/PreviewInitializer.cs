@@ -2,7 +2,7 @@
 using Kredek.Global;
 using System.Linq;
 
-namespace Kredek.Data
+namespace Kredek.Data.DatabaseSeeding
 {
     public class PreviewInitializer : IPreviewInitializer
     {

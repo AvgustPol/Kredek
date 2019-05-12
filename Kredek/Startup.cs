@@ -1,10 +1,6 @@
-using AutoMapper;
 using B2CGraph;
-using FacebookPageGetter.Models;
-using FacebookPageGetter.Models.Profiles;
-using FacebookPageGetter.Services.FacebookClient;
-using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
+using Kredek.Data.DatabaseSeeding;
 using Kredek.Logic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
@@ -98,29 +94,8 @@ namespace Kredek
 
             #endregion Database region
 
-            #region Facebook Page Getter
-
-            services.AddSingleton<IFacebookService, FacebookService>();
-            services.AddSingleton<IFacebookClient, FacebookClient>();
-            services.AddSingleton(new FacebookSettings()
-            {
-                AccessToken = Configuration.GetSection("FacebookSettings").GetSection("AccessToken").Value,
-                Id = Configuration.GetSection("FacebookSettings").GetSection("Id").Value,
-                Secret = Configuration.GetSection("FacebookSettings").GetSection("Secret").Value
-            });
-
-            // Auto Mapper Configurations
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new FeedProfile());
-            });
-
-            services.AddSingleton(mappingConfig.CreateMapper());
-
-            //Create Blogging Manager Singleton
-            services.AddSingleton<IBloggingManager, BloggingManager>();
-
-            #endregion Facebook Page Getter
+            //configure facebook page getter
+            FacebookPageGetter.Configuration.ConfigurationDefault.Configure(services, Configuration);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Kredek.Data
+﻿namespace Kredek.Data.DatabaseSeeding
 {
     public interface IDbInitializer
     {

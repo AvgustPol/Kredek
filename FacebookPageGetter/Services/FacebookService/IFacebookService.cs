@@ -5,6 +5,8 @@ namespace FacebookPageGetter.Services.FacebookService
 {
     public interface IFacebookService : IService
     {
+        Task<FeedPostsDto> GetPostsAsync();
+
         Task<FeedPostsDto> GetPostsAsync(int count);
     }
 }
