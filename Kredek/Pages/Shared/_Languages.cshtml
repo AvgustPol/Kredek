@@ -1,0 +1,9 @@
+﻿@model IndexModel
+
+@foreach (var language in Model.Languages)
+{
+    <form asp-page-handler="ChangeLanguage" asp-route-language="@language" asp-route-pageName="@Model.CurrentPage.Name" method="post">
+        <button class="btn btn-default">Set language to [@language]</button>
+    </form>
+    <br />
+}

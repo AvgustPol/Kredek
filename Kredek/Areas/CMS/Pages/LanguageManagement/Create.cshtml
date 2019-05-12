@@ -1,0 +1,39 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.LanguageManagement.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Language</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Language.ISOCode" class="control-label"></label>
+                <input asp-for="Language.ISOCode" class="form-control" />
+                <span asp-validation-for="Language.ISOCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language.Name" class="control-label"></label>
+                <input asp-for="Language.Name" class="form-control" />
+                <span asp-validation-for="Language.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

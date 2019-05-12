@@ -1,0 +1,43 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.ContentElementManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>ContentElementManagement Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentElement[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentElement[0].WebsitePage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ContentElement)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebsitePage.WebsitePageId)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ContentElementId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ContentElementId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ContentElementId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

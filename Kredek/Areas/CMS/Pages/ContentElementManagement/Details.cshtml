@@ -1,0 +1,31 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.ContentElementManagement.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ContentElement</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContentElement.Position)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContentElement.Position)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ContentElement.WebsitePage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ContentElement.WebsitePage.WebsitePageId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ContentElement.ContentElementId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

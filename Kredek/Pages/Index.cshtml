@@ -1,0 +1,32 @@
+﻿@page "{language?}/{pageName?}"
+
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@await Html.PartialAsync("Shared/HeaderAndFooter/_HeaderPartial", Model)
+
+<div class="container">
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="pb-3">
+        @*Main pages data goes here*@
+
+        <h1 class="display-1"> Current page is : [ @Model.CurrentPage.Name ] </h1>
+        <hr />
+
+        @await Html.PartialAsync("Shared/_Languages", Model)
+
+        <h1> Current language is : [ @Model.CurrentLanguage ] </h1>
+
+        <h1>Test features</h1>
+
+        <a asp-area="CMS"> CMS mode </a>
+
+        <h2>Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
+
+        <h2>Save images to wwwroot folder : <a href="https://localhost:44328/CMS/ImageSaver">click here</a></h2>
+    </main>
+</div>
+
+@await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")

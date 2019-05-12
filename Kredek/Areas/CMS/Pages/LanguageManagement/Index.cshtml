@@ -1,0 +1,46 @@
+﻿@page
+
+@model Kredek.Areas.CMS.Pages.LanguageManagement.IndexModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All languages</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Language[0].ISOCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Language)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISOCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.LanguageId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.LanguageId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.LanguageId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
