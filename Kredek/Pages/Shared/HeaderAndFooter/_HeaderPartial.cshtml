@@ -17,14 +17,13 @@
                     {
                         <li class="nav-item">
                             @{
-                                var link = $"https://{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
+                                var link = $"{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
                                 var navigationTabName = Model.Navigation[pageName][Model.CurrentLanguage];
                             }
                             <a href="@link" class="nav-link text-dark"> @navigationTabName </a>
                         </li>
                     }
                     @await Html.PartialAsync("Shared/_Languages")
-                    
                 </ul>
             </div>
         </div>
