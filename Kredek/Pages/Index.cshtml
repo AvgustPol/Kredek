@@ -20,25 +20,12 @@
 
         <h2>Save images to wwwroot folder : <a href="https://localhost:44328/CMS/ImageSaver">click here</a></h2>
 
-        @if (Model.CurrentPage.Name == "Home")
-        {
-            var testBlog = Model.CurrentPage.ContentElements;
-
-            @*
-                if (Model.CurrentPage.ContentElements.ElementAt(0).ContentElementTranslations.ElementAt(0) is Blogging modelBlog)
-                {
-                    @await Html.PartialAsync("Shared/PartialTemplates/_BlogPartial", (modelBlog, Model.FacebookService))
-                }
-            *@
-        }
+        @await Html.PartialAsync("_ContentPartial", Model)
     </main>
 </div>
 
 @await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
 
 @{
-    ViewData["Title"] = Model.CurrentPage.WebsitePageTranslations
-        .Where(x => x.Language.ISOCode == Model.CurrentLanguage)
-        .FirstOrDefault()
-        .Title;
+    ViewData["Title"] = Model.CurrentPageTranslation.Title;
 }

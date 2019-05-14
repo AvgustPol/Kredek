@@ -40,6 +40,7 @@ namespace Kredek.Pages
         public string CurrentLanguage { get; set; }
 
         public WebsitePage CurrentPage { get; set; }
+        public WebsitePageTranslation CurrentPageTranslation { get; set; }
         public IFacebookService FacebookService { get; set; }
 
         /// <summary>
@@ -146,11 +147,8 @@ namespace Kredek.Pages
                 return RedirectPermanent($"{ThisWebsiteRootUrl}/{DefaultLanguage}/{DefaultPage}");
             }
 
-            CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName)
-                .Include(page => page.WebsitePageTranslations)
-                    .Where(x => x.WebsitePageTranslations.Any(w => w.Language.ISOCode == CurrentLanguage))
-                .Include(page => page.ContentElements)
-                    .ThenInclude(elements => elements.ContentElementTranslations)
+            CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName).SingleAsync();
+            CurrentPageTranslation = await _context.WebsitePageTranslations.Where(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage)
                 .SingleAsync();
 
             return Page();
