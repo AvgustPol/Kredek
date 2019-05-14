@@ -24,10 +24,12 @@
         {
             var testBlog = Model.CurrentPage.ContentElements;
 
-            @*if (Model.CurrentPage.ContentElements.ElementAt(0).ContentElementTranslations.ElementAt(0) is Blogging modelBlog)
+            @*
+                if (Model.CurrentPage.ContentElements.ElementAt(0).ContentElementTranslations.ElementAt(0) is Blogging modelBlog)
                 {
                     @await Html.PartialAsync("Shared/PartialTemplates/_BlogPartial", (modelBlog, Model.FacebookService))
-                }*@
+                }
+            *@
         }
     </main>
 </div>
