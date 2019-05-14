@@ -82,6 +82,7 @@ namespace Kredek
             #region Database region
 
             services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<IKredekInitializer, KredekInitializer>();
             services.AddScoped<IPreviewInitializer, PreviewInitializer>();
 
             //Development SQL Connection to Microsoft SQL Managament studio
