@@ -34,14 +34,18 @@ namespace Kredek.Pages
         /// </summary>
         public IList<string> ActivePages { get; set; }
 
+        /// <summary>
+        /// ISO code of current language
+        /// </summary>
         public string CurrentLanguage { get; set; }
+
         public WebsitePage CurrentPage { get; set; }
         public IFacebookService FacebookService { get; set; }
 
         /// <summary>
         /// List of all available languages.
         /// </summary>
-        public IList<string> Languages { get; set; }
+        public IList<Language> Languages { get; set; }
 
         /// <summary>
         /// Dictionary( pageName , Dictionary (language, navigationTabName) )
@@ -78,13 +82,7 @@ namespace Kredek.Pages
 
         private void CreateLanguages()
         {
-            Languages = new List<string>();
-
-            var allLanguages = _context.Languages.ToList();
-            foreach (var language in allLanguages)
-            {
-                Languages.Add(language.ISOCode);
-            }
+            Languages = _context.Languages.ToList();
         }
 
         private void CreateNavigation()
