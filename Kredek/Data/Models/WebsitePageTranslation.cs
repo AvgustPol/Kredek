@@ -5,6 +5,11 @@
         #region Class properties
 
         /// <summary>
+        /// Website navigation name, that shows inside navigation menu.
+        /// </summary>
+        public string NavigationTabName { get; set; }
+
+        /// <summary>
         /// Website title, that shows on the top of the browser tab.
         /// </summary>
         public string Title { get; set; }

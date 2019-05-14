@@ -92,10 +92,10 @@ namespace Kredek.Data.DatabaseSeeding
             var languages = _context.Languages.ToList();
 
             //Home page translations
-            CreatePagePlAndEnTranslations(HomePageName, languages, HomePageTitlePl, HomePageTitleEn, HomeNavigationTabNameEn, HomeNavigationTabNamePl);
+            CreatePagePlAndEnTranslations(HomePageName, languages, HomePageTitlePl, HomePageTitleEn, HomeNavigationTabNamePl, HomeNavigationTabNameEn);
 
             //Blog page translations
-            CreatePagePlAndEnTranslations(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn, BlogNavigationTabNameEn, BlogNavigationTabNamePl);
+            CreatePagePlAndEnTranslations(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn, BlogNavigationTabNamePl, BlogNavigationTabNameEn);
         }
 
         /// <summary>

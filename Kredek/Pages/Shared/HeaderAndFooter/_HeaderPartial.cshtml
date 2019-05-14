@@ -1,4 +1,5 @@
-﻿@model IndexModel
+﻿@using Kredek.Global
+@model IndexModel
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow ">
@@ -12,10 +13,14 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav ">
-                    @foreach (var pageName in Model.Navigation)
+                    @foreach (var pageName in Model.ActivePages)
                     {
                         <li class="nav-item">
-                            <a href="https://localhost:44328/@Model.CurrentLanguage/@pageName" class="nav-link text-dark"> @pageName </a>
+                            @{
+                                var link = $"https://{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
+                                var navigationTabName = Model.Navigation[pageName][Model.CurrentLanguage];
+                            }
+                            <a href="@link" class="nav-link text-dark"> @navigationTabName </a>
                         </li>
                     }
                 </ul>

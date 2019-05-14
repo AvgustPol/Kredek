@@ -29,6 +29,11 @@ namespace Kredek.Pages
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
 
+        /// <summary>
+        /// List of all active pages.
+        /// </summary>
+        public IList<string> ActivePages { get; set; }
+
         public string CurrentLanguage { get; set; }
         public WebsitePage CurrentPage { get; set; }
         public IFacebookService FacebookService { get; set; }
@@ -39,9 +44,10 @@ namespace Kredek.Pages
         public IList<string> Languages { get; set; }
 
         /// <summary>
-        /// List of all active pages.
+        /// Dictionary( pageName , Dictionary (language, navigationTabName) )
+        /// e.g. (about , (en , about))
         /// </summary>
-        public IList<string> Navigation { get; set; }
+        public Dictionary<string, Dictionary<string, string>> Navigation { get; set; }
 
         public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService)
         {
@@ -51,6 +57,7 @@ namespace Kredek.Pages
 
             CreateLanguages();
             CreateNavigation();
+            GetActivePages();
         }
 
         public async Task<IActionResult> OnGetAsync(string language = DefaultLanguage, string pageName = DefaultPage)
@@ -82,14 +89,33 @@ namespace Kredek.Pages
 
         private void CreateNavigation()
         {
-            Navigation = new List<string>();
+            Navigation = new Dictionary<string, Dictionary<string, string>>();
+
+            var allPages = _context.WebsitePages.Include(x => x.WebsitePageTranslations).ToList();
+            foreach (var page in allPages)
+            {
+                if (page.IsActive)
+                {
+                    Navigation[page.Name] = new Dictionary<string, string>();
+                    foreach (var translation in page.WebsitePageTranslations)
+                    {
+                        Navigation[page.Name][translation.Language.ISOCode] =
+                            translation.NavigationTabName;
+                    }
+                }
+            }
+        }
+
+        private void GetActivePages()
+        {
+            ActivePages = new List<string>();
 
             var allPages = _context.WebsitePages.ToList();
             foreach (var page in allPages)
             {
                 if (page.IsActive)
                 {
-                    Navigation.Add(page.Name);
+                    ActivePages.Add(page.Name);
                 }
             }
         }
@@ -106,6 +132,7 @@ namespace Kredek.Pages
             {
                 //set value to default
                 _cookiesManager.Set(Response, key, DefaultLanguage, CookieTime);
+                CurrentLanguage = DefaultLanguage;
             }
             else
             {
@@ -115,16 +142,33 @@ namespace Kredek.Pages
 
         private async Task<IActionResult> LoadPage(string pageName)
         {
-            if (!Navigation.Contains(pageName))
+            if (!ActivePages.Contains(pageName))
             {
                 // hardcode
                 return RedirectPermanent($"{ThisWebsiteRootUrl}/{DefaultLanguage}/{DefaultPage}");
             }
 
-            CurrentPage = await _context.WebsitePages
+            //translation => translation.WebsitePageTranslations
+
+            //CurrentPage = await _context.WebsitePages
+            //    .Include(page => page.WebsitePageTranslations.
+            //        Single(x => x.Language.ISOCode == CurrentLanguage))
+            //    .Include(page => page.ContentElements)
+            //        .ThenInclude(elements => elements.ContentElementTranslations
+            //            .Where(x => x.Language.ISOCode == CurrentLanguage))
+            //    .SingleAsync(page => page.Name == pageName);
+
+            CurrentPage = _context.WebsitePages.Where(page => page.Name == pageName)
+                .Include(page => page.WebsitePageTranslations)
+                    .Where(x => x.WebsitePageTranslations.Any(w => w.Language.ISOCode == CurrentLanguage))
                 .Include(page => page.ContentElements)
-                .ThenInclude(elements => elements.ContentElementTranslations)
-                .SingleAsync(page => page.Name == pageName);
+                    .ThenInclude(elements => elements.ContentElementTranslations)
+                .Single();
+
+            //CurrentPage = await _context.WebsitePages
+            //    .Include(page => page.WebsitePageTranslations)
+            //        .Where(x => x.WebsitePageTranslations.Any(w => w.Language.ISOCode == CurrentLanguage))
+            //    .SingleAsync(page => page.Name == pageName);
 
             return Page();
         }
