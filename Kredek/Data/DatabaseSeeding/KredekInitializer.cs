@@ -10,7 +10,7 @@ namespace Kredek.Data.DatabaseSeeding
     /// </summary>
     public class KredekInitializer : IKredekInitializer
     {
-        #region Blog
+        #region Home page
 
         private const string HomePageTitleEn = "Home page";
         private const string HomePageTitlePl = "Strona główna";
@@ -18,9 +18,9 @@ namespace Kredek.Data.DatabaseSeeding
         private readonly string HomeNavigationTabNamePl = "Główna";
         private readonly string HomePageName = GlobalVariables.HomePageName;
 
-        #endregion Blog
+        #endregion Home page
 
-        #region Blog
+        #region Blog page
 
         private const string BlogNavigationTabNameEn = "Blog";
         private const string BlogNavigationTabNamePl = "Blog";
@@ -28,7 +28,7 @@ namespace Kredek.Data.DatabaseSeeding
         private const string BlogPageTitlePl = "Blog";
         private readonly string BlogPageName = "Blog";
 
-        #endregion Blog
+        #endregion Blog page
 
         private readonly ApplicationDbContext _context;
 
