@@ -9,11 +9,8 @@
     <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
 
-        <h1 class="display-1"> [ @Model.CurrentPage.Name ] -> Current page </h1>
-        <h1 class="display-4"> [ @Model.CurrentLanguage ] -> Current language </h1>
+        <h1 class="display-1"> [ @Model.CurrentPage.Name ] < - Current page </h1>
         <hr />
-
-        @await Html.PartialAsync("Shared/_Languages", Model)
 
         <h1>Test features</h1>
 

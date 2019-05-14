@@ -1,30 +1,56 @@
 ﻿@model IndexModel
-
-@foreach (var language in Model.Languages)
-{
-
-    <form asp-page-handler="ChangeLanguage" asp-route-language="@language" asp-route-pageName="@Model.CurrentPage.Name" method="post">
-        @if (language == "en")
-        {
-        <img height="20" width="20" src="~/img/en.png" />
-        }
-        @if (language == "pl")
-        {
-        <img height="20" width="20" src="~/img/pl.png" />
-        }
-        <button >Set language to [@language]</button>
-    </form>
-    <br />
-}
-//class="btn btn-default"
+@*
 
 
-<ul class="navbar-nav mr-auto">
+    @foreach (var language in Model.Languages)
+    {
+
+        <form asp-page-handler="ChangeLanguage" asp-route-language="@language" asp-route-pageName="@Model.CurrentPage.Name" method="post">
+            @if (language == "en")
+            {
+                <img height="20" width="20" src="~/img/en.png" />
+            }
+            @if (language == "pl")
+            {
+                <img height="20" width="20" src="~/img/pl.png" />
+            }
+            <button>Set language to [@language]</button>
+        </form>
+        <br />
+    }
+
+
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> English</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown09">
-            <a class="dropdown-item" href="#fr"> <img height="20" width="20" src="~/img/en.png" /> </span>  French</a>
-            <a class="dropdown-item" href="#it"> <img height="20" width="20" src="~/img/en.png" /> </span>  Italian</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img height="20" width="20" src="~/img/en.png" />
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#"> <img height="20" width="20" src="~/img/en.png" />&nbsp&nbsp English</a>
+            <a class="dropdown-item" href="#"> <img height="20" width="20" src="~/img/pl.png" />&nbsp&nbsp Polski</a>
         </div>
     </li>
-</ul>
+*@
+
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img height="20" width="20" src="~/img/@(Model.CurrentLanguage).png" />
+    </a>
+    
+    <div class="dropdown-menu">
+        @foreach (var language in Model.Languages)
+        {
+
+            <form asp-page-handler="ChangeLanguage" asp-route-language="@language" asp-route-pageName="@Model.CurrentPage.Name" method="post">
+                <button class="dropdown-item"><img height="20" width="20" src="~/img/@(@language).png" />&nbsp&nbsp @language</button>
+            </form>
+        }
+    </div>
+</li>
+
+
+
+
+
+
+
