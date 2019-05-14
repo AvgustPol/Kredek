@@ -146,27 +146,12 @@ namespace Kredek.Pages
                 return RedirectPermanent($"{ThisWebsiteRootUrl}/{DefaultLanguage}/{DefaultPage}");
             }
 
-            //translation => translation.WebsitePageTranslations
-
-            //CurrentPage = await _context.WebsitePages
-            //    .Include(page => page.WebsitePageTranslations.
-            //        Single(x => x.Language.ISOCode == CurrentLanguage))
-            //    .Include(page => page.ContentElements)
-            //        .ThenInclude(elements => elements.ContentElementTranslations
-            //            .Where(x => x.Language.ISOCode == CurrentLanguage))
-            //    .SingleAsync(page => page.Name == pageName);
-
-            CurrentPage = _context.WebsitePages.Where(page => page.Name == pageName)
+            CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName)
                 .Include(page => page.WebsitePageTranslations)
                     .Where(x => x.WebsitePageTranslations.Any(w => w.Language.ISOCode == CurrentLanguage))
                 .Include(page => page.ContentElements)
                     .ThenInclude(elements => elements.ContentElementTranslations)
-                .Single();
-
-            //CurrentPage = await _context.WebsitePages
-            //    .Include(page => page.WebsitePageTranslations)
-            //        .Where(x => x.WebsitePageTranslations.Any(w => w.Language.ISOCode == CurrentLanguage))
-            //    .SingleAsync(page => page.Name == pageName);
+                .SingleAsync();
 
             return Page();
         }
