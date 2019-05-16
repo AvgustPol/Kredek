@@ -13,7 +13,7 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav ">
-                    @foreach (var pageName in Model.ActivePages)
+                    @foreach (var pageName in Model.Navigation.Keys.ToList())
                     {
                         <li class="nav-item">
                             @{

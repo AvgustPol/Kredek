@@ -22,17 +22,11 @@ namespace Kredek.Pages
 
         private const string DefaultLanguage = DefaultVariables.DefaultLanguage;
         private const string DefaultPage = DefaultVariables.DefaultPage;
-        private const string ThisWebsiteRootUrl = DefaultVariables.ThisWebsiteRootUrl;
 
         #endregion Default Variables
 
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
-
-        /// <summary>
-        /// List of all active pages.
-        /// </summary>
-        public IList<string> ActivePages { get; set; }
 
         /// <summary>
         /// ISO code of current language
@@ -62,7 +56,6 @@ namespace Kredek.Pages
 
             CreateLanguages();
             CreateNavigation();
-            GetActivePages();
         }
 
         public async Task<IActionResult> OnGetAsync(string language = DefaultLanguage, string pageName = DefaultPage)
@@ -90,7 +83,8 @@ namespace Kredek.Pages
         {
             Navigation = new Dictionary<string, Dictionary<string, string>>();
 
-            var allPages = _context.WebsitePages.Include(x => x.WebsitePageTranslations).ToList();
+            var allPages = _context.WebsitePages.Include(x => x.WebsitePageTranslations).OrderBy(x => x.NavigationIndex).ToList();
+
             foreach (var page in allPages)
             {
                 if (page.IsActive)
@@ -101,20 +95,6 @@ namespace Kredek.Pages
                         Navigation[page.Name][translation.Language.ISOCode] =
                             translation.NavigationTabName;
                     }
-                }
-            }
-        }
-
-        private void GetActivePages()
-        {
-            ActivePages = new List<string>();
-
-            var allPages = _context.WebsitePages.ToList();
-            foreach (var page in allPages)
-            {
-                if (page.IsActive)
-                {
-                    ActivePages.Add(page.Name);
                 }
             }
         }
@@ -141,12 +121,6 @@ namespace Kredek.Pages
 
         private async Task<IActionResult> LoadPage(string pageName)
         {
-            if (!ActivePages.Contains(pageName))
-            {
-                // hardcode
-                return RedirectPermanent($"{ThisWebsiteRootUrl}/{DefaultLanguage}/{DefaultPage}");
-            }
-
             CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName).SingleAsync();
             CurrentPageTranslation = await _context.WebsitePageTranslations.Where(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage)
                 .SingleAsync();
