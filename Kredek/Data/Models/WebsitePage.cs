@@ -12,6 +12,12 @@ namespace Kredek.Data.Models
         public bool IsActive { get; set; }
 
         public string Name { get; set; }
+
+        /// <summary>
+        /// navigation tabs index. [1 is the most left item]
+        /// </summary>
+        public int NavigationIndex { get; set; }
+
         public int WebsitePageId { get; set; }
 
         #endregion Class properties
