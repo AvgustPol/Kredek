@@ -39,9 +39,8 @@
                     @item.GetType().ShortDisplayName()
                 </td>
                 <td>
-                    <a class="btn btn-info" href="#">View all</a>
                     <a asp-page="/ContentElementTranslationManagement/@item.GetType().ShortDisplayName()Management/Details"
-                       asp-route-id="@item.ContentElementTranslationId">Details</a>
+                       asp-route-id="@item.ContentElementTranslationId">[ More details ]</a>
                 </td>
             </tr>
         }

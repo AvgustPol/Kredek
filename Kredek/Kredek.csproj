@@ -24,9 +24,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\CMS\Pages\ContentElementTranslationManagement\ImageAndTextLeftManagement\" />
-    <Folder Include="Areas\CMS\Pages\ContentElementTranslationManagement\ImageAndTextRightManagement\" />
-    <Folder Include="Areas\CMS\Pages\ContentElementTranslationManagement\TextSeparatedByLineManagement\" />
+    <Folder Include="Areas\CMS\Pages\ContentElementManagement\" />
     <Folder Include="Areas\CMS\Pages\Languages\" />
     <Folder Include="wwwroot\SavedImages\" />
   </ItemGroup>
