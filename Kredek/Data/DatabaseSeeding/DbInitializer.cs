@@ -48,6 +48,16 @@ namespace Kredek.Data.DatabaseSeeding
                     CreateWebsitePageTranslations();
                 }
 
+                if (!_context.ContentElement.Any())
+                {
+                    CreateWebsiteContentElements();
+                }
+
+                if (!_context.ContentElementTranslation.Any())
+                {
+                    CreateWebsiteContentElementsTranslations();
+                }
+
                 #endregion First time [Kredek] database creating
             }
             catch (Exception e)
@@ -65,6 +75,16 @@ namespace Kredek.Data.DatabaseSeeding
         private void CreateDefaultPages()
         {
             _kredekInitializer.CreateDefaultPages();
+        }
+
+        private void CreateWebsiteContentElements()
+        {
+            _kredekInitializer.CreateDefaultContentElements();
+        }
+
+        private void CreateWebsiteContentElementsTranslations()
+        {
+            _kredekInitializer.CreateDefaultContentElementsTranslations();
         }
 
         private void CreateWebsitePageTranslations()
