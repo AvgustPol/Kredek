@@ -1,5 +1,7 @@
 ﻿using Kredek.Data.Models;
+using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +14,12 @@ namespace Kredek.Data.DatabaseSeeding
     {
         #region Home page
 
+        private const string HomeNavigationTabNameEn = "Home";
+        private const string HomeNavigationTabNamePl = "Główna";
+        private const int HomePageNavigationIndex = 1;
         private const string HomePageTitleEn = "Home page";
         private const string HomePageTitlePl = "Strona główna";
-        private readonly string HomeNavigationTabNameEn = "Home";
-        private readonly string HomeNavigationTabNamePl = "Główna";
         private readonly string HomePageName = GlobalVariables.HomePageName;
-        private readonly int HomePageNavigationIndex = 1;
 
         #endregion Home page
 
@@ -25,10 +27,10 @@ namespace Kredek.Data.DatabaseSeeding
 
         private const string TeamNavigationTabNameEn = "Team";
         private const string TeamNavigationTabNamePl = "Zespół";
+        private const string TeamPageName = "Team";
+        private const int TeamPageNavigationIndex = 2;
         private const string TeamPageTitleEn = "Team";
         private const string TeamPageTitlePl = "Zespół";
-        private readonly string TeamPageName = "Team";
-        private readonly int TeamPageNavigationIndex = 2;
 
         #endregion Team page
 
@@ -36,10 +38,10 @@ namespace Kredek.Data.DatabaseSeeding
 
         private const string CourseNavigationTabNameEn = "Course";
         private const string CourseNavigationTabNamePl = "Kurs";
+        private const string CoursePageName = "Course";
+        private const int CoursePageNavigationIndex = 3;
         private const string CoursePageTitleEn = "Course";
         private const string CoursePageTitlePl = "Kurs";
-        private readonly string CoursePageName = "Course";
-        private readonly int CoursePageNavigationIndex = 3;
 
         #endregion Course page
 
@@ -47,10 +49,10 @@ namespace Kredek.Data.DatabaseSeeding
 
         private const string BlogNavigationTabNameEn = "Blog";
         private const string BlogNavigationTabNamePl = "Blog";
+        private const string BlogPageName = "Blog";
+        private const int BlogPageNavigationIndex = 4;
         private const string BlogPageTitleEn = "Blog";
         private const string BlogPageTitlePl = "Blog";
-        private readonly string BlogPageName = "Blog";
-        private readonly int BlogPageNavigationIndex = 4;
 
         #endregion Blog page
 
@@ -58,10 +60,10 @@ namespace Kredek.Data.DatabaseSeeding
 
         private const string AboutNavigationTabNameEn = "About";
         private const string AboutNavigationTabNamePl = "O Nas";
+        private const string AboutPageName = "About";
+        private const int AboutPageNavigationIndex = 5;
         private const string AboutPageTitleEn = "About";
         private const string AboutPageTitlePl = "O Nas";
-        private readonly string AboutPageName = "About";
-        private readonly int AboutPageNavigationIndex = 5;
 
         #endregion About page
 
@@ -69,10 +71,10 @@ namespace Kredek.Data.DatabaseSeeding
 
         private const string ContactNavigationTabNameEn = "Contact";
         private const string ContactNavigationTabNamePl = "Kontakt";
+        private const string ContactPageName = "Contact";
+        private const int ContactPageNavigationIndex = 6;
         private const string ContactPageTitleEn = "Contact";
         private const string ContactPageTitlePl = "Kontakt";
-        private readonly string ContactPageName = "Contact";
-        private readonly int ContactPageNavigationIndex = 6;
 
         #endregion Contact page
 
@@ -83,43 +85,41 @@ namespace Kredek.Data.DatabaseSeeding
             _context = context;
         }
 
-        public void CreateANewLanguage(string name, string isoCode)
+        public void CreateDefaultContentElements()
         {
-            var newLanguage = new Language()
-            {
-                Name = name,
-                ISOCode = isoCode
-            };
+            #region Home page
 
-            _context.Languages.Add(newLanguage);
-            _context.SaveChanges();
+            //banner
+            CreateANewContentElement(GlobalVariables.HomePageName, 1);
+            //text left
+            CreateANewContentElement(GlobalVariables.HomePageName, 2);
+            //text right
+            CreateANewContentElement(GlobalVariables.HomePageName, 3);
+            //banner with buttons
+            CreateANewContentElement(GlobalVariables.HomePageName, 4);
+
+            #endregion Home page
+
+            //CreateANewContentElement(BlogPageName, 1);
+            //CreateANewContentElement(AboutPageName, 1);
+            //CreateANewContentElement(TeamPageName, 1);
+            //CreateANewContentElement(ContactPageName, 1);
+            //CreateANewContentElement(CoursePageName, 1);
         }
 
-        public void CreateANewPage(string name, int navigationIndex, bool isActive = true)
+        public void CreateDefaultContentElementsTranslations()
         {
-            var newPage = new WebsitePage()
-            {
-                Name = name,
-                IsActive = isActive,
-                NavigationIndex = navigationIndex
-            };
+            var homePage = _context.WebsitePages.Where(x => x.Name == HomePageName).Include(y => y.ContentElements)
+                .FirstOrDefault();
+            var plLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode);
 
-            _context.WebsitePages.Add(newPage);
-            _context.SaveChanges();
-        }
+            var contentElement = homePage.ContentElements.ToList()[0];
 
-        public void CreateANewPageTranslation(WebsitePage page, Language language, string title, string navigationTabName)
-        {
-            var newPageTranslation = new WebsitePageTranslation()
-            {
-                Language = language,
-                WebsitePage = page,
-                Title = title,
-                NameInNavigationBar = navigationTabName
-            };
+            //banner
+            Hardcode_Creating_Pl_TextSeparatedByLine(contentElement, plLanguage);
 
-            _context.WebsitePageTranslations.Add(newPageTranslation);
-            _context.SaveChanges();
+            //image and text left
+            Hardcode_Creating_Pl_ImageAndTextLeft(contentElement, plLanguage);
         }
 
         public void CreateDefaultLanguages()
@@ -143,21 +143,97 @@ namespace Kredek.Data.DatabaseSeeding
             var languages = _context.Languages.ToList();
 
             //Home page translations
-            CreatePagePlAndEnTranslations(HomePageName, languages, HomePageTitlePl, HomePageTitleEn, HomeNavigationTabNamePl, HomeNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(HomePageName, languages, HomePageTitlePl, HomePageTitleEn,
+                HomeNavigationTabNamePl, HomeNavigationTabNameEn);
 
             //Blog page translations
-            CreatePagePlAndEnTranslations(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn, BlogNavigationTabNamePl, BlogNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn,
+                BlogNavigationTabNamePl, BlogNavigationTabNameEn);
             //About page translations
-            CreatePagePlAndEnTranslations(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn, AboutNavigationTabNamePl, AboutNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
+                AboutNavigationTabNamePl, AboutNavigationTabNameEn);
 
             //TeamPageName page translations
-            CreatePagePlAndEnTranslations(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn, TeamNavigationTabNamePl, TeamNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn,
+                TeamNavigationTabNamePl, TeamNavigationTabNameEn);
 
             //Contact page translations
-            CreatePagePlAndEnTranslations(ContactPageName, languages, ContactPageTitlePl, ContactPageTitleEn, ContactNavigationTabNamePl, ContactNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(ContactPageName, languages, ContactPageTitlePl, ContactPageTitleEn,
+                ContactNavigationTabNamePl, ContactNavigationTabNameEn);
 
             //Course page translations
-            CreatePagePlAndEnTranslations(CoursePageName, languages, CoursePageTitlePl, CoursePageTitleEn, CourseNavigationTabNamePl, CourseNavigationTabNameEn);
+            CreateANewPageTranslationPlAndEn(CoursePageName, languages, CoursePageTitlePl, CoursePageTitleEn,
+                CourseNavigationTabNamePl, CourseNavigationTabNameEn);
+        }
+
+        private void CreateANewContentElement(string pageName, int position)
+        {
+            var page = _context.WebsitePages.Single(x => x.Name == pageName);
+
+            var newContentElement = new ContentElement()
+            {
+                Position = position,
+                WebsitePage = page
+            };
+
+            _context.ContentElement.Add(newContentElement);
+            _context.SaveChanges();
+        }
+
+        private void CreateANewImageAndTextLeft(ContentElement contentElement, Language language, string title,
+            string text, string imageUrl)
+        {
+            var imageAndTextLeft = new ImageAndTextLeft()
+            {
+                Language = language,
+                ContentElement = contentElement,
+                Title = title,
+                Text = text,
+                ImageUrl = imageUrl
+            };
+
+            _context.ContentElementTranslation.Add(imageAndTextLeft);
+            _context.SaveChanges();
+        }
+
+        private void CreateANewLanguage(string name, string isoCode)
+        {
+            var newLanguage = new Language()
+            {
+                Name = name,
+                ISOCode = isoCode
+            };
+
+            _context.Languages.Add(newLanguage);
+            _context.SaveChanges();
+        }
+
+        private void CreateANewPage(string name, int navigationIndex, bool isActive = true)
+        {
+            var newPage = new WebsitePage()
+            {
+                Name = name,
+                IsActive = isActive,
+                NavigationIndex = navigationIndex
+            };
+
+            _context.WebsitePages.Add(newPage);
+            _context.SaveChanges();
+        }
+
+        private void CreateANewPageTranslation(WebsitePage page, Language language, string title,
+            string navigationTabName)
+        {
+            var newPageTranslation = new WebsitePageTranslation()
+            {
+                Language = language,
+                WebsitePage = page,
+                Title = title,
+                NameInNavigationBar = navigationTabName
+            };
+
+            _context.WebsitePageTranslations.Add(newPageTranslation);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -169,17 +245,53 @@ namespace Kredek.Data.DatabaseSeeding
         /// <param name="pageTitleEn"></param>
         /// <param name="navigationTabNamePl"></param>
         /// <param name="navigationTabNameEn"></param>
-        private void CreatePagePlAndEnTranslations(string pageName, IList<Language> languages, string pageTitlePl, string pageTitleEn, string navigationTabNamePl, string navigationTabNameEn)
+        private void CreateANewPageTranslationPlAndEn(string pageName, IList<Language> languages, string pageTitlePl, string pageTitleEn, string navigationTabNamePl, string navigationTabNameEn)
         {
             var page = _context.WebsitePages.Single(x => x.Name == pageName);
 
             //Polish version
             CreateANewPageTranslation(page,
-                languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode), pageTitlePl, navigationTabNamePl);
+                languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode), pageTitlePl,
+                navigationTabNamePl);
 
             //English version
             CreateANewPageTranslation(page,
-                languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode), pageTitleEn, navigationTabNameEn);
+                languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode), pageTitleEn,
+                navigationTabNameEn);
+        }
+
+        private void CreateANewTextSeparatedByLine(ContentElement contentElement, Language language, string title, string subTitle, string imageUrl)
+        {
+            var newTranslation = new TextSeparatedByLine()
+            {
+                Language = language,
+                ContentElement = contentElement,
+                Title = title,
+                SubTitle = subTitle,
+                ImageUrl = imageUrl
+            };
+
+            _context.ContentElementTranslation.Add(newTranslation);
+            _context.SaveChanges();
+        }
+
+        private void Hardcode_Creating_Pl_ImageAndTextLeft(ContentElement contentElement, Language language)
+        {
+            var textPl = "Nasze koło";
+            var titlePl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej oraz uczenie się od siebie nawzajem. Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
+            var imageUrl = "https://picsum.photos/1600/1200";
+
+            CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
+        }
+
+        private void Hardcode_Creating_Pl_TextSeparatedByLine(ContentElement contentElement, Language language)
+        {
+            var titlePl = "KREDEK";
+            var subTitlePl = "Creation and Development Group";
+            var imgUrl = "https://picsum.photos/1600/1200";
+
+            //banner
+            CreateANewTextSeparatedByLine(contentElement, language, titlePl, subTitlePl, imgUrl);
         }
     }
 }
