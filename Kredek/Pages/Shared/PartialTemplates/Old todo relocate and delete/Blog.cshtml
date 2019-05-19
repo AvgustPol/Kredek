@@ -1,0 +1,45 @@
+﻿@*<div class="container ">
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-sm-12 ">
+                @foreach (var post in Model.FeedPostsDto.Posts)
+                {
+                    <div class="card bg-light mb-4 p-5 p-sm-0 p-md-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="card-text">
+                                        <a href="@post.SourceUrl">Zobacz na Facebook </a>
+                                    </h5>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <p class="card-text">
+                                        <small class="text-muted">@post.CreatedTime</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <hr />
+                            <p class="card-title text-justify text-center">
+                                @post.Content
+                            </p>
+                            <img class="card-img-top card-img-bottom"
+                                 src="@post.Picture"
+                                 alt="Card image cap">
+                        </div>
+                    </div>
+                }
+
+                <div class="card bg-light mb-4 p-5 p-sm-0 p-md-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-10 offset-1 text-center">
+                                Więcej znajdziesz na
+                                <a href="https://www.facebook.com/KNKredek/">Facebooku</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@

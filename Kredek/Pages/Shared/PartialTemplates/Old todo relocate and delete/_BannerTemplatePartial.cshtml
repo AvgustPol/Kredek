@@ -1,0 +1,22 @@
+﻿@*@using KredekProtopyte.Data;
+    @model KredekProtopyte.Data.Templates.BannerTemplate
+
+    @{
+        string bannerTemplateId = "bannerTemplateId" + Model.Id;
+    }
+
+    <style>
+        #@bannerTemplateId {
+            background-image: url(@Model.ImageUrl);
+        }
+    </style>
+
+    <div class="responsiveBackgroundImage" id="@bannerTemplateId">
+        <div class="row text-center align-content-center">
+            <div class="col p-5">
+                <h1>@Model.Title</h1>
+                <hr />
+                <h2>@Model.SubTitle</h2>
+            </div>
+        </div>
+    </div>*@
