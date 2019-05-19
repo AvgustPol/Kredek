@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Kredek.Data.Models.ContentElementTranslationTemplates;
+﻿using Kredek.Data.Models.ContentElementTranslationTemplates;
+using System.Collections.Generic;
 
 namespace Kredek.Data.Models
 {
@@ -11,7 +11,7 @@ namespace Kredek.Data.Models
 
         /// <summary>
         /// Index of the element on the webpage
-        /// 0 - top of the webpage
+        /// 1 - top of the webpage
         /// </summary>
         public int Position { get; set; }
 
