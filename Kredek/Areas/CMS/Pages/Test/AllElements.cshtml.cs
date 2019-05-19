@@ -12,6 +12,7 @@ namespace Kredek.Areas.CMS.Pages.Test
 
         public string LanguageName { get; private set; } = "Polski";
         public IList<ContentElement> PageContent { get; set; }
+        public string PageName { get; set; }
 
         public AllElementsModel(Kredek.Data.ApplicationDbContext context)
         {
@@ -20,6 +21,8 @@ namespace Kredek.Areas.CMS.Pages.Test
 
         public async Task OnGetAsync(string pageName)
         {
+            PageName = pageName;
+
             PageContent = await _context.ContentElement
                 .Include(x => x.ContentElementTranslations)
                 .ToListAsync();

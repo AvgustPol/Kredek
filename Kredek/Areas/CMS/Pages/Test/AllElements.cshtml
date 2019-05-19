@@ -7,44 +7,7 @@
 
 }
 
-<h1>Content on the page [@Model.PageContentViewModel.PageName] </h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @* Position *@
-                @Html.DisplayNameFor(model => model.PageContent[0].Position)
-            </th>
-            <th>
-                @* Content type *@
-                Template type
-            </th>
-            <th>
-                Translations
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            var i = 1;
-        }
-        @foreach (var item in Model.PageContentViewModel.Elements)
-        {
-            <tr>
-                <td>
-                    @(i++)
-                </td>
-                <td>
-                    @item.TypeName
-                </td>
-                <td>
-                    <a class="btn btn-info" href="#">View all</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h1>Content on the page [@Model.PageName] </h1>
 
 <table class="table">
     <thead>
