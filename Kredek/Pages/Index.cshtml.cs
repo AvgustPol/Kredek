@@ -74,6 +74,8 @@ namespace Kredek.Pages
 
         #region Methods
 
+        public List<ContentElement> CurrentPageElementsWithTranslations { get; set; }
+
         private void CreateLanguages()
         {
             Languages = _context.Languages.ToList();
@@ -124,6 +126,12 @@ namespace Kredek.Pages
             CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName).SingleAsync();
             CurrentPageTranslation = await _context.WebsitePageTranslations.Where(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage)
                 .SingleAsync();
+
+            CurrentPageElementsWithTranslations = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
+                .OrderBy(q => q.Position)
+                    .Include(y => y.ContentElementTranslations)
+                    .Where(z => z.ContentElementTranslations.FirstOrDefault().Language.ISOCode == CurrentLanguage)
+                        .ToListAsync();
 
             return Page();
         }

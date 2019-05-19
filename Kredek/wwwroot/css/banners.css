@@ -1,0 +1,31 @@
+﻿.responsiveBackgroundImage {
+    background: no-repeat center center;
+    background-size: cover;
+}
+
+    .responsiveBackgroundImage h2 {
+        padding: 0px 0px 150px 0px !important;
+    }
+
+    .responsiveBackgroundImage h1 {
+        padding: 150px 0px 0px 0px;
+        font-size: 65PX !important;
+    }
+
+    .responsiveBackgroundImage h2, .responsiveBackgroundImage h1 {
+        margin: 0px !important; /* ignore h1 style to center the text! */
+        text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+        font-size: 40PX;
+        font-family: "Lato";
+        font-weight: 700;
+        color: #f8f8f8;
+    }
+
+    .responsiveBackgroundImage hr {
+        max-width: 50%;
+        border-top: 5px solid #FFFFFF;
+    }
+
+.bannerText h1{
+    padding: 150px 0px 150px 0px !important;
+}

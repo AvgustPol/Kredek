@@ -1,6 +1,16 @@
 ﻿@model Kredek.Data.Models.ContentElementTranslationTemplates.TextSeparatedByLine
 
-<div class="responsiveBackgroundImage">
+@{
+    string bannerTemplateId = "bannerTemplateId" + Model.ContentElementId;
+}
+
+<style>
+    #@bannerTemplateId {
+        background-image: url(@Model.ImageUrl);
+    }
+</style>
+
+<div class="responsiveBackgroundImage" id="@bannerTemplateId">
     <div class="row text-center align-content-center">
         <div class="col p-5">
             <h1>@Model.Title</h1>
@@ -8,5 +18,4 @@
             <h2>@Model.SubTitle</h2>
         </div>
     </div>
-    <img width="250px" src="@Model.ImageUrl" alt="Alternate Text" />
 </div>

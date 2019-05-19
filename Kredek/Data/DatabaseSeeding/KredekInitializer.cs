@@ -113,13 +113,14 @@ namespace Kredek.Data.DatabaseSeeding
                 .FirstOrDefault();
             var plLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode);
 
-            var contentElement = homePage.ContentElements.ToList()[0];
+            var contentElement1 = homePage.ContentElements.ToList()[0];
 
             //banner
-            Hardcode_Creating_Pl_TextSeparatedByLine(contentElement, plLanguage);
+            Hardcode_Creating_Pl_TextSeparatedByLine(contentElement1, plLanguage);
 
+            var contentElement2 = homePage.ContentElements.ToList()[1];
             //image and text left
-            Hardcode_Creating_Pl_ImageAndTextLeft(contentElement, plLanguage);
+            Hardcode_Creating_Pl_ImageAndTextLeft(contentElement2, plLanguage);
         }
 
         public void CreateDefaultLanguages()

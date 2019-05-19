@@ -1,16 +1,16 @@
 ﻿@using Kredek.Data.Models.ContentElementTranslationTemplates
 @model IndexModel
 
-@{
-    var item = new TextSeparatedByLine()
-    {
-        ImageUrl = "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        SubTitle = "Creation and Development Group",
-        Title = "KREDEK"
-    };
-}
-
-@if (item is TextSeparatedByLine modelTextSeparatedByLine)
+@foreach (var element in Model.CurrentPageElementsWithTranslations)
 {
-    @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine)
+
+    var elementTranslation = element.ContentElementTranslations.FirstOrDefault();
+    if (elementTranslation is TextSeparatedByLine modelTextSeparatedByLine)
+    {
+        @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine)
+    }
+    else if (elementTranslation is ImageAndTextLeft modelImageAndTextLeft)
+    {
+        @await Html.PartialAsync("PartialTemplates/_ImageAndTextLeft", modelImageAndTextLeft)
+    }
 }
