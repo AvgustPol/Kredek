@@ -1,0 +1,54 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.ImageAndTextLeftManagement.IndexModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageAndTextLeft[0].ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageAndTextLeft[0].Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageAndTextLeft[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageAndTextLeft[0].ContentElement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageAndTextLeft[0].Language)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ImageAndTextLeft) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentElement.ContentElementId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language.LanguageId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ContentElementTranslationId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ContentElementTranslationId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ContentElementTranslationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

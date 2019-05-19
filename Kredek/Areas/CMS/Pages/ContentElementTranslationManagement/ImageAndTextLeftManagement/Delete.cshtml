@@ -1,0 +1,46 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.ImageAndTextLeftManagement.DeleteModel
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ImageAndTextLeft</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageAndTextLeft.ImageUrl)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImageAndTextLeft.ImageUrl)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageAndTextLeft.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImageAndTextLeft.Text)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageAndTextLeft.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImageAndTextLeft.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageAndTextLeft.ContentElement)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImageAndTextLeft.ContentElement.ContentElementId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageAndTextLeft.Language)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ImageAndTextLeft.Language.LanguageId)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ImageAndTextLeft.ContentElementTranslationId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

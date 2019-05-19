@@ -1,17 +1,17 @@
-﻿using Kredek.Data.Models;
+﻿using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
-namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
+namespace Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.TextSeparatedByLineManagement
 {
     public class CreateModel : PageModel
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
 
         [BindProperty]
-        public WebsitePageTranslation WebsitePageTranslation { get; set; }
+        public TextSeparatedByLine TextSeparatedByLine { get; set; }
 
         public CreateModel(Kredek.Data.ApplicationDbContext context)
         {
@@ -20,8 +20,9 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
 
         public IActionResult OnGet()
         {
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "Name");
-            ViewData["WebsitePageId"] = new SelectList(_context.WebsitePages, "WebsitePageId", "WebsitePageId");
+            ViewData["ContentElementId"] = new SelectList(_context.ContentElement, "ContentElementId", "ContentElementId");
+            //ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "LanguageId");
+            ViewData["LanguageName"] = new SelectList(_context.Languages, "LanguageId", "Name");
             return Page();
         }
 
@@ -32,7 +33,7 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
                 return Page();
             }
 
-            _context.WebsitePageTranslations.Add(WebsitePageTranslation);
+            _context.TemplatesTextSeparatedByLine.Add(TextSeparatedByLine);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

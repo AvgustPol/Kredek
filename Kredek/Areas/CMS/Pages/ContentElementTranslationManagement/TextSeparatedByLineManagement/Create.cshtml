@@ -1,0 +1,46 @@
+﻿@page
+@model Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.TextSeparatedByLineManagement.CreateModel
+
+<h4>TextSeparatedByLine</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TextSeparatedByLine.SubTitle" class="control-label"></label>
+                <input asp-for="TextSeparatedByLine.SubTitle" class="form-control" />
+                <span asp-validation-for="TextSeparatedByLine.SubTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextSeparatedByLine.Title" class="control-label"></label>
+                <input asp-for="TextSeparatedByLine.Title" class="form-control" />
+                <span asp-validation-for="TextSeparatedByLine.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextSeparatedByLine.ImageUrl" class="control-label"></label>
+                <input asp-for="TextSeparatedByLine.ImageUrl" class="form-control" />
+                <span asp-validation-for="TextSeparatedByLine.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextSeparatedByLine.ContentElementId" class="control-label"></label>
+                <select asp-for="TextSeparatedByLine.ContentElementId" class="form-control" asp-items="ViewBag.ContentElementId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TextSeparatedByLine.LanguageId" class="control-label"></label>
+                <select asp-for="TextSeparatedByLine.LanguageId" class="form-control" asp-items="ViewBag.LanguageName"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
