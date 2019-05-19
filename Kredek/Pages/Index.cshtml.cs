@@ -93,7 +93,7 @@ namespace Kredek.Pages
                     foreach (var translation in page.WebsitePageTranslations)
                     {
                         Navigation[page.Name][translation.Language.ISOCode] =
-                            translation.NavigationTabName;
+                            translation.NameInNavigationBar;
                     }
                 }
             }

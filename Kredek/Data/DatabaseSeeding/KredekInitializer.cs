@@ -115,7 +115,7 @@ namespace Kredek.Data.DatabaseSeeding
                 Language = language,
                 WebsitePage = page,
                 Title = title,
-                NavigationTabName = navigationTabName
+                NameInNavigationBar = navigationTabName
             };
 
             _context.WebsitePageTranslations.Add(newPageTranslation);
