@@ -1,1 +1,16 @@
-﻿@model IndexModel
+﻿@using Kredek.Data.Models.ContentElementTranslationTemplates
+@model IndexModel
+
+@{
+    var item = new TextSeparatedByLine()
+    {
+        ImageUrl = "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        SubTitle = "Creation and Development Group",
+        Title = "KREDEK"
+    };
+}
+
+@if (item is TextSeparatedByLine modelTextSeparatedByLine)
+{
+    @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine)
+}
