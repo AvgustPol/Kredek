@@ -108,7 +108,7 @@ namespace Kredek.Data.DatabaseSeeding
             _context.SaveChanges();
         }
 
-        public void CreateANewPagePageTranslation(WebsitePage page, Language language, string title, string navigationTabName)
+        public void CreateANewPageTranslation(WebsitePage page, Language language, string title, string navigationTabName)
         {
             var newPageTranslation = new WebsitePageTranslation()
             {
@@ -174,11 +174,11 @@ namespace Kredek.Data.DatabaseSeeding
             var page = _context.WebsitePages.Single(x => x.Name == pageName);
 
             //Polish version
-            CreateANewPagePageTranslation(page,
+            CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode), pageTitlePl, navigationTabNamePl);
 
             //English version
-            CreateANewPagePageTranslation(page,
+            CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode), pageTitleEn, navigationTabNameEn);
         }
     }
