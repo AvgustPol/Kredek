@@ -6,31 +6,36 @@ using System.Threading.Tasks;
 
 namespace Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.TextSeparatedByLineManagement
 {
-    public class CreateModel : PageModel
+    public class CreateForCurrentElementModel : PageModel
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
+
+        public int ContentElementId { get; set; } = 1;
 
         [BindProperty]
         public TextSeparatedByLine TextSeparatedByLine { get; set; }
 
-        public CreateModel(Kredek.Data.ApplicationDbContext context)
+        public CreateForCurrentElementModel(Kredek.Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int id)
         {
-            ViewData["ContentElementId"] = new SelectList(_context.ContentElement, "ContentElementId", "ContentElementId");
-            ViewData["LanguageName"] = new SelectList(_context.Languages, "LanguageId", "Name");
+            ContentElementId = id;
+
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "Name");
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            TextSeparatedByLine.ContentElementId = id;
 
             _context.TemplatesTextSeparatedByLine.Add(TextSeparatedByLine);
             await _context.SaveChangesAsync();

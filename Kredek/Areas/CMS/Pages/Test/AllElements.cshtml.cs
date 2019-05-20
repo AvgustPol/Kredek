@@ -25,6 +25,7 @@ namespace Kredek.Areas.CMS.Pages.Test
 
             PageContent = await _context.ContentElement
                 .Include(x => x.ContentElementTranslations)
+                .ThenInclude(z => z.Language)
                 .ToListAsync();
         }
     }
