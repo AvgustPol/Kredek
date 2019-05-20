@@ -1,15 +1,14 @@
 ﻿@using Kredek.Data.Models.ContentElementTranslationTemplates
 @model IndexModel
 
-@foreach (var element in Model.CurrentPageElementsWithTranslations)
+@foreach (var element in Model.CurrentPageElements)
 {
 
-    var elementTranslation = element.ContentElementTranslations.FirstOrDefault();
-    if (elementTranslation is TextSeparatedByLine modelTextSeparatedByLine)
+    if (element is TextSeparatedByLine modelTextSeparatedByLine)
     {
         @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine)
     }
-    else if (elementTranslation is ImageAndTextLeft modelImageAndTextLeft)
+    else if (element is ImageAndTextLeft modelImageAndTextLeft)
     {
         @await Html.PartialAsync("PartialTemplates/_ImageAndTextLeft", modelImageAndTextLeft)
     }

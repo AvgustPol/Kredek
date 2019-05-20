@@ -1,6 +1,7 @@
 ﻿using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
 using Kredek.Data.Models;
+using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
 using Kredek.Logic;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,17 @@ namespace Kredek.Pages
         public string CurrentLanguage { get; set; }
 
         public WebsitePage CurrentPage { get; set; }
+
+        /// <summary>
+        /// Elements on current page in current language
+        /// </summary>
+        public List<ContentElementTranslation> CurrentPageElements { get; set; }
+
+        /// <summary>
+        /// Property that stores data related to current page in current language
+        /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
+
         public IFacebookService FacebookService { get; set; }
 
         /// <summary>
@@ -73,8 +84,6 @@ namespace Kredek.Pages
         }
 
         #region Methods
-
-        public List<ContentElement> CurrentPageElementsWithTranslations { get; set; }
 
         private void CreateLanguages()
         {
@@ -125,23 +134,16 @@ namespace Kredek.Pages
         {
             CurrentPage = await _context.WebsitePages
                 .SingleAsync(page => page.Name == pageName);
+
             CurrentPageTranslation = await _context.WebsitePageTranslations
                 .SingleAsync(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage);
 
-            CurrentPageElementsWithTranslations = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
-                .OrderBy(q => q.Position)
-                    .Include(y => y.ContentElementTranslations)
-                    .Where(z => z.ContentElementTranslations.FirstOrDefault().Language.ISOCode == CurrentLanguage)
-                        .ToListAsync();
-
-            //TODO finish getting en version of elements
-
-            var test = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
+            CurrentPageElements = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
                 .OrderBy(q => q.Position)
                     .Include(y => y.ContentElementTranslations)
                     .SelectMany(x => x.ContentElementTranslations)
-                    .Where(x => x.Language.ISOCode == CurrentLanguage)
-                    .ToListAsync();
+                        .Where(x => x.Language.ISOCode == CurrentLanguage)
+                            .ToListAsync();
 
             return Page();
         }
