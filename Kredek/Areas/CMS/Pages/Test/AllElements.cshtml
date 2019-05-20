@@ -46,7 +46,6 @@
     <tbody>
         @foreach (var contentElement in Model.PageContent)
         {
-
             foreach (var translation in contentElement.ContentElementTranslations)
             {
                 var type = translation.GetType().ShortDisplayName();

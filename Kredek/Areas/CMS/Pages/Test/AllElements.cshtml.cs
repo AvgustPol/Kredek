@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Kredek.Areas.CMS.Pages.Test
@@ -44,7 +45,8 @@ namespace Kredek.Areas.CMS.Pages.Test
 
             PageContent = await _context.ContentElement
                 .Include(x => x.ContentElementTranslations)
-                .ThenInclude(z => z.Language)
+                    .ThenInclude(z => z.Language)
+                .Where(x => x.WebsitePage.Name == PageName)
                 .ToListAsync();
         }
     }
