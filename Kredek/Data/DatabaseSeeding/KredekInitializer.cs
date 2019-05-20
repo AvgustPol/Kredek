@@ -112,15 +112,18 @@ namespace Kredek.Data.DatabaseSeeding
             var homePage = _context.WebsitePages.Where(x => x.Name == HomePageName).Include(y => y.ContentElements)
                 .FirstOrDefault();
             var plLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode);
+            var enLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode);
 
             var contentElement1 = homePage.ContentElements.ToList()[0];
 
             //banner
-            Hardcode_Creating_Pl_TextSeparatedByLine(contentElement1, plLanguage);
+            Hardcode_Creating_TextSeparatedByLine(contentElement1, plLanguage);
 
             var contentElement2 = homePage.ContentElements.ToList()[1];
             //image and text left
             Hardcode_Creating_Pl_ImageAndTextLeft(contentElement2, plLanguage);
+
+            Hardcode_Creating_En_ImageAndTextLeft(contentElement2, enLanguage);
         }
 
         public void CreateDefaultLanguages()
@@ -276,16 +279,25 @@ namespace Kredek.Data.DatabaseSeeding
             _context.SaveChanges();
         }
 
-        private void Hardcode_Creating_Pl_ImageAndTextLeft(ContentElement contentElement, Language language)
+        private void Hardcode_Creating_En_ImageAndTextLeft(ContentElement contentElement, Language language)
         {
-            var textPl = "Nasze koło";
-            var titlePl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej oraz uczenie się od siebie nawzajem. Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
-            var imageUrl = "https://picsum.photos/1600/1200";
+            var textPl = "Who we are";
+            var titlePl = "[Google translate power! c:] The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
+            var imageUrl = "https://picsum.photos/600/400";
 
             CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
         }
 
-        private void Hardcode_Creating_Pl_TextSeparatedByLine(ContentElement contentElement, Language language)
+        private void Hardcode_Creating_Pl_ImageAndTextLeft(ContentElement contentElement, Language language)
+        {
+            var textPl = "Nasze koło";
+            var titlePl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej oraz uczenie się od siebie nawzajem. Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
+            var imageUrl = "https://picsum.photos/600/400";
+
+            CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
+        }
+
+        private void Hardcode_Creating_TextSeparatedByLine(ContentElement contentElement, Language language)
         {
             var titlePl = "KREDEK";
             var subTitlePl = "Creation and Development Group";
