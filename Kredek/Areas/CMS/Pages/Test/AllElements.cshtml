@@ -7,6 +7,13 @@
     ViewData["Title"] = "AllElements";
 }
 
+<form method="post">
+    <div class="form-group">
+        <label class="control-label"> Select page </label>
+        <select onchange="this.form.submit()" asp-for="WebsitePageId" class="form-control" asp-items="ViewBag.WebsitePageId"></select>
+    </div>
+</form>
+
 <div class="row text-center">
     <div class="col">
         <h1 class="display-4">Content on the page [@Model.PageName] </h1>
@@ -73,6 +80,6 @@
         <br />
         <br />
         <hr />
-        <a class="btn btn-light" asp-page="#">Add element to page</a>
+        <a class="btn btn-light" asp-page="">Add element to page</a>
     </div>
 </div>
