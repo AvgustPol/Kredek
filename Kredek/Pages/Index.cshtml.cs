@@ -123,15 +123,25 @@ namespace Kredek.Pages
 
         private async Task<IActionResult> LoadPage(string pageName)
         {
-            CurrentPage = await _context.WebsitePages.Where(page => page.Name == pageName).SingleAsync();
-            CurrentPageTranslation = await _context.WebsitePageTranslations.Where(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage)
-                .SingleAsync();
+            CurrentPage = await _context.WebsitePages
+                .SingleAsync(page => page.Name == pageName);
+            CurrentPageTranslation = await _context.WebsitePageTranslations
+                .SingleAsync(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage);
 
             CurrentPageElementsWithTranslations = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
                 .OrderBy(q => q.Position)
                     .Include(y => y.ContentElementTranslations)
                     .Where(z => z.ContentElementTranslations.FirstOrDefault().Language.ISOCode == CurrentLanguage)
                         .ToListAsync();
+
+            //TODO finish getting en version of elements
+
+            var test = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
+                .OrderBy(q => q.Position)
+                    .Include(y => y.ContentElementTranslations)
+                    .SelectMany(x => x.ContentElementTranslations)
+                    .Where(x => x.Language.ISOCode == CurrentLanguage)
+                    .ToListAsync();
 
             return Page();
         }
