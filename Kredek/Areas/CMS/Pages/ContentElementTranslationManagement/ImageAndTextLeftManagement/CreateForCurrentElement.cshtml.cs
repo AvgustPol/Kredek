@@ -4,35 +4,41 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
-namespace Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.TextSeparatedByLineManagement
+namespace Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.ImageAndTextLeftManagement
 {
     public class CreateModel : PageModel
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
 
         [BindProperty]
-        public TextSeparatedByLine TextSeparatedByLine { get; set; }
+        public int ContentElementId { get; set; }
+
+        [BindProperty]
+        public ImageAndTextLeft ImageAndTextLeft { get; set; }
 
         public CreateModel(Kredek.Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int id)
         {
-            ViewData["ContentElementId"] = new SelectList(_context.ContentElement, "ContentElementId", "ContentElementId");
-            ViewData["LanguageName"] = new SelectList(_context.Languages, "LanguageId", "Name");
+            ContentElementId = id;
+
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "Name");
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.TemplatesTextSeparatedByLine.Add(TextSeparatedByLine);
+            ImageAndTextLeft.ContentElementId = id;
+
+            _context.TemplatesImageAndTextLeft.Add(ImageAndTextLeft);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

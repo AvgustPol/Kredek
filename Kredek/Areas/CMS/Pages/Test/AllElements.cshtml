@@ -46,21 +46,23 @@
     <tbody>
         @foreach (var contentElement in Model.PageContent)
         {
+
             foreach (var translation in contentElement.ContentElementTranslations)
             {
+                var type = translation.GetType().ShortDisplayName();
                 <tr>
                     <td>
                         @contentElement.Position
                     </td>
                     <td>
-                        @translation.GetType().ShortDisplayName()
+                        @type
                     </td>
                     <td>
                         @translation.Language.Name
                     </td>
                     <td>
                         <a asp-route-id="@contentElement.ContentElementId"
-                           asp-page="/ContentElementTranslationManagement/TextSeparatedByLineManagement/CreateForCurrentElement">
+                           asp-page="/ContentElementTranslationManagement/@(type)Management/CreateForCurrentElement">
                             CreateForCurrentElement
                         </a>
 

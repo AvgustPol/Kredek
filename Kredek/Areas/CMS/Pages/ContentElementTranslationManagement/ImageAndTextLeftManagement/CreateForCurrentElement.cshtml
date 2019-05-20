@@ -5,7 +5,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" asp-route-id="@Model.ContentElementId">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ImageAndTextLeft.ImageUrl" class="control-label"></label>
@@ -23,12 +23,8 @@
                 <span asp-validation-for="ImageAndTextLeft.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageAndTextLeft.ContentElementId" class="control-label"></label>
-                <select asp-for="ImageAndTextLeft.ContentElementId" class ="form-control" asp-items="ViewBag.ContentElementId"></select>
-            </div>
-            <div class="form-group">
                 <label asp-for="ImageAndTextLeft.LanguageId" class="control-label"></label>
-                <select asp-for="ImageAndTextLeft.LanguageId" class ="form-control" asp-items="ViewBag.LanguageId"></select>
+                <select asp-for="ImageAndTextLeft.LanguageId" class="form-control" asp-items="ViewBag.LanguageId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
