@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\CMS\Pages\ContentElementManagement\" />
-    <Folder Include="Areas\CMS\Pages\Languages\" />
     <Folder Include="Pages\Shared\PartialTemplates\Old todo relocate and delete\" />
     <Folder Include="wwwroot\SavedImages\" />
   </ItemGroup>
