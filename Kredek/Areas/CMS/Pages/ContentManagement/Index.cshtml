@@ -1,0 +1,89 @@
+﻿@page  "{pageName}"
+@using Kredek.Data.Models
+@using Microsoft.EntityFrameworkCore.Internal
+@model Kredek.Areas.CMS.Pages.ContentManagement.IndexModel
+
+@{
+    ViewData["Title"] = "AllElements";
+}
+
+<form method="post">
+    <div class="form-group">
+        <label class="control-label"> Select page </label>
+        <select onchange="this.form.submit()" asp-for="WebsitePageId" class="form-control" asp-items="ViewBag.WebsitePageId"></select>
+    </div>
+</form>
+
+<div class="row text-center">
+    <div class="col">
+        <h1 class="display-4">Content on the page [@Model.PageName] </h1>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* Position *@
+                @Html.DisplayNameFor(model => model.PageContent[0].Position)
+            </th>
+            <th>
+                @* Content type *@
+                Template type
+            </th>
+            <th>
+                Languages
+            </th>
+            <th>
+                Translations
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contentElement in Model.PageContent)
+        {
+            foreach (var translation in contentElement.ContentElementTranslations)
+            {
+                var type = translation.GetType().ShortDisplayName();
+                <tr>
+                    <td>
+                        @contentElement.Position
+                    </td>
+                    <td>
+                        @type
+                    </td>
+                    <td>
+                        @translation.Language.Name
+                    </td>
+                    <td>
+                        <a asp-route-id="@contentElement.ContentElementId"
+                           asp-page="/ContentElementTranslationManagement/@(type)Management/CreateForCurrentElement">
+                            CreateForCurrentElement
+                        </a>
+
+                        <a asp-page="_TODO_ /ContentElementTranslationManagement/@(type)Management/Details"
+                           asp-route-id="_TODO_">[ Manage all < - TODO ( Real - > Details) ]</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<div class="row text-center">
+    <div class="col-12">
+        <br />
+        <br />
+        <br />
+        <hr />
+        <a class="btn btn-light" asp-route-id="@Model.WebsitePageId"
+           asp-page="/ContentManagement/Create/CreateTextSeparatedByLine">
+            Add element to [@Model.PageName] page
+        </a>
+    </div>
+</div>
