@@ -45,6 +45,7 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement.Create
 
             #region Create a new ContentElement
 
+            ContentElement.WebsitePageId = id;
             ContentElement.WebsitePage = page;
             _context.ContentElement.Add(ContentElement);
 
