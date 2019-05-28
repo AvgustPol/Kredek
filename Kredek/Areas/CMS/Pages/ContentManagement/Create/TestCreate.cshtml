@@ -1,0 +1,44 @@
+﻿@page
+@using Kredek.Data
+@model Kredek.Areas.CMS.Pages.ContentManagement.Create.TestCreate
+
+<h4>ContentElement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-id="@Model.WebsitePageId" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ContentElement.Position" class="control-label"></label>
+                <input asp-for="ContentElement.Position" class="form-control" />
+                <span asp-validation-for="ContentElement.Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+            <hr />
+
+            @{
+                switch (Model.Type)
+                {
+                    case AvailableTemplates.ImageAndTextLeft:
+                        await Html.RenderPartialAsync("_CreateImageAndTextLeft", Model.ImageAndTextLeft);
+                        break;
+
+                    case AvailableTemplates.TextSeparatedByLine:
+                        await Html.RenderPartialAsync("_CreateTextSeparatedByLinePartial", Model.TextSeparatedByLineModel);
+                        break;
+                }
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
