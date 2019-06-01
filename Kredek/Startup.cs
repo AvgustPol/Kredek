@@ -84,6 +84,7 @@ namespace Kredek
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IKredekInitializer, KredekInitializer>();
             services.AddScoped<IPreviewInitializer, PreviewInitializer>();
+            services.AddScoped<IImageSavingService, ImageSavingService>();
 
             //Development SQL Connection to Microsoft SQL Managament studio
             services.AddDbContext<ApplicationDbContext>(
