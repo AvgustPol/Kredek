@@ -1,8 +1,14 @@
-﻿@model Kredek.Data.Models.ContentElementTranslationTemplates.ImageAndTextLeft
+﻿@using Kredek.Global
+@model Kredek.Data.Models.ContentElementTranslationTemplates.ImageAndTextLeft
+
+@{
+    string pathToImage = $@"..\{Model.ImageUrl}";
+}
+
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-5">
-            <img class="img-thumbnail" src="@Model.ImageUrl" />
+            <img class="img-thumbnail" src="@pathToImage" />
         </div>
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-5">
             <h2>@Model.Title</h2>

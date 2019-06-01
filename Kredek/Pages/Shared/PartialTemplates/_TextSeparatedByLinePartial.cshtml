@@ -2,11 +2,15 @@
 
 @{
     string bannerTemplateId = "bannerTemplateId" + Model.ContentElementId;
+    string pathToImage = $@"..\{Model.ImageUrl}";
+    char oldLine = '\\';
+    char newLine = '/';
+    pathToImage = pathToImage.Replace(oldLine, newLine);
 }
 
 <style>
     #@bannerTemplateId {
-        background-image: url(@Model.ImageUrl);
+        background-image: url(@pathToImage);
     }
 </style>
 
