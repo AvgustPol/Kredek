@@ -78,16 +78,16 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement.Create
 
         private void CreateImageAndTextLeft(ImageAndTextLeft element)
         {
-            _context.TemplatesImageAndTextLeft.Add(element);
-
             element.ContentElement = ContentElement;
+
+            _context.TemplatesImageAndTextLeft.Add(element);
         }
 
         private void CreateTextSeparatedByLine(TextSeparatedByLine element)
         {
-            _context.TemplatesTextSeparatedByLine.Add(element);
-
             element.ContentElement = ContentElement;
+
+            _context.TemplatesTextSeparatedByLine.Add(element);
         }
     }
 }

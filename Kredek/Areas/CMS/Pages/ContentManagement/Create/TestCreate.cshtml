@@ -6,18 +6,16 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-route-id="@Model.WebsitePageId" method="post">
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.WebsitePageId" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ContentElement.Position" class="control-label"></label>
-                <input asp-for="ContentElement.Position" class="form-control" />
+                <input asp-for="ContentElement.Position" class="form-control"/>
                 <span asp-validation-for="ContentElement.Position" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
 
-            <hr />
+            <hr/>
 
             @{
                 switch (Model.Type)
@@ -31,6 +29,11 @@
                         break;
                 }
             }
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
         </form>
     </div>
 </div>

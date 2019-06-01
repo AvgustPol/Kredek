@@ -34,7 +34,9 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement
 
         public async Task OnPost()
         {
-            PageName = (await _context.WebsitePages.SingleAsync(x => x.WebsitePageId == WebsitePageId)).Name;
+            var page = await _context.WebsitePages.SingleAsync(x => x.WebsitePageId == WebsitePageId);
+            PageName = page.Name;
+            WebsitePageId = page.WebsitePageId;
 
             await GetContent();
         }

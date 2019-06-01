@@ -81,8 +81,9 @@
         <br />
         <hr />
 
-        <form method="get" asp-route-id="@Model.WebsitePageId" asp-page="/ContentManagement/Create/TestCreate">
+        <form method="get" asp-page="/ContentManagement/Create/TestCreate">
             <div class="form-group">
+                <input type="hidden" name="id" value="@Model.WebsitePageId" />
                 <label class="control-label"> Select template </label>
                 <select name="type" id="availableTemplates" class="form-control" asp-items="Html.GetEnumSelectList<AvailableTemplates>()"></select>
 
