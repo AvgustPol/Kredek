@@ -5,28 +5,38 @@
 
 @await Html.PartialAsync("Shared/HeaderAndFooter/_HeaderPartial", Model)
 
-<div class="container">
+<div class="container-fluid p-0">
     <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
+        <div class="container p-3">
+            <div class="row">
+                <h1 class="display-1"> [ @Model.CurrentPage.Name ] < - Current page </h1>
+                <hr/>
 
-        <h1 class="display-1"> [ @Model.CurrentPage.Name ] < - Current page </h1>
-        <hr />
+                <h1><a asp-area="CMS"> CMS mode </a></h1>
 
-        <h1><a asp-area="CMS"> CMS mode </a></h1>
+                <hr/>
+            </div>
 
-        <hr />
+            <div class="row">
+                <h1>Test features</h1>
 
-        <h1>Test features</h1>
+                <h2>Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
 
-        <h2>Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
+                <h2>Save images to wwwroot folder : <a href="https://localhost:44328/CMS/ImageSaver">click here</a></h2>
+            </div>
+        </div>
 
-        <h2>Save images to wwwroot folder : <a href="https://localhost:44328/CMS/ImageSaver">click here</a></h2>
+
+        
 
         @await Html.PartialAsync("_ContentPartial", Model)
     </main>
+    
+    
+    @await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
 </div>
 
-@await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
 
 @{
     ViewData["Title"] = Model.CurrentPageTranslation.Title;
