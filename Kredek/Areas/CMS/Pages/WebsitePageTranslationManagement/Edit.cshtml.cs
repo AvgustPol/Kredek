@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Kredek.Data.Models;
+﻿using Kredek.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
 {
@@ -12,13 +12,13 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
 
+        [BindProperty]
+        public WebsitePageTranslation WebsitePageTranslation { get; set; }
+
         public EditModel(Kredek.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        [BindProperty]
-        public WebsitePageTranslation WebsitePageTranslation { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,8 +35,8 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
             {
                 return NotFound();
             }
-           ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "LanguageId");
-           ViewData["WebsitePageId"] = new SelectList(_context.WebsitePages, "WebsitePageId", "WebsitePageId");
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "LanguageId");
+            ViewData["WebsitePageId"] = new SelectList(_context.WebsitePages, "WebsitePageId", "WebsitePageId");
             return Page();
         }
 

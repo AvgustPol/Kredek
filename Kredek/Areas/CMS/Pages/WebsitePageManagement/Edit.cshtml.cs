@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Kredek.Data.Models;
+﻿using Kredek.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Kredek.Areas.CMS.Pages.WebsitePageManagement
 {
@@ -11,13 +11,13 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageManagement
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
 
+        [BindProperty]
+        public WebsitePage WebsitePage { get; set; }
+
         public EditModel(Kredek.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        [BindProperty]
-        public WebsitePage WebsitePage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

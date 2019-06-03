@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Kredek.Data.Models;
+﻿using Kredek.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
 {
@@ -10,13 +10,13 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
     {
         private readonly Kredek.Data.ApplicationDbContext _context;
 
+        [BindProperty]
+        public WebsitePageTranslation WebsitePageTranslation { get; set; }
+
         public DeleteModel(Kredek.Data.ApplicationDbContext context)
         {
             _context = context;
         }
-
-        [BindProperty]
-        public WebsitePageTranslation WebsitePageTranslation { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

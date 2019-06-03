@@ -1,13 +1,7 @@
 ﻿@page
 @model Kredek.Areas.CMS.Pages.WebsitePageManagement.EditModel
 
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h1>Edit</h1>
-
-<h4>CurrentPage</h4>
+<h4>WebsitePage</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,6 +16,11 @@
                 <label asp-for="WebsitePage.Name" class="control-label"></label>
                 <input asp-for="WebsitePage.Name" class="form-control" />
                 <span asp-validation-for="WebsitePage.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WebsitePage.NavigationIndex" class="control-label"></label>
+                <input asp-for="WebsitePage.NavigationIndex" class="form-control" />
+                <span asp-validation-for="WebsitePage.NavigationIndex" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="WebsitePage.WebsitePageId" />
             <div class="form-group">

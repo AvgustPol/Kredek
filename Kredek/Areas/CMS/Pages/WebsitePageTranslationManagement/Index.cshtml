@@ -1,18 +1,15 @@
 ﻿@page
 @model Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>CurrentPageTranslationManagement Index</h1>
-
 <p>
     <a asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WebsitePageTranslation[0].NameInNavigationBar)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.WebsitePageTranslation[0].Title)
             </th>
@@ -28,22 +25,25 @@
     <tbody>
         @foreach (var item in Model.WebsitePageTranslation)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WebsitePage.WebsitePageId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Language.LanguageId)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.WebsitePageTranslationId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.WebsitePageTranslationId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.WebsitePageTranslationId">Delete</a>
-                </td>
-            </tr>
-        }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NameInNavigationBar)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.WebsitePage.WebsitePageId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Language.LanguageId)
+    </td>
+    <td>
+        <a asp-page="./Edit" asp-route-id="@item.WebsitePageTranslationId">Edit</a> |
+        <a asp-page="./Details" asp-route-id="@item.WebsitePageTranslationId">Details</a> |
+        <a asp-page="./Delete" asp-route-id="@item.WebsitePageTranslationId">Delete</a>
+    </td>
+</tr>
+}
     </tbody>
 </table>

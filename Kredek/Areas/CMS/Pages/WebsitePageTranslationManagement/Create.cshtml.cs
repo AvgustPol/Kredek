@@ -20,7 +20,7 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageTranslationManagement
 
         public IActionResult OnGet()
         {
-            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "Name");
+            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "LanguageId");
             ViewData["WebsitePageId"] = new SelectList(_context.WebsitePages, "WebsitePageId", "WebsitePageId");
             return Page();
         }
