@@ -4,5 +4,6 @@
     {
         TextSeparatedByLine,
         ImageAndTextLeft,
+        FaqElement
     }
 }

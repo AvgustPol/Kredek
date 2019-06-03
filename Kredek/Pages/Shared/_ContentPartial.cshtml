@@ -12,4 +12,8 @@
     {
         @await Html.PartialAsync("PartialTemplates/_ImageAndTextLeft", modelImageAndTextLeft)
     }
+    else if (element is FaqElement modelFaqElement)
+    {
+        @await Html.PartialAsync("PartialTemplates/_FaqElementPartial", modelFaqElement)
+    }
 }

@@ -24,6 +24,9 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement.Create
         public IFormFile DownloadedImage { get; set; }
 
         [BindProperty]
+        public FaqElement FaqElement { get; set; }
+
+        [BindProperty]
         public ImageAndTextLeft ImageAndTextLeft { get; set; }
 
         [BindProperty]
@@ -81,9 +84,17 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement.Create
             var createTemplate = new Dictionary<AvailableTemplates, Action> {
                 { AvailableTemplates.ImageAndTextLeft, () => CreateImageAndTextLeft(ImageAndTextLeft) },
                 { AvailableTemplates.TextSeparatedByLine , () => CreateTextSeparatedByLine(TextSeparatedByLineModel) },
+                { AvailableTemplates.FaqElement , () => CreateFaqElement(FaqElement) },
             };
 
             createTemplate[Type]();
+        }
+
+        private void CreateFaqElement(FaqElement element)
+        {
+            element.ContentElement = ContentElement;
+
+            _context.FaqElements.Add(element);
         }
 
         private void CreateImageAndTextLeft(ImageAndTextLeft element)

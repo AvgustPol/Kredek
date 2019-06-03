@@ -27,6 +27,10 @@
                     case AvailableTemplates.TextSeparatedByLine:
                         await Html.RenderPartialAsync("_CreateTextSeparatedByLinePartial", Model.TextSeparatedByLineModel);
                         break;
+
+                    case AvailableTemplates.FaqElement:
+                        await Html.RenderPartialAsync("_CreateFaqElementPartial", Model.FaqElement);
+                        break;
                 }
             }
 
