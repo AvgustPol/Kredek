@@ -11,13 +11,13 @@
         <div class="container p-4">
             <div class="row">
                 <h1 class="display-1"> [ @Model.CurrentPage.Name ] < - Current page </h1>
-                <hr/>
+                <hr />
             </div>
 
             <div class="row">
                 <h1><a asp-area="CMS"> CMS mode </a></h1>
 
-                <hr/>
+                <hr />
             </div>
 
             <div class="row">
@@ -33,16 +33,11 @@
             </div>
         </div>
 
-
-        
-
         @await Html.PartialAsync("_ContentPartial", Model)
     </main>
-    
-    
+
     @await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
 </div>
-
 
 @{
     ViewData["Title"] = Model.CurrentPageTranslation.Title;
