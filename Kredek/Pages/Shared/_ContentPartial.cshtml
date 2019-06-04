@@ -4,16 +4,17 @@
 @foreach (var element in Model.CurrentPageElements)
 {
 
-    if (element is TextSeparatedByLine modelTextSeparatedByLine)
+    switch (element)
     {
-        @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine)
-    }
-    else if (element is ImageAndTextLeft modelImageAndTextLeft)
-    {
-        @await Html.PartialAsync("PartialTemplates/_ImageAndTextLeft", modelImageAndTextLeft)
-    }
-    else if (element is FaqElement modelFaqElement)
-    {
-        @await Html.PartialAsync("PartialTemplates/_FaqElementPartial", modelFaqElement)
+        case TextSeparatedByLine modelTextSeparatedByLine:
+            @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLinePartial", modelTextSeparatedByLine);
+            break;
+        case ImageAndTextLeft modelImageAndTextLeft:
+            @await Html.PartialAsync("PartialTemplates/_ImageAndTextLeft", modelImageAndTextLeft);
+            break;
+        case FaqElement modelFaqElement:
+            @await Html.PartialAsync("PartialTemplates/_FaqElementPartial", modelFaqElement);
+            break;
+
     }
 }
