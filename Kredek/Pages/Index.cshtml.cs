@@ -2,6 +2,7 @@
 using Kredek.Data;
 using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
+using Kredek.Data.ViewModels;
 using Kredek.Global;
 using Kredek.Logic;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,8 @@ namespace Kredek.Pages
         /// Elements on current page in current language
         /// </summary>
         public List<ContentElementTranslation> CurrentPageElements { get; set; }
+
+        public List<PageElementViewModel> CurrentPageViewModels { get; set; }
 
         /// <summary>
         /// Property that stores data related to current page in current language
