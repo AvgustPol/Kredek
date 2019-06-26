@@ -6,6 +6,13 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\CMS\Pages\ContentElementManagement\**" />
+    <Content Remove="Areas\CMS\Pages\ContentElementManagement\**" />
+    <EmbeddedResource Remove="Areas\CMS\Pages\ContentElementManagement\**" />
+    <None Remove="Areas\CMS\Pages\ContentElementManagement\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -24,7 +31,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\CMS\Pages\ContentElementManagement\" />
     <Folder Include="Pages\Shared\PartialTemplates\Old todo relocate and delete\" />
     <Folder Include="wwwroot\img\content\" />
     <Folder Include="wwwroot\SavedImages\" />

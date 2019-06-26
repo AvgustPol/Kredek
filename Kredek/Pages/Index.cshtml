@@ -8,7 +8,14 @@
 <div class="container-fluid p-0">
     <partial name="_CookieConsentPartial" />
     <main role="main" class="pb-3">
+        @await Html.PartialAsync("_ContentPartial", Model)
+
+        <hr />
+
+        
+
         <div class="container p-4">
+            <h1>Development data:</h1>
             <div class="row">
                 <h1 class="display-1"> [ @Model.CurrentPage.Name ] < - Current page </h1>
                 <hr />
@@ -24,8 +31,6 @@
                 <h2>Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
             </div>
         </div>
-
-        @await Html.PartialAsync("_ContentPartial", Model)
     </main>
 
     @await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
