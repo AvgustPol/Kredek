@@ -10,14 +10,14 @@
 
 <form method="post">
     <div class="form-group">
-        <label class="control-label"> Select page </label>
+        <label class="control-label"> Wybierz stronę  </label>
         <select onchange="this.form.submit()" asp-for="WebsitePageId" class="form-control" asp-items="ViewBag.WebsitePageId"></select>
     </div>
 </form>
 
 <div class="row text-center">
     <div class="col">
-        <h1 class="display-4">Content on the page [@Model.PageName] </h1>
+        <h1 class="display-4">Treść na stronie [@Model.PageName] </h1>
     </div>
 </div>
 
@@ -30,17 +30,17 @@
         <tr>
             <th>
                 @* Position *@
-                @Html.DisplayNameFor(model => model.PageContent[0].Position)
+                Pozycja
             </th>
             <th>
                 @* Content type *@
-                Template type
+                Typ szablonu
             </th>
             <th>
-                Languages
+                Język
             </th>
             <th>
-                Translations
+                Tłumaczenia
             </th>
         </tr>
     </thead>
@@ -63,11 +63,8 @@
                     <td>
                         <a asp-route-id="@contentElement.ContentElementId"
                            asp-page="/ContentElementTranslationManagement/@(type)Management/CreateForCurrentElement">
-                            CreateForCurrentElement
+                            Dodaj nowe tłumaczenie
                         </a>
-
-                        <a asp-page="_TODO_ /ContentElementTranslationManagement/@(type)Management/Details"
-                           asp-route-id="_TODO_">[ Manage all < - TODO ( Real - > Details) ]</a>
                     </td>
                 </tr>
             }
@@ -84,11 +81,11 @@
         <form method="get" asp-page="/ContentManagement/Create/TestCreate">
             <div class="form-group">
                 <input type="hidden" name="id" value="@Model.WebsitePageId" />
-                <label class="control-label"> Select template </label>
+                <label class="control-label"> Wybierz szablon </label>
                 <select name="type" id="availableTemplates" class="form-control" asp-items="Html.GetEnumSelectList<AvailableTemplates>()"></select>
 
                 <br />
-                <button class="btn btn-light" type="submit"> Create </button>
+                <button class="btn btn-light" type="submit"> Dodaj </button>
             </div>
         </form>
     </div>

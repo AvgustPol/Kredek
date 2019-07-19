@@ -38,55 +38,47 @@
         <nav id="sidebar">
             <div class="sidebar-header">
 
-                <h3> <a asp-area="CMS" asp-page="/Index"><i class="fas fa-user-cog"></i> Moderator panel</a> </h3>
+                <h3> <a asp-area="CMS" asp-page="/Index"><i class="fas fa-user-cog"></i> Panel moderatora </a> </h3>
             </div>
             <ul class="list-unstyled components">
-                <p> <a asp-area="" asp-page="/Index"><i class="fas fa-home"></i> Return to website mode</a> </p>
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Dropdown nav</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Dropdown navigation 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown navigation 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown navigation 3</a>
-                        </li>
-                    </ul>
+                <p> <a asp-area="" asp-page="/Index"><i class="fas fa-home"></i> Wyjście z panelu moderatora </a> </p>
+                @*<li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Dropdown nav</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Dropdown navigation 1</a>
                 </li>
                 <li>
-                    <a asp-page="/WebsitePageManagement/Index">All pages</a>
+                    <a href="#">Dropdown navigation 2</a>
                 </li>
                 <li>
-                    <a asp-page="/LanguageManagement/Index">All Languages</a>
+                    <a href="#">Dropdown navigation 3</a>
+                </li>
+            </ul>
+        </li>*@
+                <li>
+                    <a asp-page="/WebsitePageManagement/Index">Lista wszystkich stron</a>
                 </li>
                 <li>
-                    <a asp-page="/WebsitePageTranslationManagement/Index">Website page translations Management</a>
+                    <a asp-page="/WebsitePageTranslationManagement/Index">Lista wszystkich tłumaczeń stron </a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">All content elements translations</a>
+                    <a asp-page="/LanguageManagement/Index">Lista wszystkich języków</a>
+                </li>
+
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Szablony</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a asp-page="/ContentElementTranslationManagement/ImageAndTextLeftManagement/Index">Image And Text Left</a>
+                            <a asp-page="/ContentElementTranslationManagement/ImageAndTextLeftManagement/Index">Obraz i tekst po lewej</a>
                         </li>
                         <li>
-                            <a asp-page="/ContentElementTranslationManagement/ImageAndTextRightManagement/Index">Image And Text Right</a>
-                        </li>
-                        <li>
-                            <a asp-page="/ContentElementTranslationManagement/TextSeparatedByLineManagement/Index">TextSeparatedByLineManagement</a>
+                            <a asp-page="/ContentElementTranslationManagement/TextSeparatedByLineManagement/Index">Banner - Tekst oddzielony linią</a>
                         </li>
                     </ul>
                 </li>
             </ul>
             <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="#" class="download">class="download"</a>
-                </li>
-                <li>
-                    <a href="#" class="article">class="article"</a>
-                </li>
                 <li>
                     <partial name="_LoginPartial" />
                 </li>
@@ -107,7 +99,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/ContentManagement/Index" asp-route-pageName="@DefaultVariables.DefaultPage">Content management</a>
+                                <a class="nav-link" asp-page="/ContentManagement/Index" asp-route-pageName="@DefaultVariables.DefaultPage">Zarządzanie treścią</a>
                             </li>
                         </ul>
                     </div>
