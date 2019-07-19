@@ -53,3 +53,7 @@ E.g.
     "UseSsl": "true"
   }
 ```
+
+## Library based on  
+
+[MailKit - Open Source cross-platform .NET mail-client library that is based on MimeKit and optimized for mobile devices](https://www.nuget.org/packages/MailKit)
