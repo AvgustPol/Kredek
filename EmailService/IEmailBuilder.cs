@@ -1,16 +1,16 @@
 ﻿namespace EmailService
 {
-    public interface IEmailBuilder
+    public interface IEmailService
     {
-        IEmailBuilder Message();
+        IEmailService Message();
 
-        IEmailBuilder From(string name, string address);
+        IEmailService From(string name, string address);
 
-        IEmailBuilder To(string name, string address);
+        IEmailService To(string name, string address);
 
-        IEmailBuilder WithSubject(string subject);
+        IEmailService WithSubject(string subject);
 
-        IEmailBuilder WithBodyPlain(string plainBody);
+        IEmailService WithBodyPlain(string plainBody);
 
         bool Send();
     }
