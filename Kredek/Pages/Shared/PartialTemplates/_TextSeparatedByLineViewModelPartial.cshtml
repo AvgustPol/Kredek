@@ -1,7 +1,7 @@
 ﻿@model Kredek.Data.ViewModels.TextSeparatedByLineViewModel
 
 @{
-    string bannerTemplateId = "bannerTemplateId" + Model.ContentElementId;
+    string bannerTemplateId = "bannerTemplateId" + new Random(42).Next();
     string pathToImage = $@"{Model.ImageUrl}";
     //string pathToImage = $@"..\{Model.ImageUrl}";
     //char oldLine = '\\';
