@@ -1,4 +1,4 @@
-@using Microsoft.AspNetCore.Authentication.AzureADB2C.UI
+﻿@using Microsoft.AspNetCore.Authentication.AzureADB2C.UI
 @using Microsoft.Extensions.Options
 @inject IOptionsMonitor<AzureADB2COptions> AzureADB2COptions
 
@@ -13,24 +13,24 @@
          {
              <li class="nav-item">
                  <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="EditProfile">
-                     <span class="nav-text text-dark">Hello @User.Identity.Name!</span>
+                     <span class="nav-text text-dark">Witaj, @User.Identity.Name!</span>
                  </a>
              </li>
          }
          else
          {
              <li class="nav-item">
-                 <span class="nav-text text-dark">Hello @User.Identity.Name!</span>
+                 <span class="nav-text text-dark">Witaj, @User.Identity.Name!</span>
              </li>
          }
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignOut">Sign out</a>
+            <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignOut">Wyloguj się</a>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignIn">Sign in</a>
+            <a class="nav-link " asp-area="AzureADB2C" asp-controller="Account" asp-action="SignIn">Logowanie / Rejestracja</a>
         </li>
     }
 </ul>
