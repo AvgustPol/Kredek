@@ -18,13 +18,13 @@
     }
 }
 
-@foreach (var element in Model.CurrentPageViewModels)
-{
-    switch (element)
+@*@foreach (var element in Model.CurrentPageViewModels)
     {
-        case TextSeparatedByLineViewModel modelTextSeparatedByLine:
-            @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLineViewModelPartial", modelTextSeparatedByLine);
-            break;
-    }
+        switch (element)
+        {
+            case TextSeparatedByLineViewModel modelTextSeparatedByLine:
+                @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLineViewModelPartial", modelTextSeparatedByLine);
+                break;
+        }
 
-}
+    }*@
