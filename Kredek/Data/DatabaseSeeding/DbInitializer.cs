@@ -6,6 +6,8 @@ namespace Kredek.Data.DatabaseSeeding
 {
     public class DbInitializer : IDbInitializer
     {
+        private const int MINIMAL_NUMBER_OF_PAGES = 2;
+
         private readonly ApplicationDbContext _context;
         private readonly IKredekInitializer _kredekInitializer;
         private readonly IPreviewInitializer _previewInitializer;
@@ -38,7 +40,7 @@ namespace Kredek.Data.DatabaseSeeding
                     CreateDefaultLanguages();
                 }
 
-                if (_context.WebsitePages.Count() < 2)
+                if (_context.WebsitePages.Count() < MINIMAL_NUMBER_OF_PAGES)
                 {
                     _previewInitializer.CreatePreview();
                 }
