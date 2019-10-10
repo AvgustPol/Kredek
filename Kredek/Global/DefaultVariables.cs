@@ -8,6 +8,7 @@
 
         public const string DefaultLanguage = GlobalVariables.PolishLanguageIsoCode;
         public const string DefaultPage = "Home";
+        public const string PreviewPage = "Preview";
         public const string ThisWebsiteRootUrl = "https://localhost:44328";
     }
 }
