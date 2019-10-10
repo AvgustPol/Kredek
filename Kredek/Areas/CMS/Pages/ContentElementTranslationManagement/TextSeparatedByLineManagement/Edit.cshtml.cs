@@ -38,7 +38,7 @@ namespace Kredek.Areas.CMS.Pages.ContentElementTranslationManagement.TextSeparat
             {
                 return NotFound();
             }
-           ViewData["ContentElementId"] = new SelectList(_context.ContentElement, "ContentElementId", "ContentElementId");
+           ViewData["ContentElementId"] = new SelectList(_context.ContentElements, "ContentElementId", "ContentElementId");
            ViewData["LanguageId"] = new SelectList(_context.Languages, "LanguageId", "LanguageId");
             return Page();
         }
