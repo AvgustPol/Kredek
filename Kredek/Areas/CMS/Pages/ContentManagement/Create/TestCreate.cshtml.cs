@@ -68,7 +68,7 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement.Create
 
             ContentElement.WebsitePageId = id;
             ContentElement.WebsitePage = page;
-            _context.ContentElement.Add(ContentElement);
+            _context.ContentElements.Add(ContentElement);
 
             #endregion Create a new ContentElement
 

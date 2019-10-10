@@ -180,7 +180,7 @@ namespace Kredek.Data.DatabaseSeeding
                 WebsitePage = page
             };
 
-            _context.ContentElement.Add(newContentElement);
+            _context.ContentElements.Add(newContentElement);
             _context.SaveChanges();
         }
 

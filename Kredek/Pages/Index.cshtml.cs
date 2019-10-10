@@ -138,7 +138,7 @@ namespace Kredek.Pages
             CurrentPageTranslation = await _context.WebsitePageTranslations
                 .SingleAsync(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage);
 
-            CurrentPageElements = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
+            CurrentPageElements = await _context.ContentElements.Where(x => x.WebsitePage == CurrentPage)
                 .OrderBy(q => q.Position)
                     .Include(y => y.ContentElementTranslations)
                     .SelectMany(x => x.ContentElementTranslations)

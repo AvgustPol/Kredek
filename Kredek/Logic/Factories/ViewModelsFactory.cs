@@ -23,7 +23,7 @@ namespace Kredek.Logic.Factories
             var currentPage = await _context.WebsitePages
                 .SingleAsync(page => page.Name == pageName);
 
-            var currentPageElements = await _context.ContentElement.Where(x => x.WebsitePage == currentPage)
+            var currentPageElements = await _context.ContentElements.Where(x => x.WebsitePage == currentPage)
                 .OrderBy(q => q.Position)
                     .Include(y => y.ContentElementTranslations)
                     .SelectMany(x => x.ContentElementTranslations)
