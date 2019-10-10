@@ -24,10 +24,9 @@ namespace Kredek.Data.DatabaseSeeding
         {
             try
             {
-                if (_context.Database.GetPendingMigrations().Any())
-                {
-                    _context.Database.Migrate();
-                }
+                MigratePendingMigrations();
+
+                
 
                 if (!_context.Languages.Any())
                 {
@@ -39,6 +38,14 @@ namespace Kredek.Data.DatabaseSeeding
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        private void MigratePendingMigrations()
+        {
+            if (_context.Database.GetPendingMigrations().Any())
+            {
+                _context.Database.Migrate();
             }
         }
 
