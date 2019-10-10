@@ -22,12 +22,13 @@ namespace Kredek.Pages
         private const int CookieTime = DefaultVariables.CookieLifeTime;
 
         private const string DefaultLanguage = DefaultVariables.DefaultLanguage;
-        private const string DefaultPage = DefaultVariables.DefaultPage;
+        private const string DefaultPage = DefaultVariables.PreviewPage;
 
         #endregion Default Variables
 
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
+        public readonly IFacebookService _facebookService;
 
         /// <summary>
         /// ISO code of current language
@@ -41,14 +42,11 @@ namespace Kredek.Pages
         /// </summary>
         public List<ContentElementTranslation> CurrentPageElements { get; set; }
 
-        //public List<PageElementViewModel> CurrentPageViewModels { get; set; }
-
         /// <summary>
         /// Property that stores data related to current page in current language
         /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
 
-        public IFacebookService FacebookService { get; set; }
 
         /// <summary>
         /// List of all available languages.
@@ -65,7 +63,7 @@ namespace Kredek.Pages
         {
             _context = context;
             _cookiesManager = cookiesManager;
-            FacebookService = facebookService;
+            _facebookService = facebookService;
 
             CreateLanguages();
             CreateNavigation();

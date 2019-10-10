@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Kredek.Global;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace Kredek.Data.DatabaseSeeding
 {
     public class DbInitializer : IDbInitializer
     {
-        private const int MINIMAL_NUMBER_OF_PAGES = 2;
+        private const int MINIMAL_NUMBER_OF_PAGES = 1;
 
         private readonly ApplicationDbContext _context;
         private readonly IKredekInitializer _kredekInitializer;
@@ -28,44 +29,28 @@ namespace Kredek.Data.DatabaseSeeding
                     _context.Database.Migrate();
                 }
 
-                if (!_context.WebsitePages.Any())
-                {
-                    CreateDefaultPages();
-                }
-
-                #region First time [Kredek] database creating
-
                 if (!_context.Languages.Any())
                 {
                     CreateDefaultLanguages();
                 }
 
-                if (_context.WebsitePages.Count() < MINIMAL_NUMBER_OF_PAGES)
-                {
-                    _previewInitializer.CreatePreview();
-                }
-
-                if (!_context.WebsitePageTranslations.Any())
-                {
-                    CreateWebsitePageTranslations();
-                }
-
-                if (!_context.ContentElement.Any())
-                {
-                    CreateWebsiteContentElements();
-                }
-
-                if (!_context.ContentElementTranslation.Any())
-                {
-                    CreateWebsiteContentElementsTranslations();
-                }
-
-                #endregion First time [Kredek] database creating
+                TryCreatePreview();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw e;
+            }
+        }
+
+        private void TryCreatePreview()
+        {
+            if (!_context.WebsitePages.Any())
+            {
+                _previewInitializer.CreatePreview();
+            }
+            else if (_context.WebsitePages.Single(p => p.Name == DefaultVariables.PreviewPage) is null)
+            {
+                _previewInitializer.CreatePreview();
             }
         }
 
