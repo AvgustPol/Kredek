@@ -79,25 +79,41 @@ namespace Kredek
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            #region Database region
+            ConfigureDatabase(services);
 
+            //configure facebook page getter
+            FacebookPageGetter.Configuration.ConfigurationDefault.Configure(services, Configuration);
+        }
+
+        private void ConfigureDatabase(IServiceCollection services)
+        {
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddScoped<IKredekInitializer, KredekInitializer>();
             services.AddScoped<IPreviewInitializer, PreviewInitializer>();
             services.AddScoped<IImageSavingService, ImageSavingService>();
 
-            //Development SQL Connection to Microsoft SQL Managament studio
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DevelopmentSQLConnection")));
+            ConnectToTheDatabase(DatabaseType.SQL, services);
+        }
 
-            ////PostgreSQL with EF core
-            //services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+        private void ConnectToTheDatabase(DatabaseType databaseType, IServiceCollection services)
+        {
+            switch (databaseType)
+            {
+                case DatabaseType.SQL:
+                    services.AddDbContext<ApplicationDbContext>(
+                        options => options.UseSqlServer(Configuration.GetConnectionString("DevelopmentSQLConnection")));
+                    break;
+                case DatabaseType.PostgreSQL:
+                    services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(
+                        options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+                    break;
+            }
+        }
 
-            #endregion Database region
-
-            //configure facebook page getter
-            FacebookPageGetter.Configuration.ConfigurationDefault.Configure(services, Configuration);
+        private enum DatabaseType
+        {
+            PostgreSQL,
+            SQL
         }
     }
 }
