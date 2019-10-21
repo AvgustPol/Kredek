@@ -21,7 +21,7 @@ namespace Kredek.Pages
 
         private const int CookieTime = DefaultVariables.CookieLifeTime;
 
-        private const string DefaultLanguage = DefaultVariables.DefaultLanguage;
+        private const string DefaultLanguage = DefaultVariables.DefaultLanguageIsoCode;
         private const string DefaultPage = DefaultVariables.PreviewPage;
 
         #endregion Default Variables

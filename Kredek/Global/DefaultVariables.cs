@@ -6,7 +6,7 @@
 
         public const int CookieLifeTime = 120000;
 
-        public const string DefaultLanguage = GlobalVariables.PolishLanguageIsoCode;
+        public const string DefaultLanguageIsoCode = GlobalVariables.PolishLanguageIsoCode;
         public const string DefaultPage = "Home";
         public const string PreviewPage = "Preview";
         public const string ThisWebsiteRootUrl = "https://localhost:44328";

@@ -18,7 +18,13 @@
                         <li class="nav-item">
                             @{
                                 var link = $"{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
-                                var navigationTabName = Model.Navigation[pageName][Model.CurrentLanguage];
+                                string navigationTabName = String.Empty;
+
+                                bool hasNavigationName = Model.Navigation[pageName].TryGetValue(Model.CurrentLanguage, out navigationTabName);
+                                if (!hasNavigationName)
+                                {
+                                    break;
+                                }
                             }
                             <a href="@link" class="nav-link text-dark"> @navigationTabName </a>
                         </li>
