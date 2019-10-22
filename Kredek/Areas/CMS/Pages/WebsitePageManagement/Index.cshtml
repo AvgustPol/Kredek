@@ -2,9 +2,15 @@
 @model Kredek.Areas.CMS.Pages.WebsitePageManagement.IndexModel
 
 <div class="text-center">
-    <h1 class="display-4">Lista wszystkich stron:</h1>
+    <h1 class="display-4">
+        Lista wszystkich stron:
+
+        
+        <a asp-page="Create"><i class="fas fa-calendar-plus"></i></a>
+    </h1>
     <br />
 </div>
+
 
 @foreach (var item in Model.WebsitePage)
 {
