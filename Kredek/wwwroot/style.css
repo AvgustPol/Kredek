@@ -1,13 +1,19 @@
+:root {
+    --black-primary: #0e1111;
+    --black-secondary: rgba(91, 86, 86, 0.90);
+    --white-primary: white;
+}
+
 body {
     margin: 0 !important;
 }
 
 #sidebar a {
-    color: #ffffff;
+    color: var(--white-primary);
 }
 
 #content a {
-    color: black;
+    color: var(--black-primary);
 }
 
 p {
@@ -26,7 +32,7 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: var(--white-primary);
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -59,8 +65,8 @@ a:focus {
 #sidebar {
     min-width: 350px;
     max-width: 350px;
-    background: #7386D5;
-    color: #fff;
+    background: var(--black-secondary);
+    color: var(--white-primary);
     transition: all 0.3s;
 }
 
@@ -70,16 +76,16 @@ a:focus {
 
     #sidebar .sidebar-header {
         padding: 20px;
-        background: #6d7fcc;
+        background: var(--black-primary);
     }
 
     #sidebar ul.components {
         padding: 20px 0;
-        border-bottom: 1px solid #47748b;
+        border-bottom: 1px solid var(--black-soft);
     }
 
     #sidebar ul p {
-        color: #fff;
+        color: var(--white-primary);
         padding: 10px;
     }
 
@@ -90,14 +96,14 @@ a:focus {
     }
 
         #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
+            color: var(--black-primary);
+            background: var(--white-primary);
         }
 
     #sidebar ul li.active > a,
     a[aria-expanded="true"] {
-        color: #fff;
-        background: #6d7fcc;
+        color: var(--white-primary);
+        background: var(--black-primary);
     }
 
 a[data-toggle="collapse"] {
@@ -115,7 +121,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: var(--black-primary);
 }
 
 ul.CTAs {
@@ -131,14 +137,14 @@ ul.CTAs {
     }
 
 a.download {
-    background: #fff;
-    color: #7386D5;
+    background: var(--white-primary);
+    color: var(--black-primary);
 }
 
 a.article,
 a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
+    background: var(--black-secondary) !important;
+    color: var(--white-primary) !important;
 }
 
 /* ---------------------------------------------------

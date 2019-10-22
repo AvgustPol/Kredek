@@ -118,6 +118,7 @@ namespace Kredek.Data.DatabaseSeeding
 
             //banner
             Hardcode_Creating_TextSeparatedByLine(contentElement1, plLanguage);
+            Hardcode_Creating_TextSeparatedByLine(contentElement1, enLanguage);
 
             var contentElement2 = homePage.ContentElements.ToList()[1];
             //image and text left
@@ -180,7 +181,7 @@ namespace Kredek.Data.DatabaseSeeding
                 WebsitePage = page
             };
 
-            _context.ContentElement.Add(newContentElement);
+            _context.ContentElements.Add(newContentElement);
             _context.SaveChanges();
         }
 

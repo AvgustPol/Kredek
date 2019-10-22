@@ -19,7 +19,10 @@ namespace Kredek.Areas.CMS.Pages.WebsitePageManagement
 
         public async Task OnGetAsync()
         {
-            WebsitePage = await _context.WebsitePages.ToListAsync();
+            WebsitePage = await _context.WebsitePages
+                .Include(x => x.WebsitePageTranslations)
+                    .ThenInclude(t => t.Language)
+                .ToListAsync();
         }
     }
 }
