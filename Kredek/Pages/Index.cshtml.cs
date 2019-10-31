@@ -1,4 +1,5 @@
-﻿using FacebookPageGetter.Services.FacebookService;
+﻿using FacebookPageGetter.Models.FeedPostDto;
+using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
 using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
@@ -22,13 +23,14 @@ namespace Kredek.Pages
         private const int CookieTime = DefaultVariables.CookieLifeTime;
 
         private const string DefaultLanguage = DefaultVariables.DefaultLanguageIsoCode;
-        private const string DefaultPage = DefaultVariables.PreviewPage;
+        private const string DefaultPage = DefaultVariables.DefaultPage;
 
         #endregion Default Variables
 
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
         public readonly IFacebookService _facebookService;
+        private const int NUMBER_OF_FACEBOOK_POSTS = 5;
 
         /// <summary>
         /// ISO code of current language
@@ -46,7 +48,6 @@ namespace Kredek.Pages
         /// Property that stores data related to current page in current language
         /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
-
 
         /// <summary>
         /// List of all available languages.
@@ -81,6 +82,11 @@ namespace Kredek.Pages
             SetPageLanguage(language);
 
             return await LoadPage(pageName);
+        }
+
+        public async Task<FeedPostsDto> GetFacebookPostsAsync()
+        {
+            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
         }
 
         #region Methods

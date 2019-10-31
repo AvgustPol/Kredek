@@ -1,5 +1,4 @@
 ﻿@using Kredek.Data.Models.ContentElementTranslationTemplates;
-@using Kredek.Data.ViewModels;
 @model IndexModel
 
 @foreach (var element in Model.CurrentPageElements)
@@ -18,13 +17,7 @@
     }
 }
 
-@*@foreach (var element in Model.CurrentPageViewModels)
-    {
-        switch (element)
-        {
-            case TextSeparatedByLineViewModel modelTextSeparatedByLine:
-                @await Html.PartialAsync("PartialTemplates/_TextSeparatedByLineViewModelPartial", modelTextSeparatedByLine);
-                break;
-        }
-
-    }*@
+@if (Model.CurrentPage.Name == "Blog")
+{ 
+    @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
+}
