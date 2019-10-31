@@ -1,20 +1,11 @@
-﻿@model (Kredek.Data.Models.ContentElementTranslationTemplates.Blogging, FacebookPageGetter.Services.FacebookService.IFacebookService)
-
-@{
-    ViewData["Title"] = "Blog";
-    var result = await Model.Item2.GetPostsAsync();
-    //TODO add validation
-    var facebookPagePost = result.Posts;
-}
-
-<h1>@Model.Item1.Intro</h1>
+﻿@model FacebookPageGetter.Models.FeedPostDto.FeedPostsDto
 
 <div class="container ">
     <br />
     <br />
     <div class="row">
-        <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-sm-12 ">
-            @foreach (var post in facebookPagePost)
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12 ">
+            @foreach (var post in Model.Posts)
             {
                 <div class="card bg-light mb-4 p-5 p-sm-0 p-md-2">
                     <div class="card-body">
@@ -45,7 +36,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-10 offset-1 text-center">
-                            @Model.Item1.FindMore
+                            Więcej znajdziesz na
                             <a href="https://www.facebook.com/KNKredek/">Facebooku</a>
                         </div>
                     </div>
