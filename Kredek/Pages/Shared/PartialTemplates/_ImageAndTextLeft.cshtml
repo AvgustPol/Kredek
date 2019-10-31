@@ -1,8 +1,21 @@
-﻿@using Kredek.Global
-@model Kredek.Data.Models.ContentElementTranslationTemplates.ImageAndTextLeft
+﻿@model Kredek.Data.Models.ContentElementTranslationTemplates.ImageAndTextLeft
 
 @{
-    string pathToImage = $@"..\{Model.ImageUrl}";
+    string bannerTemplateId = "bannerTemplateId" + Model.ContentElementId;
+    string pathToImage;
+
+    bool imgFromInternet = Model.ImageUrl.Contains("www.") || Model.ImageUrl.Contains("http");
+    if (imgFromInternet)
+    {
+        pathToImage = $@"{Model.ImageUrl}";
+    }
+    else
+    {
+        pathToImage = $@"..\{Model.ImageUrl}";
+        char oldLine = '\\';
+        char newLine = '/';
+        pathToImage = pathToImage.Replace(oldLine, newLine);
+    }
 }
 
 <div class="container">

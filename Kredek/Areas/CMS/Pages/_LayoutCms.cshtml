@@ -42,32 +42,15 @@
             </div>
             <ul class="list-unstyled components">
                 <p> <a asp-area="" asp-page="/Index"><i class="fas fa-home"></i> Wyjście z panelu moderatora </a> </p>
-                @*<li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Dropdown nav</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <hr />
                 <li>
-                    <a href="#">Dropdown navigation 1</a>
+                    <a asp-page="/WebsitePageManagement/Index"><i class="fas fa-clone"></i> Zarządzanie stronami</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown navigation 2</a>
+                    <a asp-page="/LanguageManagement/Index"> <i class="fas fa-globe"></i> Zarządzanie językami</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown navigation 3</a>
-                </li>
-            </ul>
-        </li>*@
-                <li>
-                    <a asp-page="/WebsitePageManagement/Index">Lista wszystkich stron</a>
-                </li>
-                <li>
-                    <a asp-page="/WebsitePageTranslationManagement/Index">Lista wszystkich tłumaczeń stron </a>
-                </li>
-                <li>
-                    <a asp-page="/LanguageManagement/Index">Lista wszystkich języków</a>
-                </li>
-
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Szablony</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <i class="fas fa-object-group"></i> Komponenty </a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a asp-page="/ContentElementTranslationManagement/ImageAndTextLeftManagement/Index">Obraz i tekst po lewej</a>
@@ -89,7 +72,7 @@
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
                         <i class="fas fa-align-left"></i>
                         <span>Sidebar</span>
                     </button>

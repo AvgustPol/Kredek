@@ -1,42 +1,37 @@
 ﻿@page
 @model Kredek.Areas.CMS.Pages.WebsitePageManagement.IndexModel
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WebsitePage[0].IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WebsitePage[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WebsitePage[0].NavigationIndex)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.WebsitePage) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NavigationIndex)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.WebsitePageId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.WebsitePageId">Details</a> |
+<div class="text-center">
+    <h1 class="display-4">
+        Lista wszystkich stron:
+
+        
+        <a asp-page="Create"><i class="fas fa-calendar-plus"></i></a>
+    </h1>
+    <br />
+</div>
+
+
+@foreach (var item in Model.WebsitePage)
+{
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h3 class="card-title"> [ @Html.DisplayFor(modelItem => item.Name) ] Imię strony  </h3>
+            <h4 class="card-subtitle mb-2 text-muted"> [ @Html.DisplayFor(modelItem => item.IsActive) ] Strona jest aktywna </h4>
+            <h4 class="card-subtitle mb-2 text-muted"> [ @Html.DisplayFor(modelItem => item.NavigationIndex) ] NavigationIndex </h4>
+        </div>
+        <div class="card-body">
+            @await Html.PartialAsync("../WebsitePageTranslationManagement/IndexPartial.cshtml", item.WebsitePageTranslations.ToList())
+        </div>
+        <div class="card-footer text-right">
+            <p>
+                <a asp-page="./Edit" asp-route-id="@item.WebsitePageId">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.WebsitePageId">Details</a>
                 <a asp-page="./Delete" asp-route-id="@item.WebsitePageId">Delete</a>
-            </td>
-        </tr>
+            </p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
 }
-    </tbody>
-</table>

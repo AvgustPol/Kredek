@@ -1,4 +1,5 @@
-﻿using FacebookPageGetter.Services.FacebookService;
+﻿using FacebookPageGetter.Models.FeedPostDto;
+using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
 using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
@@ -21,13 +22,15 @@ namespace Kredek.Pages
 
         private const int CookieTime = DefaultVariables.CookieLifeTime;
 
-        private const string DefaultLanguage = DefaultVariables.DefaultLanguage;
+        private const string DefaultLanguage = DefaultVariables.DefaultLanguageIsoCode;
         private const string DefaultPage = DefaultVariables.DefaultPage;
 
         #endregion Default Variables
 
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
+        public readonly IFacebookService _facebookService;
+        private const int NUMBER_OF_FACEBOOK_POSTS = 5;
 
         /// <summary>
         /// ISO code of current language
@@ -41,14 +44,10 @@ namespace Kredek.Pages
         /// </summary>
         public List<ContentElementTranslation> CurrentPageElements { get; set; }
 
-        //public List<PageElementViewModel> CurrentPageViewModels { get; set; }
-
         /// <summary>
         /// Property that stores data related to current page in current language
         /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
-
-        public IFacebookService FacebookService { get; set; }
 
         /// <summary>
         /// List of all available languages.
@@ -65,7 +64,7 @@ namespace Kredek.Pages
         {
             _context = context;
             _cookiesManager = cookiesManager;
-            FacebookService = facebookService;
+            _facebookService = facebookService;
 
             CreateLanguages();
             CreateNavigation();
@@ -83,6 +82,11 @@ namespace Kredek.Pages
             SetPageLanguage(language);
 
             return await LoadPage(pageName);
+        }
+
+        public async Task<FeedPostsDto> GetFacebookPostsAsync()
+        {
+            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
         }
 
         #region Methods
@@ -140,7 +144,7 @@ namespace Kredek.Pages
             CurrentPageTranslation = await _context.WebsitePageTranslations
                 .SingleAsync(t => t.WebsitePage == CurrentPage && t.Language.ISOCode == CurrentLanguage);
 
-            CurrentPageElements = await _context.ContentElement.Where(x => x.WebsitePage == CurrentPage)
+            CurrentPageElements = await _context.ContentElements.Where(x => x.WebsitePage == CurrentPage)
                 .OrderBy(q => q.Position)
                     .Include(y => y.ContentElementTranslations)
                     .SelectMany(x => x.ContentElementTranslations)

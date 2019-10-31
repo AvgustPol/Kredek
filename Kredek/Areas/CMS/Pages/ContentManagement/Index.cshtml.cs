@@ -45,7 +45,7 @@ namespace Kredek.Areas.CMS.Pages.ContentManagement
         {
             ViewData["WebsitePageId"] = new SelectList(_context.WebsitePages, "WebsitePageId", "Name");
 
-            PageContent = await _context.ContentElement
+            PageContent = await _context.ContentElements
                 .Include(x => x.ContentElementTranslations)
                     .ThenInclude(z => z.Language)
                 .Where(x => x.WebsitePage.Name == PageName)

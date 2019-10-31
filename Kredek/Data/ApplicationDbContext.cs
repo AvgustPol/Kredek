@@ -16,7 +16,7 @@ namespace Kredek.Data
 
         #endregion Templates
 
-        public DbSet<ContentElement> ContentElement { get; set; }
+        public DbSet<ContentElement> ContentElements { get; set; }
         public DbSet<ContentElementTranslation> ContentElementTranslation { get; set; }
         public DbSet<Language> Languages { get; set; }
 

@@ -2,11 +2,20 @@
 
 @{
     string bannerTemplateId = "bannerTemplateId" + Model.ContentElementId;
-    string pathToImage = $@"{Model.ImageUrl}";
-    //string pathToImage = $@"..\{Model.ImageUrl}";
-    //char oldLine = '\\';
-    //char newLine = '/';
-    //pathToImage = pathToImage.Replace(oldLine, newLine);
+    string pathToImage;
+
+    bool imgFromInternet = Model.ImageUrl.Contains("www.") || Model.ImageUrl.Contains("http");
+    if (imgFromInternet)
+    {
+        pathToImage = $@"{Model.ImageUrl}";
+    }
+    else
+    {
+        pathToImage = $@"..\{Model.ImageUrl}";
+        char oldLine = '\\';
+        char newLine = '/';
+        pathToImage = pathToImage.Replace(oldLine, newLine);
+    }
 }
 
 <style>

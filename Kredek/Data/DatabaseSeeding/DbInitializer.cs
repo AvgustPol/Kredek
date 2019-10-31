@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Kredek.Global;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -6,8 +7,6 @@ namespace Kredek.Data.DatabaseSeeding
 {
     public class DbInitializer : IDbInitializer
     {
-        private const int MINIMAL_NUMBER_OF_PAGES = 2;
-
         private readonly ApplicationDbContext _context;
         private readonly IKredekInitializer _kredekInitializer;
         private readonly IPreviewInitializer _previewInitializer;
@@ -23,75 +22,98 @@ namespace Kredek.Data.DatabaseSeeding
         {
             try
             {
-                if (_context.Database.GetPendingMigrations().Any())
-                {
-                    _context.Database.Migrate();
-                }
+                MigratePendingMigrations();
 
-                if (!_context.WebsitePages.Any())
-                {
-                    CreateDefaultPages();
-                }
-
-                #region First time [Kredek] database creating
-
-                if (!_context.Languages.Any())
-                {
-                    CreateDefaultLanguages();
-                }
-
-                if (_context.WebsitePages.Count() < MINIMAL_NUMBER_OF_PAGES)
-                {
-                    _previewInitializer.CreatePreview();
-                }
-
-                if (!_context.WebsitePageTranslations.Any())
-                {
-                    CreateWebsitePageTranslations();
-                }
-
-                if (!_context.ContentElement.Any())
-                {
-                    CreateWebsiteContentElements();
-                }
-
-                if (!_context.ContentElementTranslation.Any())
-                {
-                    CreateWebsiteContentElementsTranslations();
-                }
-
-                #endregion First time [Kredek] database creating
+                TryInitializeKredek();
+                
+                TryCreatePreview();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw e;
             }
         }
 
-        private void CreateDefaultLanguages()
+        private void TryInitializeKredek()
         {
-            _kredekInitializer.CreateDefaultLanguages();
+            TryCreateDefaultLanguages();
+
+            TryCreateDefaultPages();
+
+            TryCreateDefaultContent();
         }
 
-        private void CreateDefaultPages()
+        private void TryCreateDefaultPages()
         {
-            _kredekInitializer.CreateDefaultPages();
+            TryCreateDefaultWebsitePages();
+            TryCreateDefaultWebsitePagesTranslations();
         }
 
-        private void CreateWebsiteContentElements()
+        private void TryCreateDefaultContent()
         {
-            _kredekInitializer.CreateDefaultContentElements();
+            TryCreateDefaultContentElements();
+            TryCreateDefaultContentElementsTranslations();
         }
 
-        private void CreateWebsiteContentElementsTranslations()
+        private void TryCreateDefaultContentElementsTranslations()
         {
-            _kredekInitializer.CreateDefaultContentElementsTranslations();
+            if (!_context.ContentElementTranslation.Any())
+            {
+                _kredekInitializer.CreateDefaultContentElementsTranslations();
+            }
         }
 
-        private void CreateWebsitePageTranslations()
+        private void TryCreateDefaultContentElements()
         {
-            _kredekInitializer.CreateDefaultPagesTranslations();
+            if (!_context.ContentElements.Any())
+            {
+                _kredekInitializer.CreateDefaultContentElements();
+            }
+        }
+
+        private void TryCreateDefaultWebsitePagesTranslations()
+        {
+            if (!_context.WebsitePageTranslations.Any())
+            {
+                _kredekInitializer.CreateDefaultPagesTranslations();
+            }
+        }
+
+        private void TryCreateDefaultWebsitePages()
+        {
+            if (!_context.WebsitePages.Any())
+            {
+                _kredekInitializer.CreateDefaultPages();
+            }
+        }
+
+        private void TryCreateDefaultLanguages()
+        {
+            if (!_context.Languages.Any())
+            {
+                _kredekInitializer.CreateDefaultLanguages();
+            }
+
+        }
+
+        private void MigratePendingMigrations()
+        {
+            if (_context.Database.GetPendingMigrations().Any())
+            {
+                _context.Database.Migrate();
+            }
+        }
+
+        private void TryCreatePreview()
+        {
+            if (!_context.WebsitePages.Any())
+            {
+                _previewInitializer.CreatePreview();
+            }
+            else if (_context.WebsitePages.FirstOrDefault(p => p.Name == DefaultVariables.PreviewPage) is null)
+            {
+                _previewInitializer.CreatePreview();
+            }
         }
     }
 }
