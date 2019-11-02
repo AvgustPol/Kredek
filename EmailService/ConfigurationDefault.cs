@@ -1,4 +1,5 @@
 ﻿using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +17,8 @@ namespace EmailService
             string password = configuration.GetSection("SmtpClient").GetSection("Password").Value;
             bool useSsl = bool.Parse(configuration.GetSection("SmtpClient").GetSection("UseSsl").Value);
 
-            client.Connect(address, port, useSsl);
+            client.Connect(address, port, useSsl ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.None);
+
             client.Authenticate(username, password);
 
             serviceCollection.AddSingleton(client);
