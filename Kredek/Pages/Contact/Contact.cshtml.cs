@@ -33,8 +33,8 @@ namespace Kredek.Pages.Contact
                 ";
 
             _emailService.Message()
-                .From("Perez Logan", "perez.logan.9.3@gmail.com")
-                .To("Emma", "emma.waella@gmail.com")
+                .From("Emma", "emma.waella@gmail.com")
+                .To("Perez Logan", "perez.logan.9.3@gmail.com")
                 .WithSubject("It works!")
                 .WithBodyPlain(plainText)
                 .Send();
