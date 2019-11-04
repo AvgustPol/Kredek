@@ -22,6 +22,8 @@ namespace EmailService
             client.Authenticate(username, password);
 
             serviceCollection.AddSingleton(client);
+
+            serviceCollection.AddTransient<IEmailService, EmailService>();
         }
     }
 }
