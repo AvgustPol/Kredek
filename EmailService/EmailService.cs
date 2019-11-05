@@ -25,6 +25,12 @@ namespace EmailService
             return this;
         }
 
+        public IEmailService FromServer()
+        {
+            _message.From.Add(new MailboxAddress("[ Kredek mail system ]", "knkredek.messaging@gmail.com"));
+            return this;
+        }
+
         public IEmailService To(string name, string address)
         {
             _message.To.Add(new MailboxAddress(name, address));
@@ -34,6 +40,15 @@ namespace EmailService
         public IEmailService WithSubject(string subject)
         {
             _message.Subject = subject;
+            return this;
+        }
+
+        public IEmailService WithBodyHtml(string emailBody)
+        {
+            _message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = emailBody
+            };
             return this;
         }
 

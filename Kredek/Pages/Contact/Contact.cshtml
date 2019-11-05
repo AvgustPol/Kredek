@@ -16,7 +16,7 @@
                                 Imię
                                 <strong style="color: crimson">*</strong>
                             </label>
-                            <input asp-for="FromFirstName" type="text" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                            <input asp-for="FromFirstName" type="text" class="form-control" placeholder="Proszę podać imię*" required="required" data-error="Firstname is required.">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -25,7 +25,7 @@
                                 Nazwisko
                                 <strong style="color: crimson">*</strong>
                             </label>
-                            <input asp-for="FromLastName" type="text" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                            <input asp-for="FromLastName" type="text" class="form-control" placeholder="Proszę podać nazwisko *" required="required" data-error="Lastname is required.">
                         </div>
                     </div>
                 </div>
@@ -36,34 +36,31 @@
                                 Email
                                 <strong style="color: crimson">*</strong>
                             </label>
-                            <input asp-for="FromEmail" type="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                            <input asp-for="FromEmail" type="email" class="form-control" placeholder="Proszę podać email *" required="required" data-error="Valid email is required.">
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-
                         <div class="form-group">
                             <label asp-for="FromSubject">
                                 Tytuł
                                 <strong style="color: crimson">*</strong>
                             </label>
-                            <input asp-for="FromSubject" type="text" class="form-control" placeholder="Please enter your subject *" required="required" data-error="Valid email is required.">
+                            <input asp-for="FromSubject" type="text" class="form-control" placeholder="Proszę podać tytułu*" required="required" data-error="Valid email is required.">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label asp-for="FromSubjectTag">
-                                Please specify your need
+                                Wybierz kategoriję
                                 <strong style="color: crimson">*</strong>
                             </label>
-                            <select asp-for="FromSubjectTag" class="form-control" required="required" data-error="Please specify your need.">
+                            <select asp-for="FromSubjectTag" class="form-control" required="required" data-error="Proszę wybrać kategoriję tytułu.">
                                 <option value=""></option>
-                                <option value="Tag 1">Tag #1</option>
-                                <option value="Tag 2">Tag #2</option>
-                                <option value="Tag 3">Tag #3</option>
-                                <option value="Other">Other</option>
+                                <option value="Kurs">Kurs</option>
+                                <option value="Inne pytanie">Inne pytanie</option>
                             </select>
                         </div>
                     </div>
@@ -72,7 +69,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label asp-for="FromText">
-                                Message
+                                Treść
                                 <strong style="color: crimson">*</strong>
                             </label>
                             <textarea asp-for="FromText" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>

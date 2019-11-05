@@ -33,30 +33,53 @@ namespace Kredek.Pages.Contact
             return $"<b>{text}</b>";
         }
 
-        private void CreateFullMessage()
+        private string CreateHtmlMessage()
         {
+            string htmlLineBreak = "<br/>";
             StringBuilder builder = new StringBuilder();
 
-            string boldSubjectTag = MakeBold($"[ {FromSubjectTag} ]");
+            builder.Append($"<h2>Tytuł wiadomości</h2>")
+                .AppendLine();
 
-            builder.Append($"{boldSubjectTag} {FromSubject}")
-                .AppendLine()
+            builder.Append($"{MakeBold("Kategorija: ")} {FromSubjectTag}")
+                .AppendLine();
+
+            builder.Append($"{MakeBold("Tytuł: ")} {FromSubject}")
+                .AppendLine();
+
+            builder.Append($"<h2>Dane kontaktowe </h2>")
                 .AppendLine();
 
             builder
-                .Append($"{MakeBold("Imię:")} {FromFirstName}").AppendLine();
+                .Append($"{MakeBold("Imię:")} {FromFirstName}")
+                .AppendLine();
             builder
-                .Append($"{MakeBold("Nazwisko:")} {FromLastName}").AppendLine();
+                .Append($"{MakeBold("Nazwisko:")} {FromLastName}")
+                .AppendLine();
+            builder
+                .Append($"{MakeBold("Email:")} {FromEmail}")
+                .AppendLine()
+                .AppendLine();
+
+            string text = FromText.Replace("\r\n", htmlLineBreak);
+
+            builder.Append($"<h2>Treść: </h2>")
+                .AppendLine(htmlLineBreak);
 
             builder
-                .Append($"{MakeBold("Treść:")} {FromText}").AppendLine();
+                .Append($"{text}")
+                .AppendLine(htmlLineBreak);
 
-            string result = builder.ToString();
+            return builder.ToString();
         }
 
         public async Task OnPostAsync()
         {
-            CreateFullMessage();
+            _emailService.Message()
+                .FromServer()
+                .WithSubject(FromSubject)
+                .WithBodyHtml(CreateHtmlMessage())
+                    .Send();
         }
     }
 }
