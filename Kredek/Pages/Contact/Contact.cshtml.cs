@@ -38,37 +38,48 @@ namespace Kredek.Pages.Contact
             string htmlLineBreak = "<br/>";
             StringBuilder builder = new StringBuilder();
 
+            #region Title
+
             builder.Append($"<h2>Tytuł wiadomości</h2>")
                 .AppendLine();
 
             builder.Append($"{MakeBold("Kategorija: ")} {FromSubjectTag}")
-                .AppendLine();
+                .AppendLine(htmlLineBreak);
 
             builder.Append($"{MakeBold("Tytuł: ")} {FromSubject}")
-                .AppendLine();
+                .AppendLine(htmlLineBreak);
 
-            builder.Append($"<h2>Dane kontaktowe </h2>")
+            #endregion Title
+
+            #region Contact data
+
+            builder.AppendLine().Append($"<h2>Dane kontaktowe </h2>")
                 .AppendLine();
 
             builder
                 .Append($"{MakeBold("Imię:")} {FromFirstName}")
-                .AppendLine();
+                .AppendLine(htmlLineBreak);
             builder
                 .Append($"{MakeBold("Nazwisko:")} {FromLastName}")
-                .AppendLine();
+                .AppendLine(htmlLineBreak);
             builder
                 .Append($"{MakeBold("Email:")} {FromEmail}")
                 .AppendLine()
+                .AppendLine(htmlLineBreak);
+
+            #endregion Contact data
+
+            #region Main message body
+
+            builder.AppendLine().Append($"<h2>Treść: </h2>")
                 .AppendLine();
 
             string text = FromText.Replace("\r\n", htmlLineBreak);
 
-            builder.Append($"<h2>Treść: </h2>")
-                .AppendLine(htmlLineBreak);
-
             builder
-                .Append($"{text}")
-                .AppendLine(htmlLineBreak);
+                .Append($"{text}");
+
+            #endregion Main message body
 
             return builder.ToString();
         }
@@ -77,6 +88,7 @@ namespace Kredek.Pages.Contact
         {
             _emailService.Message()
                 .FromServer()
+                .To("Test", "vlasiuk.anton@gmail.com")
                 .WithSubject(FromSubject)
                 .WithBodyHtml(CreateHtmlMessage())
                     .Send();
