@@ -41,6 +41,7 @@
     <ProjectReference Include="..\B2CGraph\B2CGraph.csproj" />
     <ProjectReference Include="..\EmailService\EmailService.csproj" />
     <ProjectReference Include="..\FacebookPageGetter\FacebookPageGetter.csproj" />
+    <ProjectReference Include="..\Kredek.Models.Common\Kredek.Models.Common.csproj" />
   </ItemGroup>
 
 </Project>
