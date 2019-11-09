@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Kredek.Pages
 {
+    [BindProperties]
     public class IndexModel : PageModel
     {
         #region Default Variables
@@ -87,6 +89,60 @@ namespace Kredek.Pages
         public async Task<FeedPostsDto> GetFacebookPostsAsync()
         {
             return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
+        }
+
+        private string MakeBold(string text)
+        {
+            return $"<b>{text}</b>";
+        }
+
+        private async Task GenerateHtmlMessage()
+        {
+            string htmlLineBreak = "<br/>";
+            StringBuilder builder = new StringBuilder();
+
+            #region Title
+
+            builder.Append($"<h2>Tytuł wiadomości</h2>");
+
+            builder.Append($"{MakeBold("Kategorija: ")} {FromSubjectTag}")
+                .AppendLine().AppendLine();
+
+            builder.Append($"{MakeBold("Tytuł: ")} {FromSubject}")
+                .AppendLine().AppendLine();
+
+            #endregion Title
+
+            #region Contact data
+
+            builder.AppendLine().Append($"<h2>Dane kontaktowe </h2>");
+
+            builder
+                .Append($"{MakeBold("Imię:")} {FromFirstName}")
+                .AppendLine().AppendLine();
+            builder
+                .Append($"{MakeBold("Nazwisko:")} {FromLastName}")
+                .AppendLine().AppendLine();
+            builder
+                .Append($"{MakeBold("Email:")} {FromEmail}")
+                .AppendLine()
+                .AppendLine().AppendLine();
+
+            #endregion Contact data
+
+            #region Main message body
+
+            builder.AppendLine().Append($"<h2>Treść: </h2>");
+
+            builder.Append(FromText);
+
+            string result = builder.ToString();
+
+            result = result.Replace("\r\n", htmlLineBreak);
+
+            #endregion Main message body
+
+            return result;
         }
 
         #region Methods
