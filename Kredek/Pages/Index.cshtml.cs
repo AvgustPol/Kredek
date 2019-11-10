@@ -105,7 +105,7 @@ namespace Kredek.Pages
             _emailService.Message()
                             .FromServer()
                             .ToServer()
-                            .WithSubject($"[ {EmailInfo.SubjectTag} ] + {EmailInfo.Subject}")
+                            .WithSubject($"[ {EmailInfo.SubjectTag} ] {EmailInfo.Subject}")
                             .WithBodyHtml(await GenerateHtmlMessage())
                                 .Send();
         }
