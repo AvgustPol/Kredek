@@ -1,6 +1,8 @@
-﻿using FacebookPageGetter.Models.FeedPostDto;
+﻿using EmailService;
+using FacebookPageGetter.Models.FeedPostDto;
 using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
+using Kredek.Data.Dto;
 using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
@@ -62,11 +64,14 @@ namespace Kredek.Pages
         /// </summary>
         public Dictionary<string, Dictionary<string, string>> Navigation { get; set; }
 
-        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService)
+        private readonly IEmailService _emailService;
+
+        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService, IEmailService emailService)
         {
             _context = context;
             _cookiesManager = cookiesManager;
             _facebookService = facebookService;
+            _emailService = emailService;
 
             CreateLanguages();
             CreateNavigation();
@@ -96,7 +101,20 @@ namespace Kredek.Pages
             return $"<b>{text}</b>";
         }
 
-        private async Task GenerateHtmlMessage()
+        public EmailModel EmailInfo { get; set; }
+
+        [HttpPost]
+        public async Task Foo()
+        {
+            _emailService.Message()
+                            .FromServer()
+                            .To("Test 2", "vlasiuk.anton@gmail.com")
+                            .WithSubject($"[ EmailInfo.SubjectTag ] + EmailInfo.Subject")
+                            .WithBodyHtml(await GenerateHtmlMessage())
+                                .Send();
+        }
+
+        private async Task<string> GenerateHtmlMessage()
         {
             string htmlLineBreak = "<br/>";
             StringBuilder builder = new StringBuilder();
@@ -105,10 +123,10 @@ namespace Kredek.Pages
 
             builder.Append($"<h2>Tytuł wiadomości</h2>");
 
-            builder.Append($"{MakeBold("Kategorija: ")} {FromSubjectTag}")
+            builder.Append($"{MakeBold("Kategorija: ")} {EmailInfo.SubjectTag}")
                 .AppendLine().AppendLine();
 
-            builder.Append($"{MakeBold("Tytuł: ")} {FromSubject}")
+            builder.Append($"{MakeBold("Tytuł: ")} {EmailInfo.Subject}")
                 .AppendLine().AppendLine();
 
             #endregion Title
@@ -118,13 +136,13 @@ namespace Kredek.Pages
             builder.AppendLine().Append($"<h2>Dane kontaktowe </h2>");
 
             builder
-                .Append($"{MakeBold("Imię:")} {FromFirstName}")
+                .Append($"{MakeBold("Imię:")} {EmailInfo.FirstName}")
                 .AppendLine().AppendLine();
             builder
-                .Append($"{MakeBold("Nazwisko:")} {FromLastName}")
+                .Append($"{MakeBold("Nazwisko:")} {EmailInfo.LastName}")
                 .AppendLine().AppendLine();
             builder
-                .Append($"{MakeBold("Email:")} {FromEmail}")
+                .Append($"{MakeBold("Email:")} {EmailInfo.Email}")
                 .AppendLine()
                 .AppendLine().AppendLine();
 
@@ -134,7 +152,7 @@ namespace Kredek.Pages
 
             builder.AppendLine().Append($"<h2>Treść: </h2>");
 
-            builder.Append(FromText);
+            builder.Append(EmailInfo.Text);
 
             string result = builder.ToString();
 

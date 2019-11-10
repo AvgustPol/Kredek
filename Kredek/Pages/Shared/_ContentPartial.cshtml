@@ -21,3 +21,7 @@
 { 
     @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
 }
+@if (Model.CurrentPage.Name == "Contact")
+{
+    @await Html.PartialAsync()
+}
