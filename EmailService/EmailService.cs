@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using EmailService.Factories;
+using MailKit.Net.Smtp;
 using MimeKit;
 
 namespace EmailService
@@ -7,12 +8,14 @@ namespace EmailService
     {
         private readonly string _serverEmail;
         private readonly string _serverName;
-        private readonly SmtpClient _smtpClient;
-        private MimeMessage _message;
+        private readonly ISmtpClientFactory _smtpClientFactory;
 
-        public EmailService(SmtpClient smtpClient, string serverName, string serverEmail)
+        private MimeMessage _message;
+        private SmtpClient _smtpClient;
+
+        public EmailService(ISmtpClientFactory smtpClientFactory, string serverName, string serverEmail)
         {
-            _smtpClient = smtpClient;
+            _smtpClientFactory = smtpClientFactory;
             _serverName = serverName;
             _serverEmail = serverEmail;
         }
@@ -31,6 +34,7 @@ namespace EmailService
 
         public IEmailService Message()
         {
+            _smtpClient = _smtpClientFactory.GetSmtpClient();
             _message = new MimeMessage();
             return this;
         }
