@@ -1,6 +1,4 @@
 ﻿@page "{language?}/{pageName?}"
-
-@using Kredek.Data.Models.ContentElementTranslationTemplates
 @model IndexModel
 
 @await Html.PartialAsync("Shared/HeaderAndFooter/_HeaderPartial", Model)
@@ -11,8 +9,6 @@
         @await Html.PartialAsync("_ContentPartial", Model)
 
         <hr />
-
-        
 
         <div class="container p-4">
             <h1> Development data:</h1>
