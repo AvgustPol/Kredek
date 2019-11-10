@@ -94,6 +94,9 @@ namespace Kredek.Pages
         {
             SetPageLanguage(language);
 
+            CreateLanguages();
+            CreateNavigation();
+
             return await LoadPage(pageName);
         }
 
