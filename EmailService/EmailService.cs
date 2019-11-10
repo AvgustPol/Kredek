@@ -5,18 +5,16 @@ namespace EmailService
 {
     public class EmailService : IEmailService
     {
+        private readonly string _serverEmail;
+        private readonly string _serverName;
         private readonly SmtpClient _smtpClient;
         private MimeMessage _message;
 
-        public EmailService(SmtpClient smtpClient)
+        public EmailService(SmtpClient smtpClient, string serverName, string serverEmail)
         {
             _smtpClient = smtpClient;
-        }
-
-        public IEmailService Message()
-        {
-            _message = new MimeMessage();
-            return this;
+            _serverName = serverName;
+            _serverEmail = serverEmail;
         }
 
         public IEmailService From(string name, string address)
@@ -27,8 +25,25 @@ namespace EmailService
 
         public IEmailService FromServer()
         {
-            _message.From.Add(new MailboxAddress("[ Kredek mail system ]", "knkredek.messaging@gmail.com"));
+            _message.From.Add(new MailboxAddress(_serverName, _serverEmail));
             return this;
+        }
+
+        public IEmailService Message()
+        {
+            _message = new MimeMessage();
+            return this;
+        }
+
+        public bool Send()
+        {
+            bool isSent = true;
+
+            _smtpClient.Send(_message);
+            _smtpClient.Disconnect(true);
+            _smtpClient.Dispose();
+
+            return isSent;
         }
 
         public IEmailService To(string name, string address)
@@ -37,9 +52,9 @@ namespace EmailService
             return this;
         }
 
-        public IEmailService WithSubject(string subject)
+        public IEmailService ToServer()
         {
-            _message.Subject = subject;
+            _message.To.Add(new MailboxAddress(_serverName, _serverEmail));
             return this;
         }
 
@@ -61,15 +76,10 @@ namespace EmailService
             return this;
         }
 
-        public bool Send()
+        public IEmailService WithSubject(string subject)
         {
-            bool isSent = true;
-
-            _smtpClient.Send(_message);
-            _smtpClient.Disconnect(true);
-            _smtpClient.Dispose();
-
-            return isSent;
+            _message.Subject = subject;
+            return this;
         }
     }
 }
