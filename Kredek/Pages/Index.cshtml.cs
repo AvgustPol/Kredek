@@ -100,14 +100,16 @@ namespace Kredek.Pages
             return await LoadPage(pageName);
         }
 
-        public async Task OnPostFooAsync()
+        public async Task<IActionResult> OnPostSendEmailAsync()
         {
-            _emailService.Message()
+            bool wasSend = _emailService.Message()
                             .FromServer()
                             .ToServer()
                             .WithSubject($"[ {EmailInfo.SubjectTag} ] {EmailInfo.Subject}")
                             .WithBodyHtml(await GenerateHtmlMessage())
                                 .Send();
+
+            return Page();
         }
 
         private async Task<string> GenerateHtmlMessage()
