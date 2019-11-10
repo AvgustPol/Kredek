@@ -31,10 +31,11 @@ namespace Kredek.Pages
 
         #endregion Default Variables
 
-        private readonly ApplicationDbContext _context;
-        private readonly ICookiesManager _cookiesManager;
         public readonly IFacebookService _facebookService;
         private const int NUMBER_OF_FACEBOOK_POSTS = 5;
+        private readonly ApplicationDbContext _context;
+        private readonly ICookiesManager _cookiesManager;
+        private readonly IEmailService _emailService;
 
         /// <summary>
         /// ISO code of current language
@@ -53,6 +54,8 @@ namespace Kredek.Pages
         /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
 
+        public EmailModel EmailInfo { get; set; }
+
         /// <summary>
         /// List of all available languages.
         /// </summary>
@@ -64,8 +67,6 @@ namespace Kredek.Pages
         /// </summary>
         public Dictionary<string, Dictionary<string, string>> Navigation { get; set; }
 
-        private readonly IEmailService _emailService;
-
         public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService, IEmailService emailService)
         {
             _context = context;
@@ -75,6 +76,11 @@ namespace Kredek.Pages
 
             CreateLanguages();
             CreateNavigation();
+        }
+
+        public async Task<FeedPostsDto> GetFacebookPostsAsync()
+        {
+            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
         }
 
         public async Task<IActionResult> OnGetAsync(string language = DefaultLanguage, string pageName = DefaultPage)
@@ -91,25 +97,12 @@ namespace Kredek.Pages
             return await LoadPage(pageName);
         }
 
-        public async Task<FeedPostsDto> GetFacebookPostsAsync()
-        {
-            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
-        }
-
-        private string MakeBold(string text)
-        {
-            return $"<b>{text}</b>";
-        }
-
-        public EmailModel EmailInfo { get; set; }
-
-        [HttpPost]
-        public async Task Foo()
+        public async Task OnPostFooAsync()
         {
             _emailService.Message()
                             .FromServer()
-                            .To("Test 2", "vlasiuk.anton@gmail.com")
-                            .WithSubject($"[ EmailInfo.SubjectTag ] + EmailInfo.Subject")
+                            .ToServer()
+                            .WithSubject($"[ {EmailInfo.SubjectTag} ] + {EmailInfo.Subject}")
                             .WithBodyHtml(await GenerateHtmlMessage())
                                 .Send();
         }
@@ -161,6 +154,11 @@ namespace Kredek.Pages
             #endregion Main message body
 
             return result;
+        }
+
+        private string MakeBold(string text)
+        {
+            return $"<b>{text}</b>";
         }
 
         #region Methods
