@@ -9,21 +9,22 @@ namespace EmailService
     {
         public static void Configure(IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            var client = new SmtpClient();
+            SmtpClient client = new SmtpClient();
 
-            string address = configuration.GetSection("SmtpClient").GetSection("Address").Value;
-            int port = int.Parse(configuration.GetSection("SmtpClient").GetSection("Port").Value);
-            string username = configuration.GetSection("SmtpClient").GetSection("Username").Value;
-            string password = configuration.GetSection("SmtpClient").GetSection("Password").Value;
-            bool useSsl = bool.Parse(configuration.GetSection("SmtpClient").GetSection("UseSsl").Value);
-
+            string address = configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Address").Value;
+            int port = int.Parse(configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Port").Value);
+            bool useSsl = bool.Parse(configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("UseSsl").Value);
             client.Connect(address, port, useSsl ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.None);
 
+            string username = configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Username").Value;
+            string password = configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Password").Value;
             client.Authenticate(username, password);
+
+            string serverName = configuration.GetSection("EmailSystem").GetSection("ServerName").Value;
 
             serviceCollection.AddSingleton(client);
 
-            serviceCollection.AddTransient<IEmailService, EmailService>();
+            serviceCollection.AddTransient<IEmailService, EmailService>(provider => new EmailService(client, serverName, username));
         }
     }
 }
