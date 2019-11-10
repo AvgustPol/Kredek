@@ -1,0 +1,86 @@
+﻿@model IndexModel
+
+<div class="row" style="margin-top: 2rem">
+    <div class="offset-3"></div>
+    <div class="col-6">
+        <form method="post" asp-page-handler="Foo">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.FirstName">
+                            Imię
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <input asp-for="EmailInfo.FirstName" type="text" class="form-control" placeholder="Proszę podać imię*" required="required" data-error="Firstname is required.">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.LastName">
+                            Nazwisko
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <input asp-for="EmailInfo.LastName" type="text" class="form-control" placeholder="Proszę podać nazwisko *" required="required" data-error="Lastname is required.">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.Email">
+                            Email
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <input asp-for="EmailInfo.Email" type="email" class="form-control" placeholder="Proszę podać email *" required="required" data-error="Valid email is required.">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.Subject">
+                            Tytuł
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <input asp-for="EmailInfo.Subject" type="text" class="form-control" placeholder="Proszę podać tytułu*" required="required" data-error="Valid email is required.">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.SubjectTag">
+                            Wybierz kategoriję
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <select asp-for="EmailInfo.SubjectTag" class="form-control" required="required" data-error="Proszę wybrać kategoriję tytułu.">
+                            <option value=""></option>
+                            <option value="Kurs">Kurs</option>
+                            <option value="Inne pytanie">Inne pytanie</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="EmailInfo.Text">
+                            Treść
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <textarea asp-for="EmailInfo.Text" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-success" value="Send message">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-muted">
+                        <strong style="color: crimson">*</strong> Wymagane pola.
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
