@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B2CGraph", "B2CGraph\B2CGra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailService", "EmailService\EmailService.csproj", "{63E90FF9-C210-46E2-939F-A8DE159AAE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kredek.Models.Common", "Kredek.Models.Common\Kredek.Models.Common.csproj", "{5F866EA0-9FAE-4988-AE20-ACC347FC4863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kredek.Models.Common", "Kredek.Models.Common\Kredek.Models.Common.csproj", "{5F866EA0-9FAE-4988-AE20-ACC347FC4863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
