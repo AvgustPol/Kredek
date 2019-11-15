@@ -1,0 +1,25 @@
+﻿@page
+@model Kredek.Data.ViewModels.TeamMemberViewModel
+@{
+    var properties = Model.GetType().GetProperties();
+
+    if (Model.InputType == Kredek.Models.Common.Emuns.Foo.InputType.OneLine)
+    {
+
+        <div class="form-group">
+            <label asp-for="@Model.TeamMember.DisplayName" class="control-label"></label>
+            <input asp-for="@Model.TeamMember.DisplayName" class="form-control" />
+            <span asp-validation-for="@Model.TeamMember.DisplayName" class="text-danger"></span>
+        </div>
+    }
+
+    //foreach (var property in properties)
+    //{
+    //    if (property.inputType)
+    //    {
+
+    //    }
+    //}
+}
+
+
