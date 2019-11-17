@@ -4,6 +4,7 @@
     {
         OneLine,
         TextBox,
-        Image
+        Image,
+        SelectOptions
     }
 }
