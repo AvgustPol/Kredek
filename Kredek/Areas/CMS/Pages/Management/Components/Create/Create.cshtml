@@ -1,0 +1,45 @@
+﻿@page
+@model Kredek.Data.ViewModels.BaseViewModel
+@{
+    var properties = Model.Component.GetType().GetProperties();
+
+    foreach (var property in properties)
+    {
+        switch (Model.InputType)
+        {
+            case Kredek.Models.Common.Emuns.Foo.InputType.OneLine:
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Component.]" class="control-label"></label>
+                        <input asp-for="@Model.Component." class="form-control" />
+                        <span asp-validation-for="@Model.Component." class="text-danger"></span>
+                    </div>
+                    break;
+                }
+            case Kredek.Models.Common.Emuns.Foo.InputType.Image:
+                {
+                    @await Html.PartialAsync("_DownloadImagePartial");
+                    break;
+                }
+            case Kredek.Models.Common.Emuns.Foo.InputType.TextBox:
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Component.">
+                            Treść
+                            <strong style="color: crimson">*</strong>
+                        </label>
+                        <textarea asp-for="@Model.Component." class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                    </div>
+                    break;
+                }
+            case Kredek.Models.Common.Emuns.Foo.InputType.SelectOptions:
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Component." class="control-label"></label>
+                        <select asp-for="@Model.Component." class="form-control" asp-items="@Model.Component."></select>
+                    </div>
+                    break;
+                }
+        }
+    }
+}
