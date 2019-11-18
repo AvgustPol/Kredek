@@ -1,0 +1,34 @@
+﻿@page
+@using Kredek.Data.ViewModels
+@model Kredek.Areas.CMS.Pages.Management.Components.Create.IndexModel
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @switch (Model.NewElement)
+            {
+                case FooViewModel model:
+                    @await Html.PartialAsync("./Create", model.DisplayName)
+                    @await Html.PartialAsync("./Create", model.Position)
+                    break;
+                case BooViewModel model:
+                    @await Html.PartialAsync("./Create", model.HugeTextBlock)
+                    break;
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@*
+    https://localhost:44328/CMS/Management/Components/Create/Index
+*@
