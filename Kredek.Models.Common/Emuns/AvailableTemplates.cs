@@ -2,6 +2,8 @@
 {
     public enum AvailableTemplates
     {
+        Foo,
+        Boo,
         TextSeparatedByLine,
         ImageAndTextLeft,
         FaqElement
