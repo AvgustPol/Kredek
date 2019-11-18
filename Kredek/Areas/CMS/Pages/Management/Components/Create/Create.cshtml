@@ -1,43 +1,41 @@
-﻿@page
-@model Kredek.Data.ViewModels.BaseViewModel
+﻿@model Kredek.Data.ViewModels.BaseViewModel
 @{
-    var properties = Model.Component.GetType().GetProperties();
-
-    foreach (var property in properties)
+    switch (Model.InputType)
     {
-        switch (Model.InputType)
-        {
-            @*case Kredek.Models.Common.Emuns.Inputs.InputType.OneLine:
-                {
-                    <div class="form-group">
-                        <label asp-for="@Model.Component.]" class="control-label"></label>
-                        <input asp-for="@Model.Component." class="form-control" />
-                        <span asp-validation-for="@Model.Component." class="text-danger"></span>
-                    </div>
-                    break;
-                }
-            case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
-                {
-                    @await Html.PartialAsync("_DownloadImagePartial");
-                    break;
-                }
-            case Kredek.Models.Common.Emuns.Inputs.InputType.TextBox:
-                {
-                    <div class="form-group">
-                        <label asp-for="@Model.Component."></label>
-                        <textarea asp-for="@Model.Component." class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
-                        <span asp-validation-for="@Model.Component." class="text-danger"></span>
-                    </div>
-                    break;
-                }
-            case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
-                {
-                    <div class="form-group">
-                        <label asp-for="@Model.Component." class="control-label"></label>
-                        <select asp-for="@Model.Component." class="form-control" asp-items="@Model.Component."></select>
-                    </div>
-                    break;
-                }*@
-        }
+        case Kredek.Models.Common.Emuns.Inputs.InputType.OneLine:
+            {
+                <div class="form-group">
+                    <label class="control-label"> @Model.InputName </label>
+                    <input asp-for="@Model.Property" class="form-control" />
+                    <span asp-validation-for="@Model.Property" class="text-danger"></span>
+                </div>
+                break;
+            }
+        case Kredek.Models.Common.Emuns.Inputs.InputType.TextBox:
+            {
+                <div class="form-group">
+                    <label> @Model.InputName</label>
+                    <textarea asp-for="@Model.Property" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                    <span asp-validation-for="@Model.Property" class="text-danger"></span>
+                </div>
+                break;
+            } 
+            @*
+                case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
+                    {
+                        @await Html.PartialAsync("_DownloadImagePartial");
+                        break;
+                    }
+                case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
+                    {
+                        <div class="form-group">
+                            <label asp-for="@Model.Component." class="control-label"></label>
+                            <select asp-for="@Model.Component." class="form-control" asp-items="@Model.Component."></select>
+                        </div>
+                        break;
+                    }
+
+            *@
+
     }
 }
