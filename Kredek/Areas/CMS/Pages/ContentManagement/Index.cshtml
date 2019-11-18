@@ -72,12 +72,34 @@
     </tbody>
 </table>
 
+<h1 class="display-1"> Old : </h1>
+
 <div class="row text-center">
     <div class="col-12">
         <br />
         <hr />
 
         <form method="get" asp-page="/ContentManagement/Create/TestCreate">
+            <div class="form-group">
+                <input type="hidden" name="id" value="@Model.WebsitePageId" />
+                <label class="control-label"> Wybierz szablon </label>
+                <select name="type" id="availableTemplates" class="form-control" asp-items="Html.GetEnumSelectList<AvailableTemplates>()"></select>
+
+                <br />
+                <button class="btn btn-light" type="submit"> Dodaj </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h1 class="display-1"> New one : </h1>
+
+<div class="row text-center">
+    <div class="col-12">
+        <br />
+        <hr />
+
+        <form method="get" asp-page="../Management/Components/Create/Index">
             <div class="form-group">
                 <input type="hidden" name="id" value="@Model.WebsitePageId" />
                 <label class="control-label"> Wybierz szablon </label>

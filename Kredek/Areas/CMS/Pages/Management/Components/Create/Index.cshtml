@@ -1,11 +1,23 @@
 ﻿@page
 @using Kredek.Data.ViewModels
+@using Kredek.Models.Common.Emuns
 @model Kredek.Areas.CMS.Pages.Management.Components.Create.IndexModel
 
+
 <div class="row">
-    <div class="col">
-        <form method="post">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="@Model.WebsitePageId" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="@Model.NewElement.ContentElement.Position" class="control-label"></label>
+                <input asp-for="@Model.NewElement.ContentElement.Position" class="form-control" />
+                <span asp-validation-for="@Model.NewElement.ContentElement.Position" class="text-danger"></span>
+            </div>
+
+            <hr />
 
             @switch (Model.NewElement)
             {
