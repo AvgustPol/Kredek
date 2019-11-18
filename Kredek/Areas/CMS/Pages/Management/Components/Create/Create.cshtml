@@ -1,4 +1,4 @@
-﻿@model Kredek.Data.ViewModels.BaseViewModel
+﻿@model Kredek.Data.Models.CreatableModels.CreatableModelProperty
 @{
     switch (Model.InputType)
     {
@@ -19,23 +19,20 @@
                     <span asp-validation-for="@Model.Property" class="text-danger"></span>
                 </div>
                 break;
-            } 
-            @*
-                case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
-                    {
-                        @await Html.PartialAsync("_DownloadImagePartial");
-                        break;
-                    }
-                case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
-                    {
-                        <div class="form-group">
-                            <label asp-for="@Model.Component." class="control-label"></label>
-                            <select asp-for="@Model.Component." class="form-control" asp-items="@Model.Component."></select>
-                        </div>
-                        break;
-                    }
-
-            *@
+            }
+        @*case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
+            {
+                @await Html.PartialAsync("_DownloadImagePartial");
+                break;
+            }*@
+        @*case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
+            {
+                <div class="form-group">
+                    <label asp-for="@Model.Property." class="control-label"></label>
+                    <select asp-for="@Model.Property." class="form-control" asp-items="@Model.Property."></select>
+                </div>
+                break;
+            }*@
 
     }
 }
