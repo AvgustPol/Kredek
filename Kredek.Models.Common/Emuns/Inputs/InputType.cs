@@ -1,4 +1,4 @@
-﻿namespace Kredek.Models.Common.Emuns.Foo
+﻿namespace Kredek.Models.Common.Emuns.Inputs
 {
     public enum InputType
     {
