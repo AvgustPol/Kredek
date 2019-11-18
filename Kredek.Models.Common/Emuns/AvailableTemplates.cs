@@ -1,4 +1,4 @@
-﻿namespace Kredek.Data
+﻿namespace Kredek.Models.Common.Emuns
 {
     public enum AvailableTemplates
     {
