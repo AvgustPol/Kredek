@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 using Kredek.Data;
+using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
-using Kredek.Data.ViewModels;
+using Kredek.Data.Models.CreatableModels;
 using Kredek.Models.Common.Emuns;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,12 +16,21 @@ namespace Kredek.Areas.CMS.Pages.Management.Components.Create
         private readonly ApplicationDbContext _context;
         public AvailableTemplates Type { get; set; }
         public int WebsitePageId { get; set; }
-        public ContentElementTranslation NewElement { get; set; }
+
+        public ExampleCreatableModel NewElement { get; set; }
+
+        public ContentElement ContentElement { get; set; }
+
+        #region Models 
+        public Example ExampleNewElement { get; set; }
+
+        #endregion
+
+
         public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
-
 
         public IActionResult OnGet(int id, AvailableTemplates type)
         {
@@ -28,31 +38,24 @@ namespace Kredek.Areas.CMS.Pages.Management.Components.Create
 
             switch (type)
             {
-                case AvailableTemplates.Foo:
-                    NewElement = new FooViewModel();
-                    break;
-
-                case AvailableTemplates.Boo:
-                    NewElement = new BooViewModel();
+                case AvailableTemplates.Example:
+                    NewElement = new ExampleCreatableModel();
                     break;
             }
 
-            ViewData["Languages"] = new SelectList(_context.Languages, "LanguageId", "Name");
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            switch (NewElement)
+            var newElement = NewElement.GetContentElementTranslation();
+
+            switch (newElement)
             {
-                case FooViewModel model:
-                    await CreateNewElement(model);
-                    break;
-                case BooViewModel model:
+                case Example model:
                     await CreateNewElement(model);
                     break;
             }
-
 
             return RedirectToPage("./Index");
         }

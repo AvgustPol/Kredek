@@ -5,7 +5,7 @@
         case Kredek.Models.Common.Emuns.Inputs.InputType.OneLine:
             {
                 <div class="form-group">
-                    <label class="control-label"> @Model.InputName </label>
+                    <label asp-for="@Model.Property" class="control-label"> @Model.InputName </label>
                     <input asp-for="@Model.Property" class="form-control" />
                     <span asp-validation-for="@Model.Property" class="text-danger"></span>
                 </div>
@@ -14,25 +14,29 @@
         case Kredek.Models.Common.Emuns.Inputs.InputType.TextBox:
             {
                 <div class="form-group">
-                    <label> @Model.InputName</label>
+                    <label asp-for="@Model.Property"> @Model.InputName</label>
                     <textarea asp-for="@Model.Property" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
                     <span asp-validation-for="@Model.Property" class="text-danger"></span>
                 </div>
                 break;
             }
-        @*case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
+        @*
+            case Kredek.Models.Common.Emuns.Inputs.InputType.Image:
             {
                 @await Html.PartialAsync("_DownloadImagePartial");
                 break;
-            }*@
-        @*case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
+            }
+        *@
+        @*
+            case Kredek.Models.Common.Emuns.Inputs.InputType.SelectOptions:
             {
                 <div class="form-group">
                     <label asp-for="@Model.Property." class="control-label"></label>
                     <select asp-for="@Model.Property." class="form-control" asp-items="@Model.Property."></select>
                 </div>
                 break;
-            }*@
+            }
+        *@
 
     }
 }

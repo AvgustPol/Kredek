@@ -1,0 +1,15 @@
+﻿@model Kredek.Data.Models.ContentElementTranslationTemplates.Example
+
+<h1> Model.ExampleNewElement </h1>
+
+<div class="form-group">
+    <label asp-for="@Model.ExamplePropertyOneLine" class="control-label"></label>
+    <input asp-for="@Model.ExamplePropertyOneLine" class="form-control" />
+    <span asp-validation-for="@Model.ExamplePropertyOneLine" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="@Model.ExamplePropertyTextArea"  class="control-label"> </label>
+    <textarea asp-for="@Model.ExamplePropertyTextArea" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+    <span asp-validation-for="@Model.ExamplePropertyTextArea" class="text-danger"></span>
+</div>
