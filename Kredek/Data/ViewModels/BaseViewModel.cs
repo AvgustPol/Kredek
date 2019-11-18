@@ -6,6 +6,7 @@ namespace Kredek.Data.ViewModels
     public class BaseViewModel
     {
         public InputType InputType { get; set; }
-        public ContentElementTranslation Component { get; set; }
+        public string InputName { get; set; }
+        public string Property { get; set; }
     }
 }
