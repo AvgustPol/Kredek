@@ -109,6 +109,9 @@ namespace Kredek.Pages
                             .WithBodyHtml(await GenerateHtmlMessage())
                                 .Send();
 
+            CreateLanguages();
+            CreateNavigation();
+
             return await OnGetAsync(CurrentLanguage, CurrentPage.Name);
         }
 
