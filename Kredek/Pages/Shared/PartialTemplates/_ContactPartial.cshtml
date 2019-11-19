@@ -4,6 +4,9 @@
     <div class="offset-3"></div>
     <div class="col-6">
         <form method="post" asp-page-handler="SendEmail">
+            <input type="hidden" asp-for="@Model.CurrentPage.Name" />
+            <input type="hidden" asp-for="@Model.CurrentLanguage" />
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
