@@ -1,0 +1,43 @@
+﻿@using Kredek.Data.ViewModels
+
+@{
+    string textFAQ = "FAQ";
+    string textFAQ1 = "Jak się zapisać na kurs?";
+    string answeredFAQ1 = "Zapisy na nasz kurs odbywają się poprzez formularz zgłoszeniowy który zostanie umieszczony na naszej stronie FB (można dodać odnośnik) w dniu zapisów. O dokładnym terminie zapisów będziemy wielokrotnie przypominać z odpowiednim wyprzedzeniem.";
+
+    string textFAQ2 = "Co ile odbywają się zajęcia?";
+    string answeredFAQ2 = "Zajęcia odbywają się cyklicznie co tydzień. W razie gdy pokrywają się one ze świętami czy innymi dniami wolnymi od zajęć na uczelni zajęcia również nie odbywają się, a temat z opuszczonych zajęć jest prezentowany na kolejnych.";
+
+    string textFAQ3 = "Czy ilość miejsc na kursie jest ograniczona?";
+    string answeredFAQ3 = "Tak, ilość miejsc jest ograniczona dlatego zalecamy aby nie zwlekać z zapisami na kurs na aż do ostatniej chwili.";
+
+    string textFAQ4 = "Jaką wiedzę należy posiadać aby wziąć udział w kursie?";
+    string answeredFAQ4 = "Zalecana jest podstawowa wiedza z zakresu programowania (najlepiej obiektowego).";
+
+    string textFAQ5 = "Czy kurs jest całkowicie darmowy?";
+    string answeredFAQ5 = "Tak, kurs jest całkowicie wolny od jakichkolwiek opłat.";
+
+    string textFAQ6 = "Co jest potrzebne aby wziąć udział w kursie?";
+    string answeredFAQ6 = "Do udziału w zajęciach potrzebny jest laptop z zainstalowanym odpowiednim oprogramowaniem (Visual Studio itp. o którym zawsze odpowiednio wcześnie informujemy przed zajęciami). Przydatne są również przedłużacze w przypadku gdy wiemy, że nasz sprzęt nie wytrzyma 2h pracy na baterii.";
+
+}
+
+<div class="row text-center">
+    <div class="col">
+        <h2>@textFAQ</h2>
+        <br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <ul>
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ1, textFAQ1))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ2, textFAQ2))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ3, textFAQ3))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ4, textFAQ4))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ5, textFAQ5))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(answeredFAQ6, textFAQ6))
+        </ul>
+    </div>
+</div>
