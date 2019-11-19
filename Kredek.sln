@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kredek", "Kredek\Kredek.csproj", "{A2E294FC-1BA6-408A-B471-24E50EF3666F}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B2CGraph", "B2CGraph\B2CGraph.csproj", "{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailService", "EmailService\EmailService.csproj", "{63E90FF9-C210-46E2-939F-A8DE159AAE5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kredek.Models.Common", "Kredek.Models.Common\Kredek.Models.Common.csproj", "{5F866EA0-9FAE-4988-AE20-ACC347FC4863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F866EA0-9FAE-4988-AE20-ACC347FC4863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F866EA0-9FAE-4988-AE20-ACC347FC4863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F866EA0-9FAE-4988-AE20-ACC347FC4863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F866EA0-9FAE-4988-AE20-ACC347FC4863}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

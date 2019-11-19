@@ -23,6 +23,12 @@ namespace Kredek
             Configuration = configuration;
         }
 
+        private enum DatabaseType
+        {
+            PostgreSQL,
+            SQL
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDbInitializer dbInitializer)
         {
@@ -81,8 +87,8 @@ namespace Kredek
 
             ConfigureDatabase(services);
 
-            //configure facebook page getter
             FacebookPageGetter.Configuration.ConfigurationDefault.Configure(services, Configuration);
+            EmailService.ConfigurationDefault.Configure(services, Configuration);
         }
 
         private void ConfigureDatabase(IServiceCollection services)
@@ -103,17 +109,12 @@ namespace Kredek
                     services.AddDbContext<ApplicationDbContext>(
                         options => options.UseSqlServer(Configuration.GetConnectionString("DevelopmentSQLConnection")));
                     break;
+
                 case DatabaseType.PostgreSQL:
                     services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(
                         options => options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
                     break;
             }
-        }
-
-        private enum DatabaseType
-        {
-            PostgreSQL,
-            SQL
         }
     }
 }

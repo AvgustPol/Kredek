@@ -1,4 +1,5 @@
 ﻿@using Kredek.Data.Models.ContentElementTranslationTemplates;
+@using Kredek.Data.Templates
 @model IndexModel
 
 @foreach (var element in Model.CurrentPageElements)
@@ -14,10 +15,42 @@
         case FaqElement modelFaqElement:
             @await Html.PartialAsync("PartialTemplates/_FaqElementPartial", modelFaqElement);
             break;
+
     }
 }
 
 @if (Model.CurrentPage.Name == "Blog")
-{ 
+{
     @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
+}
+@if (Model.CurrentPage.Name == "Contact")
+{
+    @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kontakt", BackgroundImageUrl = "https://picsum.photos/1600/1200" });
+
+    <style>
+        .contact-page hr {
+            max-width: 50%;
+            border-top: 5px solid #000000;
+        }
+    </style>
+    <br />
+    <div class="text-center contact-page">
+        <h1>Szybki </h1>
+        <p class="display-2" style="color: #3C5A99 !important">
+            <i class="fab fa-facebook-square"></i>
+            <a target="_blank" href="https://www.facebook.com/KNKredek/"><b>Facebook</b></a>
+        </p>
+        <br />
+        <hr />
+        <br />
+
+        <h1> Oficjalny </h1>
+        <p class="display-2">
+            <i class="fa fa-envelope fa-fw"></i>
+            knkredek @@ gmail.com
+        </p>
+    </div>
+
+    @await Html.PartialAsync("PartialTemplates/_ContactPartial")
+
 }

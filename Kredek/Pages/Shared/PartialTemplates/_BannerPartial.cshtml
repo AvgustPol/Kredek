@@ -1,0 +1,17 @@
+﻿@model Kredek.Data.Templates.FullWidthBanner
+
+<style>
+    .responsiveBackgroundImage {
+        background-image: url(@Model.BackgroundImageUrl);
+    }
+</style>
+
+<div class="responsiveBackgroundImage bannerText">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>@Model.Text</h1>
+            </div>
+        </div>
+    </div>
+</div>
