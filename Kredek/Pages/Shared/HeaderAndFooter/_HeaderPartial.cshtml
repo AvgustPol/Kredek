@@ -13,6 +13,7 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav ">
+   
                     @foreach (var pageName in Model.Navigation.Keys.ToList())
                     {
                         <li class="nav-item">
@@ -25,8 +26,10 @@
                                 {
                                     break;
                                 }
+
+                                string currentPageStyle = Model.CurrentPage.Name == pageName ? "font-weight-bold" : String.Empty;
                             }
-                            <a href="@link" class="nav-link text-dark"> @navigationTabName </a>
+                            <a href="@link" class="nav-link text-dark @currentPageStyle"> @navigationTabName </a>
                         </li>
                     }
                     @await Html.PartialAsync("Shared/_Languages")
