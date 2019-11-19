@@ -294,11 +294,16 @@ namespace Kredek.Data.DatabaseSeeding
 
         private void Hardcode_Creating_Pl_ImageAndTextLeft(ContentElement contentElement, Language language)
         {
-            var textPl = "Nasze koło";
-            var titlePl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej oraz uczenie się od siebie nawzajem. Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
+            var titlePl = "Nasze koło";
+            var textPl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. " +
+               "Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. " +
+               "Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej " +
+               "oraz uczenie się od siebie nawzajem. " +
+               "Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
+
             var imageUrl = "https://picsum.photos/600/400";
 
-            CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
+            CreateANewImageAndTextLeft(contentElement, language, titlePl , textPl , imageUrl);
         }
 
         private void Hardcode_Creating_TextSeparatedByLine(ContentElement contentElement, Language language)
