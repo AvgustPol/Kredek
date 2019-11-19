@@ -1,6 +1,8 @@
-﻿using FacebookPageGetter.Models.FeedPostDto;
+﻿using EmailService;
+using FacebookPageGetter.Models.FeedPostDto;
 using FacebookPageGetter.Services.FacebookService;
 using Kredek.Data;
+using Kredek.Data.Dto;
 using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
@@ -10,10 +12,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Kredek.Pages
 {
+    [BindProperties]
     public class IndexModel : PageModel
     {
         #region Default Variables
@@ -27,10 +31,11 @@ namespace Kredek.Pages
 
         #endregion Default Variables
 
-        private readonly ApplicationDbContext _context;
-        private readonly ICookiesManager _cookiesManager;
         public readonly IFacebookService _facebookService;
         private const int NUMBER_OF_FACEBOOK_POSTS = 5;
+        private readonly ApplicationDbContext _context;
+        private readonly ICookiesManager _cookiesManager;
+        private readonly IEmailService _emailService;
 
         /// <summary>
         /// ISO code of current language
@@ -49,6 +54,8 @@ namespace Kredek.Pages
         /// </summary>
         public WebsitePageTranslation CurrentPageTranslation { get; set; }
 
+        public EmailModel EmailInfo { get; set; }
+
         /// <summary>
         /// List of all available languages.
         /// </summary>
@@ -60,14 +67,20 @@ namespace Kredek.Pages
         /// </summary>
         public Dictionary<string, Dictionary<string, string>> Navigation { get; set; }
 
-        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService)
+        public IndexModel(ApplicationDbContext context, ICookiesManager cookiesManager, IFacebookService facebookService, IEmailService emailService)
         {
             _context = context;
             _cookiesManager = cookiesManager;
             _facebookService = facebookService;
+            _emailService = emailService;
 
             CreateLanguages();
             CreateNavigation();
+        }
+
+        public async Task<FeedPostsDto> GetFacebookPostsAsync()
+        {
+            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
         }
 
         public async Task<IActionResult> OnGetAsync(string language = DefaultLanguage, string pageName = DefaultPage)
@@ -81,12 +94,76 @@ namespace Kredek.Pages
         {
             SetPageLanguage(language);
 
+            CreateLanguages();
+            CreateNavigation();
+
             return await LoadPage(pageName);
         }
 
-        public async Task<FeedPostsDto> GetFacebookPostsAsync()
+        public async Task<IActionResult> OnPostSendEmailAsync()
         {
-            return await _facebookService.GetPostsAsync(NUMBER_OF_FACEBOOK_POSTS);
+            bool wasSend = _emailService.Message()
+                            .FromServer()
+                            .ToServer()
+                            .WithSubject($"[ {EmailInfo.SubjectTag} ] {EmailInfo.Subject}")
+                            .WithBodyHtml(await GenerateHtmlMessage())
+                                .Send();
+
+            return Page();
+        }
+
+        private async Task<string> GenerateHtmlMessage()
+        {
+            string htmlLineBreak = "<br/>";
+            StringBuilder builder = new StringBuilder();
+
+            #region Title
+
+            builder.Append($"<h2>Tytuł wiadomości</h2>");
+
+            builder.Append($"{MakeBold("Kategorija: ")} {EmailInfo.SubjectTag}")
+                .AppendLine().AppendLine();
+
+            builder.Append($"{MakeBold("Tytuł: ")} {EmailInfo.Subject}")
+                .AppendLine().AppendLine();
+
+            #endregion Title
+
+            #region Contact data
+
+            builder.AppendLine().Append($"<h2>Dane kontaktowe </h2>");
+
+            builder
+                .Append($"{MakeBold("Imię:")} {EmailInfo.FirstName}")
+                .AppendLine().AppendLine();
+            builder
+                .Append($"{MakeBold("Nazwisko:")} {EmailInfo.LastName}")
+                .AppendLine().AppendLine();
+            builder
+                .Append($"{MakeBold("Email:")} {EmailInfo.Email}")
+                .AppendLine()
+                .AppendLine().AppendLine();
+
+            #endregion Contact data
+
+            #region Main message body
+
+            builder.AppendLine().Append($"<h2>Treść: </h2>");
+
+            builder.Append(EmailInfo.Text);
+
+            string result = builder.ToString();
+
+            result = result.Replace("\r\n", htmlLineBreak);
+
+            #endregion Main message body
+
+            return result;
+        }
+
+        private string MakeBold(string text)
+        {
+            return $"<b>{text}</b>";
         }
 
         #region Methods

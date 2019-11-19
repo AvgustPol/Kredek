@@ -2,16 +2,22 @@
 {
     public interface IEmailService
     {
+        IEmailService From(string name, string address);
+
+        IEmailService FromServer();
+
         IEmailService Message();
 
-        IEmailService From(string name, string address);
+        bool Send();
 
         IEmailService To(string name, string address);
 
-        IEmailService WithSubject(string subject);
+        IEmailService ToServer();
+
+        IEmailService WithBodyHtml(string emailBody);
 
         IEmailService WithBodyPlain(string plainBody);
 
-        bool Send();
+        IEmailService WithSubject(string subject);
     }
 }
