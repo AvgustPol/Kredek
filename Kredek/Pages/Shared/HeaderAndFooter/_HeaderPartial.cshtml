@@ -13,24 +13,24 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav ">
+   
                     @foreach (var pageName in Model.Navigation.Keys.ToList())
                     {
-                    <li class="nav-item">
-                    @{
-                        var link = $"{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
-                        string navigationTabName = String.Empty;
+                        <li class="nav-item">
+                            @{
+                                var link = $"{DefaultVariables.ThisWebsiteRootUrl}/{Model.CurrentLanguage}/{pageName}";
+                                string navigationTabName = String.Empty;
 
-                        bool hasNavigationName = Model.Navigation[pageName].TryGetValue(Model.CurrentLanguage, out navigationTabName);
+                                bool hasNavigationName = Model.Navigation[pageName].TryGetValue(Model.CurrentLanguage, out navigationTabName);
+                                if (!hasNavigationName)
+                                {
+                                    break;
+                                }
 
-                        if(!hasNavigationName)
-                        {
-                            break;
-                        }
-
-                        string currentPageStyle = Model.CurrentPage.Name == pageName ? "font-weight-bold" : string.Empty;
-                    }
-                    <a href="@link" class="nav-link text-dark @currentPageStyle"> @navigationTabName </a>
-                    </li>
+                                string currentPageStyle = Model.CurrentPage.Name == pageName ? "font-weight-bold" : String.Empty;
+                            }
+                            <a href="@link" class="nav-link text-dark @currentPageStyle"> @navigationTabName </a>
+                        </li>
                     }
                     @await Html.PartialAsync("Shared/_Languages")
                 </ul>
