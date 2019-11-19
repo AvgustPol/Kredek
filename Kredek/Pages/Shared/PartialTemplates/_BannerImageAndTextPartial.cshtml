@@ -1,4 +1,21 @@
-﻿@model  Kredek.Data.ViewModels.ImageAndTextTemplateViewModel
+﻿@model Kredek.Data.ViewModels.ImageAndTextTemplateViewModel
+
+@{
+    string pathToImage;
+
+    bool imgFromInternet = Model.ImageUrl.Contains("www.") || Model.ImageUrl.Contains("http");
+    if (imgFromInternet)
+    {
+        pathToImage = $@"{Model.ImageUrl}";
+    }
+    else
+    {
+        pathToImage = $@"..\{Model.ImageUrl}";
+        char oldLine = '\\';
+        char newLine = '/';
+        pathToImage = pathToImage.Replace(oldLine, newLine);
+    }
+}
 
 <div class="container">
     <div class="row">
