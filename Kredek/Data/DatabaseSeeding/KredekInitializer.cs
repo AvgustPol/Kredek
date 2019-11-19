@@ -2,6 +2,7 @@
 using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -126,6 +127,8 @@ namespace Kredek.Data.DatabaseSeeding
 
             Hardcode_Creating_En_ImageAndTextLeft(contentElement2, enLanguage);
         }
+
+
 
         public void CreateDefaultLanguages()
         {
@@ -283,7 +286,7 @@ namespace Kredek.Data.DatabaseSeeding
         private void Hardcode_Creating_En_ImageAndTextLeft(ContentElement contentElement, Language language)
         {
             var textPl = "Who we are";
-            var titlePl = "[Google translate power! c:] The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
+            var titlePl = "The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
             var imageUrl = "https://picsum.photos/600/400";
 
             CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
@@ -302,7 +305,7 @@ namespace Kredek.Data.DatabaseSeeding
         {
             var titlePl = "KREDEK";
             var subTitlePl = "Creation and Development Group";
-            var imgUrl = "https://picsum.photos/1600/1200";
+            var imgUrl = "img/staticImages/bannerIntro.jpg";
 
             //banner
             CreateANewTextSeparatedByLine(contentElement, language, titlePl, subTitlePl, imgUrl);
