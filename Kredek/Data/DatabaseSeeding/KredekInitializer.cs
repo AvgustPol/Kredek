@@ -1,4 +1,7 @@
-﻿using Kredek.Data.Models;
+﻿//#define GENERATE_ENG
+#undef GENERATE_ENG
+
+using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
 using Microsoft.EntityFrameworkCore;
@@ -113,26 +116,32 @@ namespace Kredek.Data.DatabaseSeeding
             var homePage = _context.WebsitePages.Where(x => x.Name == HomePageName).Include(y => y.ContentElements)
                 .FirstOrDefault();
             var plLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode);
+#if (GENERATE_ENG)
             var enLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode);
+#endif
 
             var contentElement1 = homePage.ContentElements.ToList()[0];
 
             //banner
             Hardcode_Creating_TextSeparatedByLine(contentElement1, plLanguage);
+#if (GENERATE_ENG)
             Hardcode_Creating_TextSeparatedByLine(contentElement1, enLanguage);
+#endif
 
             var contentElement2 = homePage.ContentElements.ToList()[1];
             //image and text left
             Hardcode_Creating_Pl_ImageAndTextLeft(contentElement2, plLanguage);
-
+#if (GENERATE_ENG)
             Hardcode_Creating_En_ImageAndTextLeft(contentElement2, enLanguage);
+#endif
         }
-
-
 
         public void CreateDefaultLanguages()
         {
+#if (GENERATE_ENG)
+            //turned off English language generating - it is not ready for "production"
             CreateANewLanguage(GlobalVariables.EnglishLanguageName, GlobalVariables.EnglishLanguageIsoCode);
+#endif
             CreateANewLanguage(GlobalVariables.PolishLanguageName, GlobalVariables.PolishLanguageIsoCode);
         }
 
@@ -140,7 +149,7 @@ namespace Kredek.Data.DatabaseSeeding
         {
             CreateANewPage(GlobalVariables.HomePageName, HomePageNavigationIndex, GlobalVariables.HomePageIsActive);
             CreateANewPage(BlogPageName, BlogPageNavigationIndex);
-            CreateANewPage(AboutPageName, AboutPageNavigationIndex);
+            //CreateANewPage(AboutPageName, AboutPageNavigationIndex);
             CreateANewPage(TeamPageName, TeamPageNavigationIndex);
             CreateANewPage(ContactPageName, ContactPageNavigationIndex);
             CreateANewPage(CoursePageName, CoursePageNavigationIndex);
@@ -157,9 +166,10 @@ namespace Kredek.Data.DatabaseSeeding
             //Blog page translations
             CreateANewPageTranslationPlAndEn(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn,
                 BlogNavigationTabNamePl, BlogNavigationTabNameEn);
+            
             //About page translations
-            CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
-                AboutNavigationTabNamePl, AboutNavigationTabNameEn);
+            //CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
+            //    AboutNavigationTabNamePl, AboutNavigationTabNameEn);
 
             //TeamPageName page translations
             CreateANewPageTranslationPlAndEn(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn,
@@ -261,11 +271,12 @@ namespace Kredek.Data.DatabaseSeeding
             CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode), pageTitlePl,
                 navigationTabNamePl);
-
+#if (GENERATE_ENG)
             //English version
             CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode), pageTitleEn,
                 navigationTabNameEn);
+#endif
         }
 
         private void CreateANewTextSeparatedByLine(ContentElement contentElement, Language language, string title, string subTitle, string imageUrl)
