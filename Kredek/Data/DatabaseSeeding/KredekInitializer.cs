@@ -287,7 +287,7 @@ namespace Kredek.Data.DatabaseSeeding
         {
             var textPl = "Who we are";
             var titlePl = "The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
-            var imageUrl = "https://picsum.photos/600/400";
+            var imageUrl = "img/staticImages/IntroImage1.jpeg";
 
             CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
         }
@@ -301,7 +301,7 @@ namespace Kredek.Data.DatabaseSeeding
                "oraz uczenie się od siebie nawzajem. " +
                "Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
 
-            var imageUrl = "https://picsum.photos/600/400";
+            var imageUrl = "img/staticImages/IntroImage1.jpeg";
 
             CreateANewImageAndTextLeft(contentElement, language, titlePl , textPl , imageUrl);
         }
