@@ -31,8 +31,8 @@ namespace Kredek.Pages
 
         #endregion Default Variables
 
-        public readonly IFacebookService _facebookService;
         private const int NUMBER_OF_FACEBOOK_POSTS = 5;
+        public readonly IFacebookService _facebookService;
         private readonly ApplicationDbContext _context;
         private readonly ICookiesManager _cookiesManager;
         private readonly IEmailService _emailService;
@@ -87,7 +87,7 @@ namespace Kredek.Pages
         {
             GetPageLanguageFromCookie();
 
-            return await LoadPage(pageName);
+            return await LoadPage(pageName ?? DefaultPage);
         }
 
         public async Task<IActionResult> OnPostChangeLanguageAsync(string language, string pageName)
@@ -109,7 +109,10 @@ namespace Kredek.Pages
                             .WithBodyHtml(await GenerateHtmlMessage())
                                 .Send();
 
-            return Page();
+            CreateLanguages();
+            CreateNavigation();
+
+            return await OnGetAsync(CurrentLanguage, CurrentPage.Name);
         }
 
         private async Task<string> GenerateHtmlMessage()

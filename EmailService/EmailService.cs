@@ -6,18 +6,26 @@ namespace EmailService
 {
     public class EmailService : IEmailService
     {
-        private readonly string _serverEmail;
-        private readonly string _serverName;
+        private readonly string _serverSenderName;
+        private readonly string _serverSenderEmail;
+
+        private readonly string _serverReceiverEmail;
+        private readonly string _serverReceiverName;
+        
         private readonly ISmtpClientFactory _smtpClientFactory;
 
         private MimeMessage _message;
         private SmtpClient _smtpClient;
 
-        public EmailService(ISmtpClientFactory smtpClientFactory, string serverName, string serverEmail)
+        public EmailService(ISmtpClientFactory smtpClientFactory, string serverSenderName, string serverSenderEmail, string serverReceiverEmail, string serverReceiverName)
         {
             _smtpClientFactory = smtpClientFactory;
-            _serverName = serverName;
-            _serverEmail = serverEmail;
+
+            _serverSenderName = serverSenderName;
+            _serverSenderEmail = serverSenderEmail;
+
+            _serverReceiverEmail = serverReceiverEmail;
+            _serverReceiverName = serverReceiverName;
         }
 
         public IEmailService From(string name, string address)
@@ -28,7 +36,7 @@ namespace EmailService
 
         public IEmailService FromServer()
         {
-            _message.From.Add(new MailboxAddress(_serverName, _serverEmail));
+            _message.From.Add(new MailboxAddress(_serverSenderName, _serverSenderEmail));
             return this;
         }
 
@@ -58,7 +66,7 @@ namespace EmailService
 
         public IEmailService ToServer()
         {
-            _message.To.Add(new MailboxAddress(_serverName, _serverEmail));
+            _message.To.Add(new MailboxAddress(_serverReceiverName, _serverReceiverEmail));
             return this;
         }
 
