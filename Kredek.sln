@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kredek", "Kredek\Kredek.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacebookPageGetter", "FacebookPageGetter\FacebookPageGetter.csproj", "{6D371519-A1F5-4713-B6AE-3F98E992A21B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B2CGraph", "B2CGraph\B2CGraph.csproj", "{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailService", "EmailService\EmailService.csproj", "{63E90FF9-C210-46E2-939F-A8DE159AAE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kredek.Models.Common", "Kredek.Models.Common\Kredek.Models.Common.csproj", "{5F866EA0-9FAE-4988-AE20-ACC347FC4863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kredek.Models.Common", "Kredek.Models.Common\Kredek.Models.Common.csproj", "{5F866EA0-9FAE-4988-AE20-ACC347FC4863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{6D371519-A1F5-4713-B6AE-3F98E992A21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D371519-A1F5-4713-B6AE-3F98E992A21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D371519-A1F5-4713-B6AE-3F98E992A21B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF07A3DA-9BD5-4EA2-91F3-E4599CAFCA76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63E90FF9-C210-46E2-939F-A8DE159AAE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
