@@ -1,4 +1,3 @@
-using B2CGraph;
 using Kredek.Data;
 using Kredek.Data.DatabaseSeeding;
 using Kredek.Logic;
@@ -70,18 +69,6 @@ namespace Kredek
             });
 
             #endregion Cookies
-
-            #region Azure_B2C_AD B2CGraphClient
-
-            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                .AddAzureADB2C(options => Configuration.Bind("AzureAdB2C", options));
-
-            services.AddSingleton<IB2CGraphClient>(new B2CGraphClient(
-                Configuration.GetSection("B2CGraphClient").GetSection("ClientId").Value,
-                Configuration.GetSection("B2CGraphClient").GetSection("ClientSecret").Value,
-                Configuration.GetSection("B2CGraphClient").GetSection("Tenant").Value));
-
-            #endregion Azure_B2C_AD B2CGraphClient
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
