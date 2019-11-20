@@ -150,7 +150,7 @@ namespace Kredek.Data.DatabaseSeeding
             CreateANewPage(GlobalVariables.HomePageName, HomePageNavigationIndex, GlobalVariables.HomePageIsActive);
             CreateANewPage(BlogPageName, BlogPageNavigationIndex);
             //CreateANewPage(AboutPageName, AboutPageNavigationIndex);
-            CreateANewPage(TeamPageName, TeamPageNavigationIndex);
+            //CreateANewPage(TeamPageName, TeamPageNavigationIndex);
             CreateANewPage(ContactPageName, ContactPageNavigationIndex);
             CreateANewPage(CoursePageName, CoursePageNavigationIndex);
         }
@@ -166,14 +166,14 @@ namespace Kredek.Data.DatabaseSeeding
             //Blog page translations
             CreateANewPageTranslationPlAndEn(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn,
                 BlogNavigationTabNamePl, BlogNavigationTabNameEn);
-            
+
             //About page translations
             //CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
             //    AboutNavigationTabNamePl, AboutNavigationTabNameEn);
 
             //TeamPageName page translations
-            CreateANewPageTranslationPlAndEn(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn,
-                TeamNavigationTabNamePl, TeamNavigationTabNameEn);
+            //CreateANewPageTranslationPlAndEn(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn,
+            //    TeamNavigationTabNamePl, TeamNavigationTabNameEn);
 
             //Contact page translations
             CreateANewPageTranslationPlAndEn(ContactPageName, languages, ContactPageTitlePl, ContactPageTitleEn,
