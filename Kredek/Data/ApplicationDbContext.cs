@@ -6,15 +6,8 @@ namespace Kredek.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        #region Templates
-
-        public DbSet<Blogging> Blogging { get; set; }
-        public DbSet<FaqElement> FaqElements { get; set; }
-        public DbSet<ImageAndTextLeft> TemplatesImageAndTextLeft { get; set; }
-        public DbSet<ImageAndTextRight> TemplatesImageAndTextRight { get; set; }
-        public DbSet<TextSeparatedByLine> TemplatesTextSeparatedByLine { get; set; }
-
-        #endregion Templates
+        public DbSet<TextSeparatedByLine> TextSeparatedByLine { get; set; }
+        public DbSet<ImageAndTextLeft> ImageAndTextLeft { get; set; }
 
         public DbSet<ContentElement> ContentElements { get; set; }
         public DbSet<ContentElementTranslation> ContentElementTranslation { get; set; }
