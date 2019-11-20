@@ -3,6 +3,7 @@ using FacebookPageGetter.Models;
 using FacebookPageGetter.Models.FeedPost;
 using FacebookPageGetter.Models.FeedPostDto;
 using FacebookPageGetter.Services.FacebookClient;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FacebookPageGetter.Services.FacebookService
@@ -25,15 +26,21 @@ namespace FacebookPageGetter.Services.FacebookService
 
         public async Task<FeedPostsDto> GetPostsAsync(int count)
         {
-            var posts = await _facebookClient.GetAsync<FeedPosts>(_facebookSettings.AccessToken, Endpoint,
+            FeedPostsDto result = new FeedPostsDto() {
+                Posts = new List<FeedPostDto>()
+            };
+
+            try
+            {
+                var posts = await _facebookClient.GetAsync<FeedPosts>(_facebookSettings.AccessToken, Endpoint,
                 $"fields=full_picture,permalink_url,created_time,message&limit={count}").ConfigureAwait(false);
 
-            if (posts == null)
-            {
-                return null;
+                return posts is null ? result : _mapper.Map<FeedPostsDto>(posts);
             }
-
-            var result = _mapper.Map<FeedPostsDto>(posts);
+            catch (System.Exception e)
+            {
+                
+            }
 
             return result;
         }

@@ -1,8 +1,25 @@
 ﻿@model Kredek.Data.Templates.FullWidthBanner
 
+@{
+    string pathToImage;
+
+    bool imgFromInternet = Model.BackgroundImageUrl.Contains("www.") || Model.BackgroundImageUrl.Contains("http");
+    if (imgFromInternet)
+    {
+        pathToImage = $@"{Model.BackgroundImageUrl}";
+    }
+    else
+    {
+        pathToImage = $@"..\{Model.BackgroundImageUrl}";
+        char oldLine = '\\';
+        char newLine = '/';
+        pathToImage = pathToImage.Replace(oldLine, newLine);
+    }
+}
+
 <style>
     .responsiveBackgroundImage {
-        background-image: url(@Model.BackgroundImageUrl);
+        background-image: url(@pathToImage);
     }
 </style>
 

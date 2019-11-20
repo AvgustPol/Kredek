@@ -21,16 +21,35 @@
 }
 
 @{
+    //may all the religions of the world forgive me for this hardcode - i'm doing my best .     ____ .
     switch (Model.CurrentPage.Name)
     {
+        case "Home":
+            {
+                ImageAndTextTemplateViewModel hardcodedImageAndTextTemplateViewModel = new ImageAndTextTemplateViewModel()
+                {
+                    ImageUrl = "img/staticImages/IntroImage2.jpeg",
+                    IsLeft = false,
+                    Text = "Nasz kurs powstał z myślą o osobach początkujących, które chciałyby zdobyć wiedzę z zakresu programowania w języku C# oraz innych technologii pozwalających na budowanie nowoczesnych i responsywnych aplikacji. W trakcie kursu będziesz wraz z prowadzącymi budować kolejne aplikacje oraz przyswajać wiele przydatnych wskazówek i dobrych praktyk. Każde zajęcia będą zwieńczone zadaniem domowym umożliwiającym ugruntowanie zdobytej wiedzy i wykazanie się kreatywnością. Kurs kończy się egzaminem którego zdanie gwarantuje otrzymanie certyfikatu dokumentującego uzyskane umiejętności",
+                    Title = "Nasz kurs"
+                };
+
+                @await Html.PartialAsync("PartialTemplates/_BannerImageAndTextPartial", hardcodedImageAndTextTemplateViewModel)
+
+                @await Html.PartialAsync("PartialTemplates/_BannerTextAndLinksPartial")
+            }
+            break;
         case "Blog":
             {
+
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Blog", BackgroundImageUrl = "img/staticImages/bannerBlog.jpg" });
+
                 @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
             }
             break;
         case "Contact":
             {
-                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kontakt", BackgroundImageUrl = "https://picsum.photos/1600/1200" });
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kontakt z nami", BackgroundImageUrl = "img/staticImages/bannerContact.jpg" });
 
                 <style>
                     .contact-page hr {
@@ -61,6 +80,8 @@
             break;
         case "Course":
             {
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kurs", BackgroundImageUrl = "img/staticImages/bannerCourse.jpg" });
+
                 string textInfo0 = "Informacje ogólne";
                 string textInfo1 = "Kurs rozpoczniemy od zajęć umożliwiających poznanie środowiska Visual Studio oraz narzędzi, z których będziemy korzystać w trakcie kursu. Przedstawione zostaną informacje na temat składni języka, słów kluczowych oraz konstrukcji występujących w języku C#. Już po pierwszych zajęciach nie będą Ci obce elementy takie jak: zmienne, pętle, funkcje,operatory, komentarze i wiele innych.";
                 string textInfo2 = "Kolejne zajęcia pozwolą Wam na zdobycie wiedzy z zakresu programowania obiektowego, z którego będziemy korzystać przez resztę kursu. Zaznajomimy się między innymi z klasami, interfejsami, metodami, dziedziczeniem, polimorfizmem, hermetyzacją.";
@@ -88,7 +109,7 @@
                 <div class="container p-lg-5">
                     <div class="row text-center">
                         <div class="col">
-                            <h1>Edycja <strong>CPC 2019-1</strong></h1>
+                            <h1>Edycja <strong>CPC 2019-2</strong></h1>
                         </div>
                     </div>
                     <hr />
@@ -109,7 +130,7 @@
                         </div>
                     </div>
 
-                    
+
                     @await Html.PartialAsync("./PartialTemplates/_BannerImageAndTextPartial", imageAndText1)
 
                     @await Html.PartialAsync("./PartialTemplates/_FAQPartial.cshtml")

@@ -1,7 +1,11 @@
-﻿using Kredek.Data.Models;
+﻿//#define GENERATE_ENG
+#undef GENERATE_ENG
+
+using Kredek.Data.Models;
 using Kredek.Data.Models.ContentElementTranslationTemplates;
 using Kredek.Global;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -112,24 +116,32 @@ namespace Kredek.Data.DatabaseSeeding
             var homePage = _context.WebsitePages.Where(x => x.Name == HomePageName).Include(y => y.ContentElements)
                 .FirstOrDefault();
             var plLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode);
+#if (GENERATE_ENG)
             var enLanguage = _context.Languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode);
+#endif
 
             var contentElement1 = homePage.ContentElements.ToList()[0];
 
             //banner
             Hardcode_Creating_TextSeparatedByLine(contentElement1, plLanguage);
+#if (GENERATE_ENG)
             Hardcode_Creating_TextSeparatedByLine(contentElement1, enLanguage);
+#endif
 
             var contentElement2 = homePage.ContentElements.ToList()[1];
             //image and text left
             Hardcode_Creating_Pl_ImageAndTextLeft(contentElement2, plLanguage);
-
+#if (GENERATE_ENG)
             Hardcode_Creating_En_ImageAndTextLeft(contentElement2, enLanguage);
+#endif
         }
 
         public void CreateDefaultLanguages()
         {
+#if (GENERATE_ENG)
+            //turned off English language generating - it is not ready for "production"
             CreateANewLanguage(GlobalVariables.EnglishLanguageName, GlobalVariables.EnglishLanguageIsoCode);
+#endif
             CreateANewLanguage(GlobalVariables.PolishLanguageName, GlobalVariables.PolishLanguageIsoCode);
         }
 
@@ -137,7 +149,7 @@ namespace Kredek.Data.DatabaseSeeding
         {
             CreateANewPage(GlobalVariables.HomePageName, HomePageNavigationIndex, GlobalVariables.HomePageIsActive);
             CreateANewPage(BlogPageName, BlogPageNavigationIndex);
-            CreateANewPage(AboutPageName, AboutPageNavigationIndex);
+            //CreateANewPage(AboutPageName, AboutPageNavigationIndex);
             CreateANewPage(TeamPageName, TeamPageNavigationIndex);
             CreateANewPage(ContactPageName, ContactPageNavigationIndex);
             CreateANewPage(CoursePageName, CoursePageNavigationIndex);
@@ -154,9 +166,10 @@ namespace Kredek.Data.DatabaseSeeding
             //Blog page translations
             CreateANewPageTranslationPlAndEn(BlogPageName, languages, BlogPageTitlePl, BlogPageTitleEn,
                 BlogNavigationTabNamePl, BlogNavigationTabNameEn);
+            
             //About page translations
-            CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
-                AboutNavigationTabNamePl, AboutNavigationTabNameEn);
+            //CreateANewPageTranslationPlAndEn(AboutPageName, languages, AboutPageTitlePl, AboutPageTitleEn,
+            //    AboutNavigationTabNamePl, AboutNavigationTabNameEn);
 
             //TeamPageName page translations
             CreateANewPageTranslationPlAndEn(TeamPageName, languages, TeamPageTitlePl, TeamPageTitleEn,
@@ -258,11 +271,12 @@ namespace Kredek.Data.DatabaseSeeding
             CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.PolishLanguageIsoCode), pageTitlePl,
                 navigationTabNamePl);
-
+#if (GENERATE_ENG)
             //English version
             CreateANewPageTranslation(page,
                 languages.Single(x => x.ISOCode == GlobalVariables.EnglishLanguageIsoCode), pageTitleEn,
                 navigationTabNameEn);
+#endif
         }
 
         private void CreateANewTextSeparatedByLine(ContentElement contentElement, Language language, string title, string subTitle, string imageUrl)
@@ -283,26 +297,31 @@ namespace Kredek.Data.DatabaseSeeding
         private void Hardcode_Creating_En_ImageAndTextLeft(ContentElement contentElement, Language language)
         {
             var textPl = "Who we are";
-            var titlePl = "[Google translate power! c:] The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
-            var imageUrl = "https://picsum.photos/600/400";
+            var titlePl = "The scientific circle \"Kredek\" was founded on March 1, 2007. Every semester we launch the next course edition, during which we make ambitious students and IT specialists. The aim of the Scientific Society is to learn about programming technologies and skills in the future career and learning from each other. We implement our assumptions through meetings, lectures, laboratories and joint projects.";
+            var imageUrl = "img/staticImages/IntroImage1.jpeg";
 
             CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
         }
 
         private void Hardcode_Creating_Pl_ImageAndTextLeft(ContentElement contentElement, Language language)
         {
-            var textPl = "Nasze koło";
-            var titlePl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej oraz uczenie się od siebie nawzajem. Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
-            var imageUrl = "https://picsum.photos/600/400";
+            var titlePl = "Nasze koło";
+            var textPl = "Koło naukowe \"Kredek\" zostało założone dnia 1 Marca 2007. " +
+               "Co semestr uruchamiamy kolejną edycję, podczas której z ambitnych studentów robimy profesjonalnych informatyków. " +
+               "Celem Koła Naukowego jest poznawanie nowych technologii programistycznych, umiejętności przydatnych w przyszłej karierze zawodowej " +
+               "oraz uczenie się od siebie nawzajem. " +
+               "Nasze założenia realizujemy poprzez spotkania, wykłady, laboratoria oraz wspólne projekty.";
 
-            CreateANewImageAndTextLeft(contentElement, language, textPl, titlePl, imageUrl);
+            var imageUrl = "img/staticImages/IntroImage1.jpeg";
+
+            CreateANewImageAndTextLeft(contentElement, language, titlePl , textPl , imageUrl);
         }
 
         private void Hardcode_Creating_TextSeparatedByLine(ContentElement contentElement, Language language)
         {
             var titlePl = "KREDEK";
             var subTitlePl = "Creation and Development Group";
-            var imgUrl = "https://picsum.photos/1600/1200";
+            var imgUrl = "img/staticImages/bannerIntro.jpg";
 
             //banner
             CreateANewTextSeparatedByLine(contentElement, language, titlePl, subTitlePl, imgUrl);
