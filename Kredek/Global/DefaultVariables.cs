@@ -9,6 +9,5 @@
         public const string DefaultLanguageIsoCode = GlobalVariables.PolishLanguageIsoCode;
         public const string DefaultPage = "Home";
         public const string PreviewPage = "Preview";
-        //public const string ThisWebsiteRootUrl = "http://kredek.dce.pwr.edu.pl";
     }
 }
