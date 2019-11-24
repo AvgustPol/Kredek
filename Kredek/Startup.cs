@@ -85,7 +85,7 @@ namespace Kredek
             services.AddScoped<IPreviewInitializer, PreviewInitializer>();
             services.AddScoped<IImageSavingService, ImageSavingService>();
 
-            ConnectToTheDatabase(DatabaseType.SQL, services);
+            ConnectToTheDatabase(DatabaseType.PostgreSQL, services);
         }
 
         private void ConnectToTheDatabase(DatabaseType databaseType, IServiceCollection services)
