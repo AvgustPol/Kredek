@@ -1,0 +1,84 @@
+﻿@using Kredek.Data.ViewModels
+
+@{
+    string textFAQ = "FAQ";
+    
+    // tag [ Kurs - rekrutacja ] 
+    string faqQuestion1 = "Jak się zapisać na kurs?";
+    string faqAnswer1 = "Zapisy na nasz kurs odbywają się poprzez formularz zgłoszeniowy który zostanie umieszczony na naszej stronie FB (można dodać odnośnik) w dniu zapisów. O dokładnym terminie zapisów będziemy wielokrotnie przypominać z odpowiednim wyprzedzeniem.";
+
+    // tag [ Kurs ]
+    string faqQuestion2 = "Co ile odbywają się zajęcia?";
+    string faqAnswer2 = "Zajęcia odbywają się cyklicznie co tydzień. W razie gdy pokrywają się one ze świętami czy innymi dniami wolnymi od zajęć na uczelni zajęcia również nie odbywają się, a temat z opuszczonych zajęć jest prezentowany na kolejnych.";
+
+    // tag [ Kurs - rekrutacja ] 
+    string faqQuestion3 = "Czy ilość miejsc na kursie jest ograniczona?";
+    string faqAnswer3 = "Tak, ilość miejsc jest ograniczona dlatego zalecamy aby nie zwlekać z zapisami na kurs na aż do ostatniej chwili.";
+
+    // tag [ Kurs - rekrutacja ] 
+    string faqQuestion4 = "Jaką wiedzę należy posiadać aby wziąć udział w kursie?";
+    string faqAnswer4 = "Zalecana jest podstawowa wiedza z zakresu programowania (najlepiej obiektowego).";
+
+    // tag [ Kurs - rekrutacja ] 
+    string faqQuestion5 = "Czy kurs jest całkowicie darmowy?";
+    string faqAnswer5 = "Tak, kurs jest całkowicie wolny od jakichkolwiek opłat.";
+
+    // tag [ Kurs - rekrutacja ] 
+    string faqQuestion6 = "Co jest potrzebne aby wziąć udział w kursie?";
+    string faqAnswer6 = "Do udziału w zajęciach potrzebny jest laptop z zainstalowanym odpowiednim oprogramowaniem (Visual Studio itp. o którym zawsze odpowiednio wcześnie informujemy przed zajęciami). Przydatne są również przedłużacze w przypadku gdy wiemy, że nasz sprzęt nie wytrzyma 2h pracy na baterii.";
+    
+    // tag [ Kurs ] 
+    string faqQuestion7 = "Jak wyglądają zajęcia na kursie?";
+    string faqAnswer7 = "Zajęcia są prowadzone w formie laboratoryjnej z elementami wykładowymi. W trakcie zajęć rozwiązywane są określone problemy inspirujące i umożliwiające poznanie najważniejszych kierunków dalszego poszerzania wiedzy.";
+
+    // tag [ Zadania domowe ]
+    string faqQuestion8 = "Gdzie są przedstawione wymagania dotyczące zadań domowych?";
+    string faqAnswer8 = "Zadania są przedstawiane pod koniec każdych zajęć.";
+    
+    // tag [ Kurs ] 
+    string faqQuestion9 = "Czy mogę przyjść na zajęcia jeśli nie jestem zapisany/a na kurs?";
+    string faqAnswer9 = "Tak. Ale: kolejne zajęcia mogą wymagać wiedzy z poprzednich zajęć. W celu pełnego skorzystania z zajęć zalecane jest uczzestnictwo w Kursie Programowania w Języku C# CPC.";
+    
+    // tag [ Zadania domowe ]
+    string faqQuestion10 = "Kiedy moje zadanie domowe będzie ocenione?";
+    string faqAnswer10 = "Ocena opisowa będzie wysyłana do wybranych zadań, w części zadań błędy będą omawiane w trakcie zajęć, ";
+    
+    // tag [ Zadania domowe ]
+    string faqQuestion11 = "Jak często będą pojawiać się zadania domowe?";
+    string faqAnswer11 = "Po każdych zajęciach laboratoryjnych, będą one obowiązkowe. ";
+    
+    // tag [ Kurs ] 
+    string faqQuestion12 = "Czy konieczna jest obecność na wszystkich zajęciach?";
+    string faqAnswer12 = "Ukończenie kursu i uczestnictwo (bezpłatne) w egzaminie jest możliwe tylko dla osób posiadających 100% obecności.";
+    
+    // tag [ Kurs ] 
+    string faqQuestion13 = "Czy przed zajęciami należy się przygotować (zapoznać z technologią, materiałem)?";
+    string faqAnswer13 = "Przed zajęciami zalecane jest zapoznanie się z omawianymi zagadnieniami";
+}
+
+<div class="row text-center">
+    <div class="col">
+        <h2>@textFAQ</h2>
+        <br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <ul>
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer1, faqQuestion1))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer2, faqQuestion2))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer3, faqQuestion3))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer4, faqQuestion4))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer5, faqQuestion5))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer6, faqQuestion6))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer7, faqQuestion7))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer8, faqQuestion8))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer9, faqQuestion9))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer10, faqQuestion10))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer11, faqQuestion11))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer12, faqQuestion12))
+            @await Html.PartialAsync("PartialTemplates/_faqQuestionAndAnswerPartial", new QuestionAndAnswerViewModel(faqAnswer13, faqQuestion13))
+        </ul>
+    </div>
+</div>

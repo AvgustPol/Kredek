@@ -25,8 +25,13 @@
                                 {
                                     break;
                                 }
+
+                                bool doesItCurrentPage = Model.CurrentPage.Name == pageName;
+
+                                string currentPageStyle = doesItCurrentPage ? "font-weight-bold" : String.Empty;
+                                string currentPageText = doesItCurrentPage ? "<u>" + @navigationTabName + "</u>" : @navigationTabName;
                             }
-                            <a href="@link" class="nav-link text-dark"> @navigationTabName </a>
+                            <a href="@link" class="nav-link text-dark @currentPageStyle"> @Html.Raw(currentPageText) </a>
                         </li>
                     }
                     @await Html.PartialAsync("Shared/_Languages")

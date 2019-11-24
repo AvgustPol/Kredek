@@ -14,10 +14,13 @@ namespace EmailService
             int port = int.Parse(configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Port").Value);
             bool useSsl = bool.Parse(configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("UseSsl").Value);
 
+            //Server sender E-mail
             string username = configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Username").Value;
             string password = configuration.GetSection("EmailSystem").GetSection("SmtpClient").GetSection("Password").Value;
 
-            string serverName = configuration.GetSection("EmailSystem").GetSection("ServerName").Value;
+            string serverSenderName = configuration.GetSection("EmailSystem").GetSection("ServerSenderName").Value;
+            string serverReceiverName = configuration.GetSection("EmailSystem").GetSection("ServerReceiverEmail").Value;
+            string serverReceiverEmail = configuration.GetSection("EmailSystem").GetSection("ServerReceiverEmail").Value;
 
             serviceCollection.AddTransient<ISmtpClientFactory>(s => 
                 new SmtpClientFactory(password, 
@@ -29,8 +32,11 @@ namespace EmailService
             serviceCollection.AddTransient<IEmailService>(s => 
                 new EmailService(
                     (ISmtpClientFactory)s.GetService(typeof(ISmtpClientFactory)), 
-                    serverName, 
-                    username));
+                    serverSenderName, 
+                    username,
+                    serverReceiverEmail,
+                    serverReceiverName
+                    ));
         }
 
     }

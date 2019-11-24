@@ -26,7 +26,7 @@ namespace Kredek.Data.DatabaseSeeding
 
                 TryInitializeKredek();
                 
-                TryCreatePreview();
+                //TryCreatePreview();
             }
             catch (Exception e)
             {

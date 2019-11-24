@@ -4,6 +4,9 @@
     <div class="offset-3"></div>
     <div class="col-6">
         <form method="post" asp-page-handler="SendEmail">
+            <input type="hidden" asp-for="@Model.CurrentPage.Name" />
+            <input type="hidden" asp-for="@Model.CurrentLanguage" />
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -55,7 +58,9 @@
                         <select asp-for="EmailInfo.SubjectTag" class="form-control" required="required" data-error="Proszę wybrać kategoriję tytułu.">
                             <option value=""></option>
                             <option value="Kurs">Kurs</option>
+                            <option value="Kurs - rekrutacja">Kurs - rekrutacja</option>
                             <option value="Inne pytanie">Inne pytanie</option>
+                            <option value="Zadania domowe">Zadania domowe</option>
                         </select>
                     </div>
                 </div>

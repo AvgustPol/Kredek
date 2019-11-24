@@ -3,6 +3,7 @@
     public enum SubjectTag
     {
         Course,
+        Homework,
         Other
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Kredek.Data.Models.ContentElementTranslationTemplates;
 @using Kredek.Data.Templates
+@using Kredek.Data.ViewModels
 @model IndexModel
 
 @foreach (var element in Model.CurrentPageElements)
@@ -19,38 +20,126 @@
     }
 }
 
-@if (Model.CurrentPage.Name == "Blog")
-{
-    @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
-}
-@if (Model.CurrentPage.Name == "Contact")
-{
-    @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kontakt", BackgroundImageUrl = "https://picsum.photos/1600/1200" });
+@{
+    //may all the religions of the world forgive me for this hardcode - i'm doing my best .     ____ .
+    switch (Model.CurrentPage.Name)
+    {
+        case "Home":
+            {
+                ImageAndTextTemplateViewModel hardcodedImageAndTextTemplateViewModel = new ImageAndTextTemplateViewModel()
+                {
+                    ImageUrl = "img/staticImages/IntroImage2.jpeg",
+                    IsLeft = false,
+                    Text = "Nasz kurs powstał z myślą o osobach początkujących, które chciałyby zdobyć wiedzę z zakresu programowania w języku C# oraz innych technologii pozwalających na budowanie nowoczesnych i responsywnych aplikacji. W trakcie kursu będziesz wraz z prowadzącymi budować kolejne aplikacje oraz przyswajać wiele przydatnych wskazówek i dobrych praktyk. Każde zajęcia będą zwieńczone zadaniem domowym umożliwiającym ugruntowanie zdobytej wiedzy i wykazanie się kreatywnością. Kurs kończy się egzaminem którego zdanie gwarantuje otrzymanie certyfikatu dokumentującego uzyskane umiejętności",
+                    Title = "Nasz kurs"
+                };
 
-    <style>
-        .contact-page hr {
-            max-width: 50%;
-            border-top: 5px solid #000000;
-        }
-    </style>
-    <br />
-    <div class="text-center contact-page">
-        <h1>Szybki </h1>
-        <p class="display-2" style="color: #3C5A99 !important">
-            <i class="fab fa-facebook-square"></i>
-            <a target="_blank" href="https://www.facebook.com/KNKredek/"><b>Facebook</b></a>
-        </p>
-        <br />
-        <hr />
-        <br />
+                @await Html.PartialAsync("PartialTemplates/_BannerImageAndTextPartial", hardcodedImageAndTextTemplateViewModel)
 
-        <h1> Oficjalny </h1>
-        <p class="display-2">
-            <i class="fa fa-envelope fa-fw"></i>
-            knkredek @@ gmail.com
-        </p>
-    </div>
+                @await Html.PartialAsync("PartialTemplates/_BannerTextAndLinksPartial")
+            }
+            break;
+        case "Blog":
+            {
 
-    @await Html.PartialAsync("PartialTemplates/_ContactPartial")
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Blog", BackgroundImageUrl = "img/staticImages/bannerBlog.jpg" });
 
+                @await Html.PartialAsync("PartialTemplates/_BlogPartial", await Model.GetFacebookPostsAsync());
+            }
+            break;
+        case "Contact":
+            {
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kontakt z nami", BackgroundImageUrl = "img/staticImages/bannerContact.jpg" });
+
+                <style>
+                    .contact-page hr {
+                        max-width: 50%;
+                        border-top: 5px solid #000000;
+                    }
+                </style>
+                <br />
+                <div class="text-center contact-page">
+                    <h1>Szybki </h1>
+                    <p class="display-2" style="color: #3C5A99 !important">
+                        <i class="fab fa-facebook-square"></i>
+                        <a target="_blank" href="https://www.facebook.com/KNKredek/"><b>Facebook</b></a>
+                    </p>
+                    <br />
+                    <hr />
+                    <br />
+
+                    <h1> Oficjalny </h1>
+                    <p class="display-2">
+                        <i class="fa fa-envelope fa-fw"></i>
+                        knkredek @@ gmail.com
+                    </p>
+                </div>
+                <br />
+                @await Html.PartialAsync("PartialTemplates/_ContactPartial")
+            }
+            break;
+        case "Course":
+            {
+                @await Html.PartialAsync("PartialTemplates/_BannerPartial", new FullWidthBanner() { Text = "Kurs", BackgroundImageUrl = "img/staticImages/bannerCourse.jpg" });
+
+                string textInfo0 = "Informacje ogólne";
+                string textInfo1 = "Kurs rozpoczniemy od zajęć umożliwiających poznanie środowiska Visual Studio oraz narzędzi, z których będziemy korzystać w trakcie kursu. Przedstawione zostaną informacje na temat składni języka, słów kluczowych oraz konstrukcji występujących w języku C#. Już po pierwszych zajęciach nie będą Ci obce elementy takie jak: zmienne, pętle, funkcje,operatory, komentarze i wiele innych.";
+                string textInfo2 = "Kolejne zajęcia pozwolą Wam na zdobycie wiedzy z zakresu programowania obiektowego, z którego będziemy korzystać przez resztę kursu. Zaznajomimy się między innymi z klasami, interfejsami, metodami, dziedziczeniem, polimorfizmem, hermetyzacją.";
+                string textInfo3 = "Podczas kolejnych spotkań nauczymy się podłączać nasze aplikacje do bazy danych oraz pracować na danych z nich pozyskanych. Kolejne zajęcia dostarczą nam wiedzy na temat aplikacji webowych i wielu przydatnych narzędzi programistycznych wraz z dużą ilością dobrych praktyk i przykładów ich wykorzystania.";
+                string textInfo4 = "Brzmi ciekawie? Nie zwlekaj z decyzją i weź udział w naszym kursie, czekamy na Ciebie.";
+
+
+                ImageAndTextTemplateViewModel imageAndText1 = new ImageAndTextTemplateViewModel()
+                {
+                    Text = "W kolejnej edycji programowania poruszymy następujące tematy, które poprowadzą eksperci w swojej dziedzinie.",
+                    ImageUrl = "https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/s960x960/76644600_2526809937426217_745322425247334400_o.jpg?_nc_cat=107&_nc_oc=AQnbvCWsKpOyD7lyF84ma4DJEMF0_de0xpemnQ0_1kwLkSLr8takyyAwJ_ndbKGhWtU&_nc_ht=scontent-frx5-1.xx&oh=6b05c0d09eb1ecaa89c624fb2fb2ea54&oe=5E8556D6",
+                    Title = "Tematy wykładów",
+                    IsLeft = true
+                };
+
+                string dyplomImg = "http://kredek.iiar.pwr.edu.pl/img/ogloszenia/egzamin-CPC-2018-2/certyfikaty/2018-2_1_Dominik_Frankowski_wm.png";
+                string dyplomAlt = "Kurs kończy się egzaminem którego zdanie gwarantuje otrzymanie certyfikatu dokumentującego uzyskane umiejętności. Gratulacje dla Dominika Frankowskiego, który uzyskał‚ najwyższy wynik spośród 25 uczestników Egzaminu CPC Edycja 2018-2";
+                ImageAndTextTemplateViewModel imageAndText2 = new ImageAndTextTemplateViewModel()
+                {
+                    Text = dyplomAlt,
+                    ImageUrl = dyplomImg,
+                    Title = "Zdjęcie dyplomu"
+                };
+
+                <div class="container p-lg-5">
+                    <div class="row text-center">
+                        <div class="col">
+                            <h1>Edycja <strong>CPC 2019-2</strong></h1>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row text-center">
+                        <div class="col">
+                            <h2>@textInfo0</h2>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <ul>
+                                <li>@textInfo1</li>
+                                <li>@textInfo2</li>
+                                <li>@textInfo3</li>
+                                <li>@textInfo4</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    @await Html.PartialAsync("./PartialTemplates/_BannerImageAndTextPartial", imageAndText1)
+
+                    @await Html.PartialAsync("./PartialTemplates/_FAQPartial.cshtml")
+
+                    @await Html.PartialAsync("./PartialTemplates/_BannerImageAndTextPartial", imageAndText2)
+                </div>
+            }
+            break;
+        default:
+            break;
+    }
 }
