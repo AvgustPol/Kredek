@@ -8,20 +8,6 @@
     <main role="main">
         @await Html.PartialAsync("_ContentPartial", Model)
 
-        @*<div class="container p-4">
-            <h1> Development data:</h1>
-            <div class="row">
-                <h1> - [ @Model.CurrentPage.Name ] < - Current page </h1>
-            </div>
-
-            <div class="row">
-                <h1> - <a asp-area="CMS"> CMS mode </a></h1>
-            </div>
-
-            <div class="row">
-                <h2> - Our team link : <a href="https://localhost:44328/TestFeatures/OurTeam">click here</a></h2>
-            </div>
-        </div>*@
     </main>
 
     @await Html.PartialAsync("Shared/HeaderAndFooter/_FooterPartial")
